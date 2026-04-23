@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // --- 1. VARIABLES ---
 $bg-navy: #0a192f;
 $bg-light-navy: #111e31;
@@ -42,7 +44,6 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
 
     h1 {
         font-size: clamp(2.5rem, 8vw, 5rem);
@@ -57,7 +58,7 @@ header {
         font-weight: 400;
 
         &:hover {
-            color: lighten($accent-cyan, 15%);
+            color: color.adjust($accent-cyan, $lightness: 15%);
         }
     }
 
@@ -82,8 +83,7 @@ header {
     }
 }
 
-main,
-section {
+main, section {
     @include section-padding;
 }
 
@@ -135,7 +135,7 @@ section {
     }
 
     iframe {
-        width: 100%;
+        width: 65%;
         max-width: 800px;
         border-radius: 8px;
         border: 1px solid rgba($accent-cyan, 0.2);
@@ -143,7 +143,7 @@ section {
     }
 }
 
-.python-img {
+.language-img {
     display: block;
     margin: 40px auto;
     max-width: 80px;
