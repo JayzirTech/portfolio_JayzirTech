@@ -129,8 +129,7 @@ section iframe {
   opacity: 0.8;
   filter: grayscale(30%);
   transition: filter 0.3s ease, opacity 0.3s ease;
-  filter: brightness(1.2) contrast(1.1);
-  filter: drop-shadow(0 0 8px #64ffda);
+  filter: brightness(1.2) contrast(1.1) drop-shadow(0 0 8px #64ffda);
   transition: all 0.3s ease;
 }
 #Language div .language-img {

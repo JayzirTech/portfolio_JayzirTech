@@ -4,7 +4,7 @@ $text-lightest: #e6f1ff;
 $bg-dark: #020c1b;
 $bg-gradient-1: #0a192f;
 $bg-gradient-2: #112240;
-$accent-glow: rgba(100, 255, 218, 0.05); // Un toque de tu cian pero muy transparente
+$accent-glow: rgba(100, 255, 218, 0.05);
 $bg-navy: #0a192f;
 
 @keyframes gradientBG {
@@ -26,14 +26,12 @@ h1 {
     font-weight: 800;
     color: $text-lightest;
 
-    // El orden importa: primero la estándar, luego la específica (o viceversa)
-    background-clip: text; // Propiedad estándar
-    -webkit-background-clip: text; // Propiedad para Chrome/Safari
+    background-clip: text;
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
     background-image: linear-gradient(90deg, white, $accent-cyan);
 
-    // Detalle decorativo debajo del texto
     position: relative;
     display: inline-block;
 
@@ -42,7 +40,7 @@ h1 {
         position: absolute;
         bottom: -5px;
         left: 0;
-        width: 60px; // Una línea corta y elegante
+        width: 60px;
         height: 4px;
         background-color: $accent-cyan;
         border-radius: 2px;
@@ -53,7 +51,6 @@ body.PetsPage {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    // Creamos un degradado lineal grande que se moverá
     background: linear-gradient(-45deg, $bg-dark, $bg-gradient-1, $bg-gradient-2, $bg-dark);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
@@ -61,7 +58,6 @@ body.PetsPage {
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
 
-    // Capa extra de textura (puntos sutiles como de tecnología)
     &::before {
         content: "";
         position: fixed;
@@ -87,8 +83,8 @@ body.PetsPage {
         padding: 15px;
         border-radius: 12px;
         transition: transform 0.3s ease, border-color 0.3s ease;
-        background: rgba(255, 255, 255, 0.03); // Muy transparente
-        backdrop-filter: blur(10px); // Efecto de desenfoque detrás
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
         border: 1px solid rgba(100, 255, 218, 0.1);
         box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
@@ -98,9 +94,9 @@ body.PetsPage {
         }
 
         img {
-            width: 250px; // Ancho fijo para uniformidad
-            height: 250px; // Altura fija
-            object-fit: cover; // Corta la imagen para que llene el espacio sin deformarse
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
             border-radius: 8px;
             margin-bottom: 15px;
             display: block;
@@ -114,7 +110,7 @@ body.PetsPage {
         }
 
         .pet-name {
-            color: $accent-cyan; // Resaltamos el nombre con tu color de marca
+            color: $accent-cyan;
             font-size: 1.2rem;
             font-weight: bold;
             margin-bottom: 5px;
@@ -122,19 +118,17 @@ body.PetsPage {
 
         .pet-description {
             font-size: 0.9rem;
-            line-height: 1.5; // Aumentamos un poco el espacio entre líneas para mejor lectura
+            line-height: 1.5;
             text-align: center;
-            max-width: 220px; // Evita que el texto sea más ancho que la imagen
+            max-width: 220px;
             margin: 0 auto;
 
             span {
-                color: $accent-cyan; // Tu color de marca para el texto
-                font-weight: 600; // Un poco más grueso para destacar
+                color: $accent-cyan;
+                font-weight: 600;
 
-                // Efecto de resplandor suave
                 text-shadow: 0 0 10px rgba($accent-cyan, 0.5);
 
-                // Opcional: Un fondo sutil para que parezca resaltado con marcador tecnológico
                 background: rgba($accent-cyan, 0.1);
                 padding: 2px 6px;
                 border-radius: 4px;
@@ -143,8 +137,8 @@ body.PetsPage {
     }
 
     .BackCard {
-        @extend article; // Hereda todo el diseño de las tarjetas de mascotas
-        border-color: rgba($accent-cyan, 0.4); // Un poco más brillante para resaltar
+        @extend article;
+        border-color: rgba($accent-cyan, 0.4);
 
         a {
             text-decoration: none;
@@ -160,7 +154,7 @@ body.PetsPage {
 
         &:hover {
             background: rgba($accent-cyan, 0.1);
-            transform: scale(1.05); // Un efecto de agrandado suave
+            transform: scale(1.05);
         }
     }
 }
@@ -170,14 +164,14 @@ main {
 }
 
 footer {
-    position: fixed; // Lo fija en la pantalla
-    bottom: 0; // Lo pega al borde inferior
-    left: 0; // Asegura que empiece desde la izquierda
-    width: 100%; // Ocupa todo el ancho de la pantalla
-    z-index: 1000; // Lo mantiene por encima de otros elementos (excepto quizás el botón de subir)
+    position: fixed;
+    bottom: 0; 
+    left: 0; 
+    width: 100%;
+    z-index: 1000;
 
-    background-color: rgba($bg-navy, 0.95); // Fondo sólido o con ligera transparencia
-    backdrop-filter: blur(5px); // Efecto elegante de desenfoque detrás
+    background-color: rgba($bg-navy, 0.95);
+    backdrop-filter: blur(5px);
     border-top: 1px solid rgba($accent-cyan, 0.2);
     padding: 15px 0;
     text-align: center;
