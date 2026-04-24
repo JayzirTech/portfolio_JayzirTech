@@ -83,8 +83,15 @@ header {
     }
 }
 
-main, section {
+main,
+section {
     @include section-padding;
+
+    p {
+        span {
+            font-weight: bold;
+        }
+    }
 }
 
 section {
@@ -135,7 +142,10 @@ section {
     }
 
     iframe {
+        height: 100%;
         width: 65%;
+        aspect-ratio: 16/9;
+        height: auto;
         max-width: 800px;
         border-radius: 8px;
         border: 1px solid rgba($accent-cyan, 0.2);
@@ -143,12 +153,37 @@ section {
     }
 }
 
-.language-img {
-    display: block;
-    margin: 40px auto;
-    max-width: 80px;
-    opacity: 0.7;
-    filter: grayscale(20%);
+#Language {
+    div {
+        display: flex;
+        justify-content: center; // Centra los logos horizontalmente
+        align-items: center; // Los alinea verticalmente
+        flex-wrap: wrap; // Permite que bajen si no caben (responsivo)
+        gap: 40px; // Aumentamos el espacio entre ellos para que respiren
+        margin: 40px auto;
+        max-width: 600px; // <--- Aquí controlas qué tan ancho se ve el grupo
+        opacity: 0.8;
+        filter: grayscale(30%);
+        transition: filter 0.3s ease, opacity 0.3s ease;
+
+        filter: brightness(1.2) contrast(1.1) drop-shadow(0 0 8px rgba($accent-cyan, 1));
+
+        transition: all 0.3s ease;
+
+        .language-img {
+            width: 100px; // Tamaño uniforme para todos los logos
+            height: auto;
+            object-fit: contain;
+
+            &:hover {
+                opacity: 1;
+                // 2. Al pasar el mouse, quitamos el filtro y damos un brillo cian
+                filter: brightness(1) drop-shadow(0 0 10px rgba($accent-cyan, 0.5));
+                transform: scale(1.5); // Un pequeño pulso visual
+            }
+        }
+    }
+
 }
 
 footer {
@@ -157,4 +192,92 @@ footer {
     color: $accent-cyan;
     font-family: monospace;
     font-size: 0.9rem;
+}
+
+#GoToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    border: 1px solid $accent-cyan;
+    background-color: transparent;
+    color: $accent-cyan;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 18px;
+    transition: all 0.3s;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.3s ease;
+
+    &.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &:hover {
+        background-color: rgba($accent-cyan, 0.1);
+        transform: translateY(-5px);
+    }
+}
+
+#sideMenu {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%); // Centrado verticalmente
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 99;
+
+    // Estado inicial oculto
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+
+    // Clase que activaremos con JS
+    &.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    a {
+        color: $text-lightest;
+        text-decoration: none;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-align: right;
+        padding: 10px;
+        border-right: 1px solid rgba($accent-cyan, 0.3);
+        transition: color 0.3s, border-color 0.3s;
+
+        &:hover {
+            color: $accent-cyan;
+            border-right-color: $accent-cyan;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    #sideMenu {
+        right: 0;
+        top: 0;
+        bottom: auto;
+        width: 100%;
+        transform: none;
+        flex-direction: row; // Los enlaces se ponen uno al lado del otro
+        justify-content: space-around;
+        background: rgba($bg-navy, 0.95);
+        padding: 10px 0;
+        border-top: 1px solid rgba($accent-cyan, 0.3);
+
+        a {
+            border-right: none;
+            font-size: 0.7rem;
+        }
+    }
 }
