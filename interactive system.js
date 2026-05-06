@@ -1,10 +1,9 @@
 const nameEntered = prompt("Please, enter your name: ");
 let ageEntered;
 
-do{
-    ageEntered = prompt(`Welcome ${nameEntered}, this is Jayzir Martinez's WebSite.\n
-Please, enter your age: `);
-} while(ageEntered === "" || isNaN(ageEntered));
+do {
+    ageEntered = prompt(`Welcome ${nameEntered}, this is Jayzir Martinez's WebSite. Please, enter your age: `);
+    alert((ageEntered === "" || isNaN(ageEntered) || ageEntered <= 0) ? "Invalid Number" : (ageEntered >= 18) ? "You Are Adult" : "You Are Young")
 
-let status = (ageEntered >= 18) ? "Adult" : "Young";
-console.log(status);
+} while (ageEntered === "" || isNaN(ageEntered) || ageEntered <= 0);
+
