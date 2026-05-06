@@ -136,6 +136,7 @@ section iframe {
   width: 100px;
   height: auto;
   object-fit: contain;
+  transition-duration: .65s;
 }
 #Language div .language-img:hover {
   opacity: 1;
