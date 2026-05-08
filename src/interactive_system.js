@@ -2,6 +2,10 @@
 let nameEntered
 let ageEntered
 
+let minorThan18 = `Hello ${nameEntered}, you are under 18. Keep learning and enjoying coding!`
+let majorThan18 = `Hello ${nameEntered}, You are of legal age. Get ready for great opportunities in the world of programming!`
+const invalidNumber = "Error: Please, Enter a valid age number."
+
 //Asks for the username. If you don't enter it, it asks for it again.
 do {
     nameEntered = prompt("Please, enter your name:").trim();
@@ -12,6 +16,6 @@ do {
 do {
     ageEntered = prompt(`Welcome ¡${nameEntered}!, this is Jayzir Martinez's WebSite. Please, enter your age:`);
 
-    (isNaN(ageEntered) || ageEntered <= 0 || !Number.isInteger(Number(ageEntered))) ? console.error("Error: Please, Enter a valid age number.") : (ageEntered >= 18) ? console.log("You Are Adult") : console.log("You Are Young")
+    (isNaN(ageEntered) || ageEntered <= 0 || !Number.isInteger(Number(ageEntered))) ? console.error(invalidNumber) : (ageEntered >= 18) ? console.log(majorThan18) : console.warn(minorThan18)
 
 } while (isNaN(ageEntered) || ageEntered <= 0 || !Number.isInteger(Number(ageEntered)));

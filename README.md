@@ -38,10 +38,13 @@ Plaintext
 └── styles.scss             # SASS source file with variables and mixins
 
 ## ⚙️ Installation and Usage
-1. Clone this repository: git clone https://github.com/JayzirTech/your-repo-name.git
+1. Clone this repository: git clone https://github.com/JayzirTech/portfolio_JayzirTech.git
 2. Make sure you have a SASS compiler installed (such as the Live Sass Compiler extension in VS Code).
 
 3. Open the index.html file in your preferred browser.
+
+## 📝 Notes
+To review the user stories for Module 3 - JavaScript, please open the index.html file in your preferred browser and all the JS files will run.
 
 ## 👤 Author
 Jayzir Martinez
