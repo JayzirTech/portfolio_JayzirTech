@@ -50,10 +50,10 @@ function getElementButton(elementButton, operation = 'get', info = null) {
 }
 
 /**
-
 renderHtml
 @param { object } element
-@param { object } data */
+@param { object } data 
+*/
 
 
 function renderHtml(data) {
