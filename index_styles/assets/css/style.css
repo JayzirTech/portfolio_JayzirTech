@@ -30,13 +30,13 @@ header h1 {
   color: #ccd6f6;
   margin-bottom: 0.5rem;
 }
-header h2 a {
+header nav h2 a {
   color: #64ffda;
   text-decoration: none;
   font-size: 1.5rem;
   font-weight: 400;
 }
-header h2 a:hover {
+header nav h2 a:hover {
   color: rgb(176.5, 255, 236.2612903226);
 }
 header nav {
