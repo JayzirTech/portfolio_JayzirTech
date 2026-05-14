@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./data_management_styles/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Botón de regreso -->
+        <a href="index.html" class="back-link">← Go to Back</a>
+
+        <header>
+            <h1>Gestión de Inventario</h1>
+            <p">Selecciona una acción para administrar los productos de la miscelánea</p>
+        </header>
+
+        <!-- Menú de navegación principal -->
+        <nav class="action-menu" id="mainMenu">
+            <button class="menu-btn" onclick="showSection('registerSection')">
+                <div class="icon">📦</div>
+                <span>Registrar Producto</span>
+            </button>
+            <button class="menu-btn" onclick="showSection('searchSection')">
+                <div class="icon">🔍</div>
+                <span>Buscar Producto</span>
+            </button>
+        </nav>
+
+        <!-- Sección: Registrar Producto -->
+        <section id="registerSection" class="content-section">
+            <div class="card">
+                <h2>Registrar Nuevo Producto</h2>
+                <form id="productForm">
+                    <div class="form-group">
+                        <label for="prodName">Nombre del Producto</label>
+                        <input type="text" id="prodName" placeholder="Ej: Cuaderno Rayado" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prodPrice">Precio ($)</label>
+                        <input type="number" id="prodPrice" placeholder="Ej: 5500" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prodCategory">Categoría</label>
+                        <select id="prodCategory" required>
+                            <option value="">Seleccione una categoría</option>
+                            <option value="Papelería">Papelería</option>
+                            <option value="Útiles de Oficina">Útiles de Oficina</option>
+                            <option value="Manualidades">Manualidades</option>
+                            <option value="Tecnología">Tecnología</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary">Guardar Producto</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="showSection('mainMenu')">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Sección: Búsqueda de Producto -->
+        <section id="searchSection" class="content-section">
+            <div class="card">
+                <h2>Búsqueda de Inventario</h2>
+                <form id="searchForm" action="">
+                    <div class="search-bar">
+                        <input type="number" id="searchInputID" placeholder="Ingresa el ID del producto...">
+                    </div>
+
+                    <div class="search-bar">
+                        <input type="text" id="searchInputName" placeholder="Ingresa el nombre del producto...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prodCategory">Categoría</label>
+                        <select id="prodCategory" required>
+                            <option value="">Seleccione una categoría</option>
+                            <option value="Papelería">Papelería</option>
+                            <option value="Útiles de Oficina">Útiles de Oficina</option>
+                            <option value="Manualidades">Manualidades</option>
+                            <option value="Tecnología">Tecnología</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="handleSearch()">Buscar</button>
+
+                </form>
+
+                <div id="searchResult" class="result-area">
+                    <!-- Aquí se mostrará la información del producto -->
+                    <p class="placeholder-text">Introduce un ID para ver los detalles.</p>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="showSection('mainMenu')">Volver al
+                        Menú</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones y el menú
+            document.getElementById('mainMenu').style.display = 'none';
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Mostrar la sección seleccionada o el menú principal
+            if (sectionId === 'mainMenu') {
+                document.getElementById('mainMenu').style.display = 'flex';
+            } else {
+                document.getElementById(sectionId).classList.add('active');
+            }
+        }
+
+        function handleSearch() {
+            // Aquí irá tu lógica de Map en el siguiente paso
+            const resultArea = document.getElementById('searchResult');
+            resultArea.innerHTML = `<div class="info-box">Buscando... (Conectando con tu lógica de Map)</div>`;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,239 @@
+// Variables de color - Estilo Miscelánea (Beige & Amigable)
+$bg-color: #fdfaf5;
+$primary-beige: #f5f1e6;
+$accent-brown: #8d775f;
+$text-dark: #4a4238;
+$card-white: #ffffff;
+$success-green: #7da186;
+$shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: $bg-color;
+    color: $text-dark;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    line-height: 1.6;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+}
+
+// Botón de Regreso
+.back-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: $accent-brown;
+    font-weight: 600;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: translateX(-5px);
+    }
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+
+    h1 {
+        font-size: 2.2rem;
+        color: $accent-brown;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: lighten($text-dark, 20%);
+    }
+}
+
+// Menú de Botones
+.action-menu {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .menu-btn {
+        background-color: $card-white;
+        border: 2px solid $primary-beige;
+        padding: 30px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 180px;
+        box-shadow: $shadow;
+
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        span {
+            font-weight: 700;
+            color: $accent-brown;
+            font-size: 1rem;
+        }
+
+        &:hover {
+            transform: translateY(-10px);
+            border-color: $accent-brown;
+            background-color: $primary-beige;
+        }
+    }
+}
+
+// Secciones de contenido
+.content-section {
+    display: none;
+
+    &.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+    }
+}
+
+.card {
+    background: $card-white;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: $shadow;
+
+    h2 {
+        margin-bottom: 25px;
+        color: $accent-brown;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+}
+
+// Formularios
+.form-group {
+    margin-bottom: 20px;
+    width: 100%;
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid $primary-beige;
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.3s;
+
+        &:focus {
+            border-color: $accent-brown;
+        }
+    }
+}
+
+// Botones
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: filter 0.3s;
+
+    &-primary {
+        background-color: $accent-brown;
+        color: white;
+    }
+
+    &-secondary {
+        background-color: $primary-beige;
+        color: $accent-brown;
+    }
+
+    &:hover {
+        filter: brightness(0.9);
+    }
+}
+
+// Búsqueda
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    width: 100%;
+
+    input {
+        flex: 3;
+        padding: 12px;
+        border: 2px solid $primary-beige;
+        border-radius: 12px;
+        outline: none;
+    }
+}
+
+.result-area {
+    background-color: $bg-color;
+    padding: 20px;
+    border-radius: 15px;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed $primary-beige;
+    margin-top: 30px;
+
+    .placeholder-text {
+        color: lighten($text-dark, 30%);
+        font-style: italic;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#searchForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    button{
+        width: 20rem;
+    }
+}
