@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Miscellaneous Inventory - Product Management</title>
     <link rel="stylesheet" href="./data_management_styles/css/styles.css">
 </head>
 
@@ -14,50 +14,50 @@
         <a href="index.html" class="back-link">← Go to Back</a>
 
         <header>
-            <h1>Gestión de Inventario</h1>
-            <p">Selecciona una acción para administrar los productos de la miscelánea</p>
+            <h1>Inventory Management</h1>
+            <p">Select an action to manage the miscellaneous products</p>
         </header>
 
         <!-- Menú de navegación principal -->
         <nav class="action-menu" id="mainMenu">
             <button class="menu-btn" onclick="showSection('registerSection')">
                 <div class="icon">📦</div>
-                <span>Registrar Producto</span>
+                <span>Register Product</span>
             </button>
             <button class="menu-btn" onclick="showSection('searchSection')">
                 <div class="icon">🔍</div>
-                <span>Buscar Producto</span>
+                <span>Search Product</span>
             </button>
         </nav>
 
         <!-- Sección: Registrar Producto -->
         <section id="registerSection" class="content-section">
             <div class="card">
-                <h2>Registrar Nuevo Producto</h2>
+                <h2>Register a New Product</h2>
                 <form id="productForm">
                     <div class="form-group">
-                        <label for="prodName">Nombre del Producto</label>
-                        <input type="text" id="prodName" placeholder="Ej: Cuaderno Rayado" required>
+                        <label for="prodName">Product's Name</label>
+                        <input type="text" id="prodName" placeholder="Ex: Lined Notebook" required>
                     </div>
                     <div class="form-group">
-                        <label for="prodPrice">Precio ($)</label>
-                        <input type="number" id="prodPrice" placeholder="Ej: 5500" required>
+                        <label for="prodPrice">Price ($)</label>
+                        <input type="number" id="prodPrice" placeholder="Ex: 5500" required>
                     </div>
                     <div class="form-group">
-                        <label for="prodCategory">Categoría</label>
+                        <label for="prodCategory">Category</label>
                         <select id="prodCategory" required>
-                            <option value="">Seleccione una categoría</option>
-                            <option value="Papelería">Papelería</option>
-                            <option value="Útiles de Oficina">Útiles de Oficina</option>
-                            <option value="Manualidades">Manualidades</option>
-                            <option value="Tecnología">Tecnología</option>
+                            <option value="">Select a Category</option>
+                            <option value="Stationery">Stationery</option>
+                            <option value="Office supplies">Office supplies</option>
+                            <option value="Crafts">Crafts</option>
+                            <option value="Technology">Technology</option>
                             <option value="Others">Others</option>
                         </select>
                     </div>
                     <div class="button-group">
-                        <button type="submit" class="btn btn-primary">Guardar Producto</button>
+                        <button type="submit" class="btn btn-primary">Save Product</button>
                         <button type="button" class="btn btn-secondary"
-                            onclick="showSection('mainMenu')">Cancelar</button>
+                            onclick="showSection('mainMenu')">Cancel</button>
                     </div>
                 </form>
             </div>
@@ -66,24 +66,24 @@
         <!-- Sección: Búsqueda de Producto -->
         <section id="searchSection" class="content-section">
             <div class="card">
-                <h2>Búsqueda de Inventario</h2>
+                <h2>Inventory Search</h2>
                 <form id="searchForm" action="">
                     <div class="search-bar">
-                        <input type="number" id="searchInputID" placeholder="Ingresa el ID del producto...">
+                        <input type="number" id="searchInputID" placeholder="Enter the Product's ID...">
                     </div>
 
                     <div class="search-bar">
-                        <input type="text" id="searchInputName" placeholder="Ingresa el nombre del producto...">
+                        <input type="text" id="searchInputName" placeholder="Enter the Product's name...">
                     </div>
 
                     <div class="form-group">
-                        <label for="prodCategory">Categoría</label>
+                        <label for="prodCategory">Category</label>
                         <select id="prodCategory" required>
-                            <option value="">Seleccione una categoría</option>
-                            <option value="Papelería">Papelería</option>
-                            <option value="Útiles de Oficina">Útiles de Oficina</option>
-                            <option value="Manualidades">Manualidades</option>
-                            <option value="Tecnología">Tecnología</option>
+                            <option value="">Select a Category</option>
+                            <option value="Stationery">Stationery</option>
+                            <option value="Office supplies">Office supplies</option>
+                            <option value="Crafts">Crafts</option>
+                            <option value="Technology">Technology</option>
                             <option value="Others">Others</option>
                         </select>
                     </div>
@@ -94,12 +94,11 @@
 
                 <div id="searchResult" class="result-area">
                     <!-- Aquí se mostrará la información del producto -->
-                    <p class="placeholder-text">Introduce un ID para ver los detalles.</p>
+                    <p class="placeholder-text"></p>
                 </div>
 
                 <div class="button-group">
-                    <button type="button" class="btn btn-secondary" onclick="showSection('mainMenu')">Volver al
-                        Menú</button>
+                    <button type="button" class="btn btn-secondary" onclick="showSection('mainMenu')">Go to Menu</button>
                 </div>
             </div>
         </section>
