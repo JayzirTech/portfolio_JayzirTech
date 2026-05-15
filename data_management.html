@@ -9,123 +9,91 @@
 </head>
 
 <body>
-    <div class="container">
-        <!-- Botón de regreso -->
-        <a href="index.html" class="back-link">← Go to Back</a>
+    <!-- Botón de regreso -->
+    <a href="index.html" class="back-link">← Go to Home</a>
 
-        <header>
-            <h1>Inventory Management</h1>
-            <p">Select an action to manage the miscellaneous products</p>
-        </header>
+    <header>
+        <h1>Inventory Management</h1>
+        <p id="selectOption">Select an option to manage the miscellaneous products</p>
+    </header>
 
-        <!-- Menú de navegación principal -->
-        <nav class="action-menu" id="mainMenu">
-            <button class="menu-btn" onclick="showSection('registerSection')">
-                <div class="icon">📦</div>
-                <span>Register Product</span>
-            </button>
-            <button class="menu-btn" onclick="showSection('searchSection')">
-                <div class="icon">🔍</div>
-                <span>Search Product</span>
-            </button>
-        </nav>
+    <!-- Menú de navegación principal -->
+    <nav id="mainMenu">
+        <button class="menu-btn" onclick="showSection('registerSection')">
+            <span class="icon">📦</span>
+            <span>Register Product</span>
+        </button>
+        <button class="menu-btn" onclick="showSection('searchSection')">
+            <span class="icon">🔍</span>
+            <span>Search Product</span>
+        </button>
+    </nav>
 
-        <!-- Sección: Registrar Producto -->
-        <section id="registerSection" class="content-section">
-            <div class="card">
-                <h2>Register a New Product</h2>
-                <form id="productForm">
-                    <div class="form-group">
-                        <label for="prodName">Product's Name</label>
-                        <input type="text" id="prodName" placeholder="Ex: Lined Notebook" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="prodPrice">Price ($)</label>
-                        <input type="number" id="prodPrice" placeholder="Ex: 5500" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="prodCategory">Category</label>
-                        <select id="prodCategory" required>
-                            <option value="">Select a Category</option>
-                            <option value="Stationery">Stationery</option>
-                            <option value="Office supplies">Office supplies</option>
-                            <option value="Crafts">Crafts</option>
-                            <option value="Technology">Technology</option>
-                            <option value="Others">Others</option>
-                        </select>
-                    </div>
-                    <div class="button-group">
-                        <button type="submit" class="btn btn-primary">Save Product</button>
-                        <button type="button" class="btn btn-secondary"
-                            onclick="showSection('mainMenu')">Cancel</button>
-                    </div>
-                </form>
-            </div>
-        </section>
+    <!-- Sección: Registrar Producto -->
+    <section id="registerSection" class="content-section">
+        <h2>Register a New Product</h2>
+        <form id="productForm">
+            <fieldset class="form-group">
+                <label for="prodName">Product's Name</label>
+                <input type="text" id="prodName" placeholder="Ex: Lined Notebook" required>
+            </fieldset>
 
-        <!-- Sección: Búsqueda de Producto -->
-        <section id="searchSection" class="content-section">
-            <div class="card">
-                <h2>Inventory Search</h2>
-                <form id="searchForm" action="">
-                    <div class="search-bar">
-                        <input type="number" id="searchInputID" placeholder="Enter the Product's ID...">
-                    </div>
+            <fieldset class="form-group">
+                <label for="prodPrice">Price ($)</label>
+                <input type="number" id="prodPrice" placeholder="Ex: 5500" required>
+            </fieldset>
 
-                    <div class="search-bar">
-                        <input type="text" id="searchInputName" placeholder="Enter the Product's name...">
-                    </div>
+            <fieldset class="form-group">
+                <label for="prodCategory">Category</label>
+                <select id="prodCategory" required>
+                    <option value="">Select a Category</option>
+                    <option value="Stationery">Stationery</option>
+                    <option value="Office supplies">Office supplies</option>
+                    <option value="Crafts">Crafts</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Others">Others</option>
+                </select>
+            </fieldset>
 
-                    <div class="form-group">
-                        <label for="prodCategory">Category</label>
-                        <select id="prodCategory" required>
-                            <option value="">Select a Category</option>
-                            <option value="Stationery">Stationery</option>
-                            <option value="Office supplies">Office supplies</option>
-                            <option value="Crafts">Crafts</option>
-                            <option value="Technology">Technology</option>
-                            <option value="Others">Others</option>
-                        </select>
-                    </div>
+            <footer class="button-group">
+                <button type="submit" class="btn btn-primary">Save Product</button>
+                <button type="button" class="btn btn-secondary" onclick="showSection('mainMenu')">Cancel</button>
+            </footer>
+        </form>
+    </section>
 
-                    <button class="btn btn-primary" onclick="handleSearch()">Buscar</button>
+    <!-- Sección: Busqueda de Producto -->
+    <section id="searchSection" class="content-section">
+        <h2>Inventory Search</h2>
+        <form id="searchForm">
+            <input type="number" id="searchInputID" class="search-input search-field" placeholder="Enter Product ID...">
+            <input type="text" id="searchInputName" class="search-input search-field" placeholder="Enter Product Name...">
 
-                </form>
+            <fieldset class="form-group">
+                <label for="searchCategory">Category</label>
+                <select id="searchCategory" class="search-field">
+                    <option value="">Select a Category</option>
+                    <option value="Stationery">Stationery</option>
+                    <option value="Office supplies">Office supplies</option>
+                    <option value="Crafts">Crafts</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Others">Others</option>
+                </select>
+            </fieldset>
 
-                <div id="searchResult" class="result-area">
-                    <!-- Aquí se mostrará la información del producto -->
-                    <p class="placeholder-text"></p>
-                </div>
+            <button type="button" class="btn btn-primary" onclick="handleSearch()">Search</button>
+        </form>
 
-                <div class="button-group">
-                    <button type="button" class="btn btn-secondary" onclick="showSection('mainMenu')">Go to Menu</button>
-                </div>
-            </div>
-        </section>
-    </div>
+        <output id="searchResult" class="result-area">
+            <p class="placeholder-text">Enter details to see results.</p>
+        </output>
 
-    <script>
-        function showSection(sectionId) {
-            // Ocultar todas las secciones y el menú
-            document.getElementById('mainMenu').style.display = 'none';
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active');
-            });
+        <footer class="button-group">
+            <button type="button" class="btn btn-secondary" onclick="showSection('mainMenu')">Go to Menu</button>
+        </footer>
+    </section>
 
-            // Mostrar la sección seleccionada o el menú principal
-            if (sectionId === 'mainMenu') {
-                document.getElementById('mainMenu').style.display = 'flex';
-            } else {
-                document.getElementById(sectionId).classList.add('active');
-            }
-        }
-
-        function handleSearch() {
-            // Aquí irá tu lógica de Map en el siguiente paso
-            const resultArea = document.getElementById('searchResult');
-            resultArea.innerHTML = `<div class="info-box">Buscando... (Conectando con tu lógica de Map)</div>`;
-        }
-    </script>
+    <script src="./src/data_management.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Variables de color - Estilo Miscelánea (Beige & Amigable)
 $bg-color: #fdfaf5;
 $primary-beige: #f5f1e6;
@@ -18,20 +20,17 @@ body {
     background-color: $bg-color;
     color: $text-dark;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     padding: 40px 20px;
     line-height: 1.6;
-}
 
-.container {
-    width: 100%;
-    max-width: 600px;
 }
 
 // Botón de Regreso
 .back-link {
-    display: flex;
-    align-items: center;
+    position: absolute;
+    left: 15%;
     gap: 8px;
     text-decoration: none;
     color: $accent-brown;
@@ -46,7 +45,7 @@ body {
 
 header {
     text-align: center;
-    margin-bottom: 40px;
+    margin: 40px 0;
 
     h1 {
         font-size: 2.2rem;
@@ -55,12 +54,12 @@ header {
     }
 
     p {
-        color: lighten($text-dark, 20%);
+        color: color.scale($text-dark, $lightness: 20%);
     }
 }
 
 // Menú de Botones
-.action-menu {
+nav {
     display: flex;
     gap: 20px;
     justify-content: center;
@@ -101,14 +100,14 @@ header {
 // Secciones de contenido
 .content-section {
     display: none;
+    width: 35rem;
+    max-width: 95vw;
 
     &.active {
         display: block;
         animation: fadeIn 0.5s ease;
     }
-}
 
-.card {
     background: $card-white;
     padding: 30px;
     border-radius: 25px;
@@ -126,6 +125,7 @@ header {
 .form-group {
     margin-bottom: 20px;
     width: 100%;
+    border: none;
 
     label {
         display: block;
@@ -149,6 +149,19 @@ header {
             border-color: $accent-brown;
         }
     }
+}
+
+// Quitar flechas en navegadores basados en Chrome, Safari, Edge y Opera
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+// Quitar flechas en Firefox
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 // Botones
@@ -184,18 +197,26 @@ header {
 }
 
 // Búsqueda
-.search-bar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 25px;
+.search-input {
     width: 100%;
+    padding: 12px 15px;
+    border: 2px solid $primary-beige;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
 
-    input {
-        flex: 3;
-        padding: 12px;
-        border: 2px solid $primary-beige;
-        border-radius: 12px;
-        outline: none;
+    &:focus {
+        border-color: $accent-brown;
+        background-color: color.scale($primary-beige, $lightness: 2%);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    &::placeholder {
+        color: color.scale($text-dark, $lightness: 30%);
+        font-style: italic;
     }
 }
 
@@ -211,7 +232,7 @@ header {
     margin-top: 30px;
 
     .placeholder-text {
-        color: lighten($text-dark, 30%);
+        color: color.scale($text-dark, $lightness: 30%);
         font-style: italic;
     }
 }
@@ -231,9 +252,20 @@ header {
 #searchForm {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 5px;
+    width: 100%;
 
-    button{
-        width: 20rem;
+    .btn-primary {
+        margin-top: 10px;
+        align-self: center;
+        width: 100%;
+        max-width: 300px;
     }
+}
+
+.search-input:disabled,
+select:disabled {
+    background-color: #eee;
+    border-color: #ccc;
+    color: #999;
 }
