@@ -127,6 +127,14 @@ nav .menu-btn:hover {
 .form-group select:focus {
   border-color: #8d775f;
 }
+.form-group span {
+  font-family: sans-serif;
+  color: red;
+  font-size: smaller;
+  display: none;
+  margin-left: 0.7rem;
+  margin-top: 0.5rem;
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

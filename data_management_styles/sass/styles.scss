@@ -114,6 +114,7 @@ nav {
     &.active {
         display: block;
         animation: fadeIn 0.5s ease;
+        
     }
 
     h2 {
@@ -151,6 +152,15 @@ nav {
         &:focus {
             border-color: $accent-brown;
         }
+    }
+
+    span{
+        font-family: sans-serif;
+        color: red;
+        font-size: smaller;
+        display: none;
+        margin-left: .7rem;
+        margin-top: .5rem;
     }
 }
 
