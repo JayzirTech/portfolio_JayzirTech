@@ -15,6 +15,10 @@ $shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
     padding: 0;
 }
 
+html {
+    scrollbar-gutter: stable; // Reserva el espacio del scroll para que nada se mueva
+}
+
 body {
     font-family: 'Quicksand', sans-serif;
     background-color: $bg-color;
@@ -24,7 +28,7 @@ body {
     align-items: center;
     padding: 40px 20px;
     line-height: 1.6;
-
+    width: 100%;
 }
 
 // Botón de Regreso
@@ -100,18 +104,17 @@ nav {
 // Secciones de contenido
 .content-section {
     display: none;
-    width: 35rem;
-    max-width: 95vw;
+    width: 100%;
+    max-width: 35rem;
+    background: $card-white;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: $shadow;
 
     &.active {
         display: block;
         animation: fadeIn 0.5s ease;
     }
-
-    background: $card-white;
-    padding: 30px;
-    border-radius: 25px;
-    box-shadow: $shadow;
 
     h2 {
         margin-bottom: 25px;

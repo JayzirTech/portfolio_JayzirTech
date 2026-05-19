@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   font-family: "Quicksand", sans-serif;
   background-color: #fdfaf5;
@@ -13,6 +17,7 @@ body {
   align-items: center;
   padding: 40px 20px;
   line-height: 1.6;
+  width: 100%;
 }
 
 .back-link {
@@ -78,18 +83,16 @@ nav .menu-btn:hover {
 
 .content-section {
   display: none;
-  width: 35rem;
-  max-width: 95vw;
-}
-.content-section.active {
-  display: block;
-  animation: fadeIn 0.5s ease;
-}
-.content-section {
+  width: 100%;
+  max-width: 35rem;
   background: #ffffff;
   padding: 30px;
   border-radius: 25px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+.content-section.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
 }
 .content-section h2 {
   margin-bottom: 25px;

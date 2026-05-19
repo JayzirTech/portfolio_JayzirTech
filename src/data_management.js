@@ -1,63 +1,63 @@
-const inventoryMap = new Map([
+let inventoryMap = new Map([
     [
-        "1001", {
-            nombre: "Cuaderno Rayado 100H",
-            precio: 5500,
-            categoria: "Papelería"
+        1001, {
+            name: "Cuaderno Rayado 100H",
+            pryce: 5500,
+            category: "Papelería"
         }],
     [
-        "1002", {
-            nombre: "Caja de Colores x24",
-            precio: 12000,
-            categoria: "Papelería"
+        1002, {
+            name: "Caja de Colores x24",
+            pryce: 12000,
+            category: "Papelería"
         }],
     [
-        "2002", {
-            nombre: "Resaltador Fluorescente",
-            precio: 2800,
-            categoria: "Útiles de Oficina"
+        2002, {
+            name: "Resaltador Fluorescente",
+            pryce: 2800,
+            category: "Útiles de Oficina"
         }],
     [
-        "3001", {
-            nombre: "Cartulina de Colores",
-            precio: 800,
-            categoria: "Manualidades"
+        3001, {
+            name: "Cartulina de Colores",
+            pryce: 800,
+            category: "Manualidades"
         }],
     [
-        "3002", {
-            nombre: "Silicona Líquida 250ml",
-            precio: 8500,
-            categoria: "Manualidades"
+        3002, {
+            name: "Silicona Líquida 250ml",
+            pryce: 8500,
+            category: "Manualidades"
         }],
     [
-        "2001", {
-            nombre: "Pegante en Barra 40g",
-            precio: 3500,
-            categoria: "Útiles de Oficina"
+        2001, {
+            name: "Pegante en Barra 40g",
+            pryce: 3500,
+            category: "Útiles de Oficina"
         }],
     [
-        "4001", {
-            nombre: "Carpeta de Presentación",
-            precio: 1500,
-            categoria: "Archivo"
+        4001, {
+            name: "Carpeta de Presentación",
+            pryce: 1500,
+            category: "Archivo"
         }],
     [
-        "4002", {
-            nombre: "Ganchos Legajadores x20",
-            precio: 2200,
-            categoria: "Archivo"
+        4002, {
+            name: "Ganchos Legajadores x20",
+            pryce: 2200,
+            category: "Archivo"
         }],
     [
-        "5001", {
-            nombre: "Calculadora Científica",
-            precio: 45000,
-            categoria: "Tecnología"
+        5001, {
+            name: "Calculadora Científica",
+            pryce: 45000,
+            category: "Tecnología"
         }],
     [
-        "5002", {
-            nombre: "Memoria USB 64GB",
-            precio: 28000,
-            categoria: "Tecnología"
+        5002, {
+            name: "Memoria USB 64GB",
+            pryce: 28000,
+            category: "Tecnología"
         }]
 ]);
 
@@ -66,30 +66,54 @@ const inventoryMap = new Map([
  * Esta función se encarga de mostrar solo una "pantalla" a la vez.
  */
 function showSection(sectionId) {
-    // 1. Ocultar el menú principal
     const mainMenu = document.getElementById('mainMenu');
-    if (mainMenu) {
-        mainMenu.style.display = 'none';
-    }
+    const textSelect = document.getElementById('selectOption');
+    const buttonToBack = document.getElementById('buttonToBack');
 
-    // 2. Ocultar todas las secciones de contenido (las que tienen la clase .content-section)
+    mainMenu.style.display = 'none';
+    textSelect.style.display = 'none';
+    buttonToBack.style.display = 'none';
+
     const sections = document.querySelectorAll('.content-section');
     sections.forEach(section => {
         section.classList.remove('active');
+
+        // Buscamos el formulario de la sección que se está ocultando
         const form = section.querySelector('form');
         if (form) {
-            form.reset();
+            form.reset(); // Restablece los valores a vacío
+        }
+
+        // CONTROL CRÍTICO: Desbloquear los campos de exclusión mutua al salir
+        const searchFields = section.querySelectorAll('.search-field');
+        searchFields.forEach(f => {
+            f.disabled = false;
+            f.style.opacity = "1";
+            f.style.cursor = "auto";
+        });
+    });
+
+    // Restablecer el texto idéntico al del HTML original
+    const pText = document.getElementById("placeholderText");
+    if (pText) {
+        pText.innerHTML = `Enter details to see results.`;
+    }
+
+    // Desactivar el scroll (wheel) en las entradas numéricas para evitar cambios accidentales
+    document.addEventListener('wheel', function () {
+        if (document.activeElement.type === 'number') {
+            document.activeElement.blur();
         }
     });
 
-    // 3. Lógica para decidir qué mostrar
+    // Mostrar sección destino
     if (sectionId === 'mainMenu') {
-        // Si el usuario quiere volver, mostramos el menú principal en modo flex
         if (mainMenu) {
             mainMenu.style.display = 'flex';
+            textSelect.style.display = 'block'
+            buttonToBack.style.display = 'block';
         }
     } else {
-        // Si el usuario elige una funcionalidad, activamos esa sección específica
         const targetSection = document.getElementById(sectionId);
         if (targetSection) {
             targetSection.classList.add('active');
@@ -98,52 +122,33 @@ function showSection(sectionId) {
 }
 
 /**
- * Manejador de Búsqueda (Estructura base)
- * Esta función se activa al hacer clic en el botón de buscar.
+ * Control UI: Exclusión mutua de campos de búsqueda
  */
-function handleSearch() {
-    const id = document.getElementById('searchInputID').value;
-    const resultArea = document.getElementById('searchResult');
-
-    // Verificamos si el ID existe en nuestro Map
-    if (inventoryMap.has(id)) {
-        const producto = inventoryMap.get(id);
-        resultArea.innerHTML = `
-            <div class="info-box">
-                <p><strong>Producto:</strong> ${producto.nombre}</p>
-                <p><strong>Precio:</strong> $${producto.precio}</p>
-                <p><strong>Categoría:</strong> ${producto.categoria}</p>
-            </div>
-        `;
-    } else {
-        resultArea.innerHTML = `<p class="placeholder-text">❌ Producto no encontrado</p>`;
-    }
-}
-
-// Seleccionamos todos los campos de búsqueda
 const searchFields = document.querySelectorAll('.search-field');
 
 searchFields.forEach(field => {
     field.addEventListener('input', () => {
-        // Verificamos si el campo actual tiene algún valor
-        const hasValue = field.value !== "";
+        const hasValue = field.value.trim() !== "";
 
         if (hasValue) {
-            // Si tiene valor, deshabilitamos todos los DEMÁS campos
+            // Deshabilitar los demás campos
             searchFields.forEach(otherField => {
                 if (otherField !== field) {
                     otherField.disabled = true;
-                    otherField.style.opacity = "0.5"; // Feedback visual de bloqueo
+                    otherField.style.opacity = "0.5";
                     otherField.style.cursor = "not-allowed";
                 }
             });
         } else {
-            // Si el campo se vacía, habilitamos todos nuevamente
-            searchFields.forEach(f => {
-                f.disabled = false;
-                f.style.opacity = "1";
-                f.style.cursor = "auto";
-            });
+            // CONTROL: Verificar si de verdad TODOS están vacíos antes de habilitar
+            const allEmpty = Array.from(searchFields).every(f => f.value.trim() === "");
+            if (allEmpty) {
+                searchFields.forEach(f => {
+                    f.disabled = false;
+                    f.style.opacity = "1";
+                    f.style.cursor = "auto";
+                });
+            }
         }
     });
 });
