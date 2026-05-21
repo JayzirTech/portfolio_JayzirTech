@@ -14,6 +14,7 @@ let inventoryMap = new Map([
 const buttonSumit = document.getElementById('buttonSubmitSaveProduct');
 const productForm = document.getElementById('productForm');
 const existingIDMessage = document.getElementById('IDVrification');
+const existingdNameMessage = document.getElementById('nameVerification');
 
 /**
  * Control de Navegación de Secciones
@@ -34,11 +35,12 @@ function showSection(sectionId) {
 
         // Buscamos el formulario de la sección que se está ocultando
         const form = section.querySelector('form');
-        
+
         if (form) {
             form.reset(); // Restablece los valores a vacío
 
-            existingIDMessage.textContent='';
+            existingIDMessage.textContent = '';
+            existingdNameMessage.textContent = '';
 
             buttonSumit.disabled = false;
             buttonSumit.style.opacity = "1";
@@ -124,14 +126,14 @@ inputID.addEventListener('input', (event) => {
 
         if (registeredIDs.has(parseInt(actualValue, 10))) {
 
-            existingIDMessage.textContent='❌ ID not available';
+            existingIDMessage.textContent = '❌ ID not available';
 
             buttonSumit.disabled = true;
             buttonSumit.style.opacity = "0.5";
             buttonSumit.style.cursor = "not-allowed";
         }
     } else {
-        existingIDMessage.textContent=``;
+        existingIDMessage.textContent = ``;
 
         buttonSumit.disabled = false;
         buttonSumit.style.opacity = "1";
@@ -139,7 +141,7 @@ inputID.addEventListener('input', (event) => {
     }
 });
 
-// Seleccionamos el nombre del producto por su ID
+// Seleccionamos el input por su ID
 const inputProdName = document.getElementById('prodName');
 
 // Le plantamos el "escuchador" del evento 'input'
@@ -148,22 +150,18 @@ inputProdName.addEventListener('input', (event) => {
     const actualValue = event.target.value;
 
     // Verifica si el ID ya existe
-    if (actualValue) {
+    const registeredName = new Set([...inventoryMap.values()].map(product => product.name.toLowerCase()));
+    console.log(registeredName)
 
-        const registeredName = new Set ([...inventoryMap.values()].map(product => product.name.toLowerCase()));
-        console.log(registeredName)
+    if (registeredName.has(actualValue.toLowerCase())) {
 
-        if (registeredName.has(actualValue.toLowerCase())) {
+        existingdNameMessage.textContent = '❌ Name not available';
 
-            existingIDMessage.textContent='❌ ID not available';
-
-            buttonSumit.disabled = true;
-            buttonSumit.style.opacity = "0.5";
-            buttonSumit.style.cursor = "not-allowed";
-        }
+        buttonSumit.disabled = true;
+        buttonSumit.style.opacity = "0.5";
+        buttonSumit.style.cursor = "not-allowed";
     } else {
-        existingIDMessage.textContent=``;
-
+        existingdNameMessage.textContent = '';
         buttonSumit.disabled = false;
         buttonSumit.style.opacity = "1";
         buttonSumit.style.cursor = "auto";
@@ -175,7 +173,7 @@ inputProdName.addEventListener('input', (event) => {
  */
 productForm.addEventListener('submit', (event) => {
     // Evita la recarga inmediata de la página para no perder el mapa en memoria
-    event.preventDefault(); 
+    event.preventDefault();
 
     // Capturamos y formateamos los valores ingresados por el usuario
     const id = parseInt(document.getElementById('prodID').value, 10);
@@ -197,3 +195,5 @@ productForm.addEventListener('submit', (event) => {
     showSection('mainMenu');
     console.table(inventoryMap)
 });
+
+//Lógica de búsqueda

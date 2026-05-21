@@ -39,6 +39,7 @@
             <fieldset class="form-group">
                 <label for="prodName">Product's Name</label>
                 <input type="text" id="prodName" placeholder="Ex: Lined Notebook" required>
+                <span id="nameVerification"></span>
             </fieldset>
 
             <fieldset class="form-group">
@@ -83,12 +84,13 @@
                     <option value="Others">Others</option>
                 </select>
             </fieldset>
-
-            <button type="button" class="btn btn-primary" onclick="handleSearch()">Search</button>
         </form>
 
         <output id="searchResult" class="result-area">
-            <p id="placeholderText" class="placeholder-text"></p>
+            <p id="placeholderText" class="placeholder-text">
+                <ul id="productLis" class="product-list">
+                </ul>
+            </p>
         </output>
 
         <footer class="button-group">
