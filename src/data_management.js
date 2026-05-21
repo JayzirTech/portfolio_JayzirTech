@@ -12,8 +12,8 @@ let inventoryMap = new Map([
 ]);
 
 const buttonSumit = document.getElementById('buttonSubmitSaveProduct');
-const existingIDMessage = document.getElementById('IDVrification');
 const productForm = document.getElementById('productForm');
+const existingIDMessage = document.getElementById('IDVrification');
 
 /**
  * Control de Navegación de Secciones
@@ -34,10 +34,11 @@ function showSection(sectionId) {
 
         // Buscamos el formulario de la sección que se está ocultando
         const form = section.querySelector('form');
+        
         if (form) {
             form.reset(); // Restablece los valores a vacío
 
-            existingIDMessage.style.display = 'none';
+            existingIDMessage.textContent='';
 
             buttonSumit.disabled = false;
             buttonSumit.style.opacity = "1";
@@ -56,7 +57,7 @@ function showSection(sectionId) {
     // Restablecer el texto idéntico al del HTML original
     const pText = document.getElementById("placeholderText");
     if (pText) {
-        pText.innerHTML = `Enter details to see results.`;
+        pText.textContent = `Enter details to see results.`;
     }
 
     // Mostrar sección destino
@@ -123,14 +124,45 @@ inputID.addEventListener('input', (event) => {
 
         if (registeredIDs.has(parseInt(actualValue, 10))) {
 
-            existingIDMessage.style.display = 'block';
+            existingIDMessage.textContent='❌ ID not available';
 
             buttonSumit.disabled = true;
             buttonSumit.style.opacity = "0.5";
             buttonSumit.style.cursor = "not-allowed";
         }
     } else {
-        existingIDMessage.style.display = 'none';
+        existingIDMessage.textContent=``;
+
+        buttonSumit.disabled = false;
+        buttonSumit.style.opacity = "1";
+        buttonSumit.style.cursor = "auto";
+    }
+});
+
+// Seleccionamos el nombre del producto por su ID
+const inputProdName = document.getElementById('prodName');
+
+// Le plantamos el "escuchador" del evento 'input'
+inputProdName.addEventListener('input', (event) => {
+    // Capturamos el valor actual que tiene el campo
+    const actualValue = event.target.value;
+
+    // Verifica si el ID ya existe
+    if (actualValue) {
+
+        const registeredName = new Set ([...inventoryMap.values()].map(product => product.name.toLowerCase()));
+        console.log(registeredName)
+
+        if (registeredName.has(actualValue.toLowerCase())) {
+
+            existingIDMessage.textContent='❌ ID not available';
+
+            buttonSumit.disabled = true;
+            buttonSumit.style.opacity = "0.5";
+            buttonSumit.style.cursor = "not-allowed";
+        }
+    } else {
+        existingIDMessage.textContent=``;
 
         buttonSumit.disabled = false;
         buttonSumit.style.opacity = "1";
