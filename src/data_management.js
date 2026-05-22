@@ -1,5 +1,5 @@
 let inventoryMap = new Map([
-    [1001, { name: "Cuaderno Rayado 100H", price: 5500, category: "Stationery" }],
+    [1001, { name: "cuaderno rayado 100H", price: 5500, category: "Stationery" }],
     [1002, { name: "Caja de Colores x24", price: 12000, category: "Stationery" }],
     [2002, { name: "Resaltador Fluorescente", price: 2800, category: "Office supplies" }],
     [3001, { name: "Cartulina de Colores", price: 800, category: "Crafts" }],
@@ -11,8 +11,11 @@ let inventoryMap = new Map([
     [5002, { name: "Memoria USB 64GB", price: 28000, category: "Technology" }]
 ]);
 
+// 
 const textIDVerification = document.getElementById('IDVerification');
 const textNameVerification = document.getElementById('nameVerification');
+const textProductsDetails = document.getElementById('placeholderText');
+
 
 // Función para mostrar secciones de registro y búsqueda
 function showSection(form) {
@@ -26,9 +29,17 @@ function showSection(form) {
     textSelectOption.style.display = 'none';
     buttonToHome.style.display = 'none';
 
-    if (form === 'registerSection') registerForm.classList.add('active');
+    if (form === 'registerSection') {
+        registerForm.classList.add('active');
+        inputProductForm.reset();
+        inputSearchForm.reset();
+    };
 
-    if (form === 'searchSection') searchForm.classList.add('active');
+    if (form === 'searchSection') {
+        searchForm.classList.add('active');
+        inputProductForm.reset();
+        inputSearchForm.reset();
+    };
 
     if (form === 'mainMenu') {
         menu.style.display = 'flex';
@@ -41,36 +52,50 @@ function showSection(form) {
 
         textIDVerification.innerText = '';
         textNameVerification.innerText = '';
+        submitButtonEnabler(false, false);
+
+        inputSearchForm.reset();
+        inputSearch(false, false, false)
     }
 }
+
+// Variables para el arbitro de la habilitación del botón de submit de registro
+let errorID = false;
+let errorName = false;
 
 // Lógica para bloquear el envío si el ID ya está registrado
 const inputProdID = document.getElementById('prodID');
 
-inputProdID.addEventListener('input', () => {
+inputProdID.addEventListener('blur', () => {
 
-    if ((inputProdID.value).length === 4 && inputProdName) {
+    if ((inputProdID.value).length === 4) {
         const ids = new Set(inventoryMap.keys());
 
         if (ids.has(Number(inputProdID.value))) {
 
             textIDVerification.innerText = '❌ ID not available';
 
-            submitButtonEnabler(true);
+            errorID = true;
+        }
+        else {
+            textIDVerification.innerText = '';
+            errorID = false;
         }
 
-    } else {
-        textIDVerification.innerText = '';
-
-        submitButtonEnabler(false);
     }
+
+    else {
+        textIDVerification.innerText = '';
+    }
+
+    submitButtonEnabler(errorID, errorName);
 
 });
 
 // Lógica para bloquear el envío si el nombre ya está registrado
 const inputProdName = document.getElementById('prodName');
 
-inputProdName.addEventListener('input', () => {
+inputProdName.addEventListener('blur', () => {
 
     const names = new Set();
 
@@ -79,21 +104,25 @@ inputProdName.addEventListener('input', () => {
     if (names.has(((inputProdName.value).trim()).toLocaleLowerCase())) {
 
         textNameVerification.innerText = '❌ Product name already exists';
-        submitButtonEnabler(true);
+
+        errorName = true;
 
     } else {
 
         textNameVerification.innerText = '';
-        submitButtonEnabler(false);
+
+        errorName = false;
     };
+
+    submitButtonEnabler(errorID, errorName);
 
 });
 
 // Función para habilita y deshabilitar el botón de envío
-function submitButtonEnabler(confirmation) {
+function submitButtonEnabler(confID, confName) {
     const buttonSubmit = document.getElementById('buttonSubmitSaveProduct');
 
-    if (confirmation === true) {
+    if (confID || confName) {
         buttonSubmit.disabled = true;
 
         buttonSubmit.style.backgroundColor = '#a39385';
@@ -119,12 +148,106 @@ inputProductForm.addEventListener('submit', (event) => {
 
     inventoryMap.set(Number(inputProdID.value), {
         name: inputProdName.value,
-        price: Number(inputProdPrice.value), 
+        price: Number(inputProdPrice.value),
         category: inputProdCategory.value
     });
 
-    console.log(inventoryMap);
+    alert("✨ Product successfully registered!")
 
     showSection('mainMenu');
 
 });
+
+// Lógica para bloquear entradas que no se estén utilizando en búsqueda
+const inputSearchForm = document.getElementById('searchForm');
+const inputSearchID = document.getElementById('searchInputID');
+const inputSearchName = document.getElementById('searchInputName');
+const inputSearchCategory = document.getElementById('searchCategory');
+
+inputSearchForm.addEventListener('input', () => {
+
+    // Llamado a la función para bloquear entradas
+    inputSearch(inputSearchID.value, inputSearchName.value, inputSearchCategory.value);
+});
+
+// Función para bloquear entradas
+function inputSearch(idValue, nameValue, categoryValue) {
+    const someInput = idValue || nameValue || categoryValue;
+
+    const bloquearID = someInput && !idValue;
+    inputSearchID.disabled = bloquearID;
+    inputSearchID.style.opacity = bloquearID ? '0.5' : '1';
+    inputSearchID.style.cursor = bloquearID ? 'not-allowed' : 'auto', searchID(inputSearchID.value);
+
+    const bloquearName = someInput && !nameValue;
+    inputSearchName.disabled = bloquearName;
+    inputSearchName.style.opacity = bloquearName ? '0.5' : '1';
+    inputSearchName.style.cursor = bloquearName ? 'not-allowed' : 'auto', searchName(inputSearchName.value);
+
+    const bloquearCategory = someInput && !categoryValue;
+    inputSearchCategory.disabled = bloquearCategory;
+    inputSearchCategory.style.opacity = bloquearCategory ? '0.5' : '1';
+    inputSearchCategory.style.cursor = bloquearCategory ? 'not-allowed' : 'auto';
+}
+
+// Función para búsqueda por ID
+function searchID(pInputSearchID) {
+    const ids = new Set(inventoryMap.keys());
+
+    if (pInputSearchID !== '') {
+
+        ids.forEach(element => {
+
+            if (pInputSearchID.length > 1) {
+
+                if (String(element).includes(pInputSearchID)) {
+                    printHtml(element);
+                }
+            }
+        });
+    }
+
+}
+
+// Función para búsqueda por Nombre
+function searchName(pInputSearchName) {
+
+    if (pInputSearchName !== '') {
+
+        inventoryMap.forEach((product, id) => {
+
+            if ((product.name).includes(pInputSearchName.trim().toLowerCase())) {
+                printHtml(id);
+            }
+
+        });
+    }
+}
+
+// Función para capitalizar los textos
+function capitalizeWords(text) {
+    return text
+        .toLowerCase()                     // 1. Pasamos todo a minúsculas para limpiar
+        .split(' ')                        // 2. Separamos la frase en un array de palabras
+        .map(word => {
+            // 3. De cada palabra, tomamos la primera letra, la hacemos mayúscula
+            // y le pegamos el resto de la palabra
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join(' ');                        // 4. Volvemos a unir las palabras con un espacio
+}
+
+// Variable para imprimir los productos en un lista
+const productsList = document.getElementById('productList');
+
+// Función para imprimir HTML 
+function printHtml(params) {
+    productsList.innerHTML += `
+        <li class="product-list">
+            <p><strong>ID: </strong>${params}</p>
+            <p><strong>Name: </strong> ${capitalizeWords(inventoryMap.get(params).name)}</p>
+            <p><strong>Price: </strong> $${inventoryMap.get(params).price} COP</p>
+            <p><strong>Category: </strong> ${capitalizeWords(inventoryMap.get(params).category)}</p>
+        </li>
+    `
+}
