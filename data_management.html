@@ -13,7 +13,7 @@
 
     <header>
         <h1>Inventory Management</h1>
-        <p id="selectOption">Select an option to manage the miscellaneous products</p>
+        <p id="textSelectOption">Select an option to manage the miscellaneous products</p>
     </header>
 
     <nav id="mainMenu">
@@ -33,7 +33,7 @@
             <fieldset class="form-group">
                 <label for="prodID">Product's ID</label>
                 <input type="text" id="prodID" placeholder="Ex: 1111" pattern="[0-9]{4}" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,4);" required>
-                <span id="IDVrification"></span>
+                <span id="IDVerification"></span>
             </fieldset>
             
             <fieldset class="form-group">

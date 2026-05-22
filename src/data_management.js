@@ -11,189 +11,120 @@ let inventoryMap = new Map([
     [5002, { name: "Memoria USB 64GB", price: 28000, category: "Technology" }]
 ]);
 
-const buttonSumit = document.getElementById('buttonSubmitSaveProduct');
-const productForm = document.getElementById('productForm');
-const existingIDMessage = document.getElementById('IDVrification');
-const existingdNameMessage = document.getElementById('nameVerification');
+const textIDVerification = document.getElementById('IDVerification');
+const textNameVerification = document.getElementById('nameVerification');
 
-/**
- * Control de Navegación de Secciones
- * Esta función se encarga de mostrar solo una "pantalla" a la vez.
- */
-function showSection(sectionId) {
-    const mainMenu = document.getElementById('mainMenu');
-    const textSelect = document.getElementById('selectOption');
-    const buttonToBack = document.getElementById('buttonToBack');
+// Función para mostrar secciones de registro y búsqueda
+function showSection(form) {
+    const registerForm = document.getElementById('registerSection');
+    const searchForm = document.getElementById('searchSection');
+    const menu = document.getElementById('mainMenu');
+    const textSelectOption = document.getElementById('textSelectOption');
+    const buttonToHome = document.getElementById('buttonToBack');
 
-    mainMenu.style.display = 'none';
-    textSelect.style.display = 'none';
-    buttonToBack.style.display = 'none';
+    menu.style.display = 'none';
+    textSelectOption.style.display = 'none';
+    buttonToHome.style.display = 'none';
 
-    const sections = document.querySelectorAll('.content-section');
-    sections.forEach(section => {
-        section.classList.remove('active');
+    if (form === 'registerSection') registerForm.classList.add('active');
 
-        // Buscamos el formulario de la sección que se está ocultando
-        const form = section.querySelector('form');
+    if (form === 'searchSection') searchForm.classList.add('active');
 
-        if (form) {
-            form.reset(); // Restablece los valores a vacío
+    if (form === 'mainMenu') {
+        menu.style.display = 'flex';
+        textSelectOption.style.display = 'block';
+        buttonToHome.style.display = 'block';
+        registerForm.classList.remove('active');
+        searchForm.classList.remove('active');
 
-            existingIDMessage.textContent = '';
-            existingdNameMessage.textContent = '';
+        inputProductForm.reset();
 
-            buttonSumit.disabled = false;
-            buttonSumit.style.opacity = "1";
-            buttonSumit.style.cursor = "auto";
-        }
-
-        // CONTROL CRÍTICO: Desbloquear campos de búsqueda y select al salir
-        const activeSearchFields = section.querySelectorAll('#searchForm input, #searchForm select');
-        activeSearchFields.forEach(f => {
-            f.disabled = false;
-            f.style.opacity = "1";
-            f.style.cursor = "auto";
-        });
-    });
-
-    // Restablecer el texto idéntico al del HTML original
-    const pText = document.getElementById("placeholderText");
-    if (pText) {
-        pText.textContent = `Enter details to see results.`;
-    }
-
-    // Mostrar sección destino
-    if (sectionId === 'mainMenu') {
-        if (mainMenu) {
-            mainMenu.style.display = 'flex';
-            textSelect.style.display = 'block';
-            buttonToBack.style.display = 'block';
-        }
-    } else {
-        const targetSection = document.getElementById(sectionId);
-        if (targetSection) {
-            targetSection.classList.add('active');
-        }
+        textIDVerification.innerText = '';
+        textNameVerification.innerText = '';
     }
 }
 
-/**
- * Control UI: Exclusión mutua de campos de búsqueda
- * Selecciona tanto inputs con clase como select internos del contenedor del buscador
- */
-const searchFields = document.querySelectorAll('#searchForm input, #searchForm select');
+// Lógica para bloquear el envío si el ID ya está registrado
+const inputProdID = document.getElementById('prodID');
 
-searchFields.forEach(field => {
-    field.addEventListener('input', () => {
-        const hasValue = field.value.trim() !== "";
+inputProdID.addEventListener('input', () => {
 
-        if (hasValue) {
-            // Deshabilitar los demás campos
-            searchFields.forEach(otherField => {
-                if (otherField !== field) {
-                    otherField.disabled = true;
-                    otherField.style.opacity = "0.5";
-                    otherField.style.cursor = "not-allowed";
-                }
-            });
-        } else {
-            // CONTROL: Verificar si de verdad TODOS están vacíos antes de habilitar
-            const allEmpty = Array.from(searchFields).every(f => f.value.trim() === "");
-            if (allEmpty) {
-                searchFields.forEach(f => {
-                    f.disabled = false;
-                    f.style.opacity = "1";
-                    f.style.cursor = "auto";
-                });
-            }
+    if ((inputProdID.value).length === 4 && inputProdName) {
+        const ids = new Set(inventoryMap.keys());
+
+        if (ids.has(Number(inputProdID.value))) {
+
+            textIDVerification.innerText = '❌ ID not available';
+
+            submitButtonEnabler(true);
         }
-    });
-});
 
-// Seleccionamos el input por su ID
-const inputID = document.getElementById('prodID');
-
-// Le plantamos el "escuchador" del evento 'input'
-inputID.addEventListener('input', (event) => {
-    // Capturamos el valor actual que tiene el campo
-    const actualValue = event.target.value;
-
-    // Verifica si el ID ya existe
-    if (actualValue.length === 4) {
-
-        // inventoryMap.keys() toma todos los IDs del mapa y los hereda al Set automáticamente
-        const registeredIDs = new Set(inventoryMap.keys());
-
-        if (registeredIDs.has(parseInt(actualValue, 10))) {
-
-            existingIDMessage.textContent = '❌ ID not available';
-
-            buttonSumit.disabled = true;
-            buttonSumit.style.opacity = "0.5";
-            buttonSumit.style.cursor = "not-allowed";
-        }
     } else {
-        existingIDMessage.textContent = ``;
+        textIDVerification.innerText = '';
 
-        buttonSumit.disabled = false;
-        buttonSumit.style.opacity = "1";
-        buttonSumit.style.cursor = "auto";
+        submitButtonEnabler(false);
     }
+
 });
 
-// Seleccionamos el input por su ID
+// Lógica para bloquear el envío si el nombre ya está registrado
 const inputProdName = document.getElementById('prodName');
 
-// Le plantamos el "escuchador" del evento 'input'
-inputProdName.addEventListener('input', (event) => {
-    // Capturamos el valor actual que tiene el campo
-    const actualValue = event.target.value;
+inputProdName.addEventListener('input', () => {
 
-    // Verifica si el ID ya existe
-    const registeredName = new Set([...inventoryMap.values()].map(product => product.name.toLowerCase()));
-    console.log(registeredName)
+    const names = new Set();
 
-    if (registeredName.has(actualValue.toLowerCase())) {
+    inventoryMap.forEach(product => { names.add((product.name.trim()).toLocaleLowerCase()) });
 
-        existingdNameMessage.textContent = '❌ Name not available';
+    if (names.has(((inputProdName.value).trim()).toLocaleLowerCase())) {
 
-        buttonSumit.disabled = true;
-        buttonSumit.style.opacity = "0.5";
-        buttonSumit.style.cursor = "not-allowed";
+        textNameVerification.innerText = '❌ Product name already exists';
+        submitButtonEnabler(true);
+
     } else {
-        existingdNameMessage.textContent = '';
-        buttonSumit.disabled = false;
-        buttonSumit.style.opacity = "1";
-        buttonSumit.style.cursor = "auto";
-    }
+
+        textNameVerification.innerText = '';
+        submitButtonEnabler(false);
+    };
+
 });
 
-/**
- * Control lógico: Envío y Guardado del Formulario de Registro
- */
-productForm.addEventListener('submit', (event) => {
-    // Evita la recarga inmediata de la página para no perder el mapa en memoria
-    event.preventDefault();
+// Función para habilita y deshabilitar el botón de envío
+function submitButtonEnabler(confirmation) {
+    const buttonSubmit = document.getElementById('buttonSubmitSaveProduct');
 
-    // Capturamos y formateamos los valores ingresados por el usuario
-    const id = parseInt(document.getElementById('prodID').value, 10);
-    const name = document.getElementById('prodName').value.trim();
-    const price = parseFloat(document.getElementById('prodPrice').value);
-    const category = document.getElementById('prodCategory').value;
+    if (confirmation === true) {
+        buttonSubmit.disabled = true;
 
-    // Guardamos el nuevo producto dentro del Map estructural
-    inventoryMap.set(id, {
-        name: name,
-        price: price,
-        category: category
+        buttonSubmit.style.backgroundColor = '#a39385';
+        buttonSubmit.style.cursor = 'not-allowed';
+        buttonSubmit.style.opacity = '0.6';
+    } else {
+        buttonSubmit.disabled = false;
+
+        buttonSubmit.style.backgroundColor = '';
+        buttonSubmit.style.cursor = 'pointer'
+        buttonSubmit.style.opacity = '1';
+    }
+}
+
+// Lógica para registro de envío
+const inputProductForm = document.getElementById('productForm');
+
+inputProductForm.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    const inputProdPrice = document.getElementById('prodPrice');
+    const inputProdCategory = document.getElementById('prodCategory');
+
+    inventoryMap.set(Number(inputProdID.value), {
+        name: inputProdName.value,
+        price: Number(inputProdPrice.value), 
+        category: inputProdCategory.value
     });
 
-    alert("✨ Product successfully registered!");
+    console.log(inventoryMap);
 
-    // Reseteamos el formulario y regresamos al menú principal de manera limpia
-    productForm.reset();
     showSection('mainMenu');
-    console.table(inventoryMap)
-});
 
-//Lógica de búsqueda
+});
