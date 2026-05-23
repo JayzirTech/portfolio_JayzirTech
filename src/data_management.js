@@ -1,5 +1,6 @@
+// Creating a map, where the key is a number and the values ​​are objects that in turn contain both a key and a value
 let inventoryMap = new Map([
-    [1001, { name: "cuaderno rayado 100H", price: 5500, category: "Stationery" }],
+    [1001, { name: "Cuaderno Rayado 100H", price: 5500, category: "Stationery" }],
     [1002, { name: "Caja de Colores x24", price: 12000, category: "Stationery" }],
     [2002, { name: "Resaltador Fluorescente", price: 2800, category: "Office supplies" }],
     [3001, { name: "Cartulina de Colores", price: 800, category: "Crafts" }],
@@ -11,36 +12,37 @@ let inventoryMap = new Map([
     [5002, { name: "Memoria USB 64GB", price: 28000, category: "Technology" }]
 ]);
 
-// 
+// Taking HTML tags with objects
 const textIDVerification = document.getElementById('IDVerification');
 const textNameVerification = document.getElementById('nameVerification');
 const textProductsDetails = document.getElementById('placeholderText');
 
-
-// Función para mostrar secciones de registro y búsqueda
+// Function to display registration and search sections
 function showSection(form) {
+    // Taking HTML tags with objects
     const registerForm = document.getElementById('registerSection');
     const searchForm = document.getElementById('searchSection');
     const menu = document.getElementById('mainMenu');
     const textSelectOption = document.getElementById('textSelectOption');
     const buttonToHome = document.getElementById('buttonToBack');
 
+    // The menu and other unnecessary things are hidden.
     menu.style.display = 'none';
     textSelectOption.style.display = 'none';
     buttonToHome.style.display = 'none';
 
+    // Depending on the section the user chooses, the previously written form is deleted and the section is displayed.
     if (form === 'registerSection') {
-        registerForm.classList.add('active');
         inputProductForm.reset();
-        inputSearchForm.reset();
+        registerForm.classList.add('active');
     };
 
     if (form === 'searchSection') {
-        searchForm.classList.add('active');
-        inputProductForm.reset();
         inputSearchForm.reset();
+        searchForm.classList.add('active');
     };
 
+    // If the user returns to the menu, then all sections are cleared.
     if (form === 'mainMenu') {
         menu.style.display = 'flex';
         textSelectOption.style.display = 'block';
@@ -59,11 +61,11 @@ function showSection(form) {
     }
 }
 
-// Variables para el arbitro de la habilitación del botón de submit de registro
+// Variables for the referee of enabling the registration submit button
 let errorID = false;
 let errorName = false;
 
-// Lógica para bloquear el envío si el ID ya está registrado
+// Logic to block sending if the ID is already registered
 const inputProdID = document.getElementById('prodID');
 
 inputProdID.addEventListener('blur', () => {
@@ -92,7 +94,7 @@ inputProdID.addEventListener('blur', () => {
 
 });
 
-// Lógica para bloquear el envío si el nombre ya está registrado
+// Logic to block sending if the Name is already registered
 const inputProdName = document.getElementById('prodName');
 
 inputProdName.addEventListener('blur', () => {
@@ -118,7 +120,7 @@ inputProdName.addEventListener('blur', () => {
 
 });
 
-// Función para habilita y deshabilitar el botón de envío
+// Function to enable and disable the send button
 function submitButtonEnabler(confID, confName) {
     const buttonSubmit = document.getElementById('buttonSubmitSaveProduct');
 
@@ -137,7 +139,7 @@ function submitButtonEnabler(confID, confName) {
     }
 }
 
-// Lógica para registro de envío
+// Logic for product registration
 const inputProductForm = document.getElementById('productForm');
 
 inputProductForm.addEventListener('submit', (event) => {
@@ -158,19 +160,25 @@ inputProductForm.addEventListener('submit', (event) => {
 
 });
 
-// Lógica para bloquear entradas que no se estén utilizando en búsqueda
+// Constants are created from the search form and its inputs
 const inputSearchForm = document.getElementById('searchForm');
 const inputSearchID = document.getElementById('searchInputID');
 const inputSearchName = document.getElementById('searchInputName');
 const inputSearchCategory = document.getElementById('searchCategory');
 
+// Logic for blocking entries that are not being used in search
 inputSearchForm.addEventListener('input', () => {
 
-    // Llamado a la función para bloquear entradas
+    productsList.innerHTML = '';
+
+    foundProduct(false);
+
+    // Call to the function to block inputs
     inputSearch(inputSearchID.value, inputSearchName.value, inputSearchCategory.value);
+
 });
 
-// Función para bloquear entradas
+// Input blocking function
 function inputSearch(idValue, nameValue, categoryValue) {
     const someInput = idValue || nameValue || categoryValue;
 
@@ -187,10 +195,13 @@ function inputSearch(idValue, nameValue, categoryValue) {
     const bloquearCategory = someInput && !categoryValue;
     inputSearchCategory.disabled = bloquearCategory;
     inputSearchCategory.style.opacity = bloquearCategory ? '0.5' : '1';
-    inputSearchCategory.style.cursor = bloquearCategory ? 'not-allowed' : 'auto';
+    inputSearchCategory.style.cursor = bloquearCategory ? 'not-allowed' : 'auto', searchCategory(inputSearchCategory.value);
+
+    !someInput ? textProductsDetails.innerText = 'Results will appear here once you start searching.' : '';
+
 }
 
-// Función para búsqueda por ID
+// Function for searching by ID
 function searchID(pInputSearchID) {
     const ids = new Set(inventoryMap.keys());
 
@@ -209,14 +220,14 @@ function searchID(pInputSearchID) {
 
 }
 
-// Función para búsqueda por Nombre
+// Function for searching by name
 function searchName(pInputSearchName) {
 
     if (pInputSearchName !== '') {
 
         inventoryMap.forEach((product, id) => {
 
-            if ((product.name).includes(pInputSearchName.trim().toLowerCase())) {
+            if ((product.name.trim().toLowerCase()).includes(pInputSearchName.trim().toLowerCase())) {
                 printHtml(id);
             }
 
@@ -224,7 +235,25 @@ function searchName(pInputSearchName) {
     }
 }
 
-// Función para capitalizar los textos
+// Function for searching by Category
+function searchCategory(pInputSearchCartegory) {
+
+    if (pInputSearchCartegory !== '') {
+        inventoryMap.forEach ((product, id) => {
+
+            if (product.category.includes(pInputSearchCartegory)) {
+                printHtml(id);
+            }
+
+            if (pInputSearchCartegory === 'All') {
+                printHtml(id)
+            }
+        });
+    }
+    
+}
+
+// Function to capitalize text
 function capitalizeWords(text) {
     return text
         .toLowerCase()                     // 1. Pasamos todo a minúsculas para limpiar
@@ -237,11 +266,15 @@ function capitalizeWords(text) {
         .join(' ');                        // 4. Volvemos a unir las palabras con un espacio
 }
 
-// Variable para imprimir los productos en un lista
+// Constant to print the products in a list
 const productsList = document.getElementById('productList');
 
-// Función para imprimir HTML 
+// Function to render HTML
 function printHtml(params) {
+    textProductsDetails.innerText = '';
+
+    foundProduct(true)
+
     productsList.innerHTML += `
         <li class="product-list">
             <p><strong>ID: </strong>${params}</p>
@@ -250,4 +283,13 @@ function printHtml(params) {
             <p><strong>Category: </strong> ${capitalizeWords(inventoryMap.get(params).category)}</p>
         </li>
     `
+}
+
+// Function to indicate that the product has not been entered
+function foundProduct (params) {
+    if (!params === true) {
+        textProductsDetails.innerText = '❌ No products found matching your search criteria.';
+    } else {
+        textProductsDetails.innerText = '';
+    }
 }

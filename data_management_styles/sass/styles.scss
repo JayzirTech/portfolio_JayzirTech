@@ -281,3 +281,15 @@ select:disabled {
     border-color: #ccc;
     color: #999;
 }
+
+#productList{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style-type: none;
+
+    li{
+        border-bottom: 2px solid $primary-beige;
+        box-shadow: $shadow;
+    }
+}
