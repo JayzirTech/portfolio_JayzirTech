@@ -21,24 +21,9 @@ Welcome to my personal portfolio project. This website has been designed to show
 
 - Dynamic Background: Use of radial gradients and infinite animations to simulate technological depth.
 
-## 📁 Project Structure
-Plaintext
-
-├── index.html              # Main page (Portfolio)
-├── pets.html               # Pets gallery with descriptions
-├── script.js               # Navigation logic and scroll effects
-├── index_styles/
-│   └── assets/
-│       ├── css/
-│       │   └── style.css   # Compiled CSS file
-│       └── imgs/           # Language and project images
-├── pets_styles/
-│   └── assets/
-│       └── Imagenes/       # Pet photos (Leon, Toby, Paloma)
-└── styles.scss             # SASS source file with variables and mixins
-
 ## ⚙️ Installation and Usage
 1. Clone this repository: git clone https://github.com/JayzirTech/portfolio_JayzirTech.git
+
 2. Make sure you have a SASS compiler installed (such as the Live Sass Compiler extension in VS Code).
 
 3. Open the index.html file in your preferred browser.
@@ -49,4 +34,4 @@ To review the user stories for Module 3 - JavaScript, please open the index.html
 ## 👤 Author
 Jayzir Martinez
 
-Profession: Mechatronics Engineer & Software Developer Trainee at Riwi.
+Profession: Mechatronics Engineer & Software Developer Trainer at Riwi.
