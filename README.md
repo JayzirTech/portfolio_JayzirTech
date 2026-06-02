@@ -29,7 +29,7 @@ Welcome to my personal portfolio project. This website has been designed to show
 3. Open the index.html file in your preferred browser.
 
 ## 📝 Notes
-To review the user stories for Module 3 - JavaScript, please open the index.html file in your preferred browser and all the JS files will run.
+To review the user stories for Module - JavaScript (week 1 & 2), please open the index.html file in your preferred browser and all the JS files will run.
 
 ## 👤 Author
 Jayzir Martinez
