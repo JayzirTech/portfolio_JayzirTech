@@ -11,33 +11,116 @@
 </head>
 
 <body>
+    <canvas id="antigravity-stars"></canvas>
 
     <header>
         <h1>Jayzir Martinez</h1>
+        <h2><a href="#PersonalProjects">Backend & Data Engineer | Mechatronics Background</a></h2>
 
         <nav>
             <a href="#AboutMe">About Me</a>
             <a href="#PersonalProjects">Projects</a>
-            <a href="#ContactMe">Contact Me</a>
-            <a href="#Language">Programming Languages</a>
+            <a href="#Language">Tech Stack</a>
+            <a href="#ContactMe">Contact</a>
         </nav>
     </header>
 
     <main id="AboutMe">
         <p>
-            Hi! I'm Jayzir Martinez. I'm 25 years old and a <span>Mechatronics Engineer</span>, graduated from the
-            Universidad de
-            Barranquilla. Currently, I am training as a <span>software developer</span> at RIWI, where I'm bridging the
-            gap
-            between hardware engineering and the digital world.
+            Hi! I'm <span>Jayzir Martinez</span>, a <span>Mechatronics Engineer</span> graduated from the Universidad de Barranquilla (IUB), specialized in <span>Backend Architecture & Data Engineering</span>. 
+            Trained through intensive industry programs at RIWI and SENA, I bridge physical systems engineering with scalable backend architectures, automated ETL pipelines, and analytical data warehouses.
         </p>
     </main>
 
     <section id="PersonalProjects">
-        <h3>Personal Projects</h3>
-        <ul>
-            <li></li>
-        </ul>
+        <h3>Featured Projects</h3>
+        <div class="projects-grid">
+            
+            <!-- Project 1: DataMart Analytical ETL Pipeline -->
+            <article class="project-card">
+                <div class="project-card-header">
+                    <span class="project-category">Data Engineering / ETL</span>
+                    <div class="project-links">
+                        <a href="https://github.com/JayzirTech/datamart-analytics-etl-pipeline" target="_blank" rel="noopener noreferrer" title="View Source Code">↗</a>
+                    </div>
+                </div>
+                <h4 class="project-title">DataMart Analytical ETL Pipeline</h4>
+                <p class="project-desc">
+                    End-to-end analytical ETL pipeline powered by Apache Airflow (CeleryExecutor & RabbitMQ), PostgreSQL Data Warehouse, and FastAPI product catalog microservice, fully containerized with Docker.
+                </p>
+                <ul class="project-techs">
+                    <li><span class="tech-tag">Airflow</span></li>
+                    <li><span class="tech-tag">FastAPI</span></li>
+                    <li><span class="tech-tag">RabbitMQ</span></li>
+                    <li><span class="tech-tag">Celery</span></li>
+                    <li><span class="tech-tag">PostgreSQL</span></li>
+                    <li><span class="tech-tag">Docker</span></li>
+                </ul>
+            </article>
+
+            <!-- Project 2: Mercado Nube Analytics Engine -->
+            <article class="project-card">
+                <div class="project-card-header">
+                    <span class="project-category">Data Architecture / BI</span>
+                    <div class="project-links">
+                        <a href="https://github.com/JayzirTech/mercado-nube-analytics-engine-" target="_blank" rel="noopener noreferrer" title="View Source Code">↗</a>
+                    </div>
+                </div>
+                <h4 class="project-title">Mercado Nube Analytics Engine</h4>
+                <p class="project-desc">
+                    Dimensional Data Warehouse (Star Schema & SCD Type 2) designed to resolve complex analytical queries, handle late-arriving events (>24h), and automate data quality gates.
+                </p>
+                <ul class="project-techs">
+                    <li><span class="tech-tag">Star Schema</span></li>
+                    <li><span class="tech-tag">SCD Type 2</span></li>
+                    <li><span class="tech-tag">SQL</span></li>
+                    <li><span class="tech-tag">PostgreSQL</span></li>
+                    <li><span class="tech-tag">Airflow</span></li>
+                    <li><span class="tech-tag">Docker</span></li>
+                </ul>
+            </article>
+
+            <!-- Project 3: Ocularis -->
+            <article class="project-card">
+                <div class="project-card-header">
+                    <span class="project-category">Physics Simulation / Web App</span>
+                    <div class="project-links">
+                        <a href="https://github.com/JayzirTech/ocularis" target="_blank" rel="noopener noreferrer" title="View Source Code">↗</a>
+                    </div>
+                </div>
+                <h4 class="project-title">Ocularis — Optical Simulation</h4>
+                <p class="project-desc">
+                    Interactive optical simulation and patient education web app for optometrists. Models ray tracing, focal refractive errors, and corrective lens physics in real time.
+                </p>
+                <ul class="project-techs">
+                    <li><span class="tech-tag">JavaScript</span></li>
+                    <li><span class="tech-tag">Physics Modeling</span></li>
+                    <li><span class="tech-tag">SVG / Canvas</span></li>
+                    <li><span class="tech-tag">UI / UX</span></li>
+                </ul>
+            </article>
+
+            <!-- Project 4: FastAPI Microservice Backend -->
+            <article class="project-card">
+                <div class="project-card-header">
+                    <span class="project-category">Backend API</span>
+                    <div class="project-links">
+                        <a href="https://github.com/JayzirTech/fastapi_app_jayzirTech" target="_blank" rel="noopener noreferrer" title="View Source Code">↗</a>
+                    </div>
+                </div>
+                <h4 class="project-title">FastAPI Microservice Backend</h4>
+                <p class="project-desc">
+                    High-throughput asynchronous REST API connected to relational databases, implementing clean architecture, modular routing, and Pydantic data validation.
+                </p>
+                <ul class="project-techs">
+                    <li><span class="tech-tag">Python</span></li>
+                    <li><span class="tech-tag">FastAPI</span></li>
+                    <li><span class="tech-tag">PostgreSQL</span></li>
+                    <li><span class="tech-tag">Pydantic</span></li>
+                </ul>
+            </article>
+
+        </div>
     </section>
 
     <section id="ContactMe">
@@ -45,6 +128,7 @@
         <ul>
             <li><a href="https://www.linkedin.com/in/jayzir-martinez/" target="_blank">LinkedIn</a></li>
             <li><a href="https://github.com/JayzirTech" target="_blank">GitHub</a></li>
+            <li><a href="mailto:jayzirslaider18@gmail.com">Email (jayzirslaider18@gmail.com)</a></li>
         </ul>
     </section>
 
@@ -56,14 +140,14 @@
     </section>
 
     <section id="Language">
-        <h3>Languages Programming</h3>
+        <h3>Languages & Technologies</h3>
         <div>
             <img src="./index_styles/assets/imgs/python.png" alt="Python" class="language-img">
-            <img src="./index_styles/assets/imgs/html.png" alt="HTML" class="language-img">
-            <img src="./index_styles/assets/imgs/css.png" alt="CSS" class="language-img">
+            <img src="./index_styles/assets/imgs/sql.png" alt="SQL" class="language-img">
             <img src="./index_styles/assets/imgs/javascript.png" alt="JavaScript" class="language-img">
             <img src="./index_styles/assets/imgs/arduino.png" alt="Arduino" class="language-img">
-            <img src="./index_styles/assets/imgs/sql.png" alt="SQL" class="language-img">
+            <img src="./index_styles/assets/imgs/html.png" alt="HTML" class="language-img">
+            <img src="./index_styles/assets/imgs/css.png" alt="CSS" class="language-img">
         </div>
     </section>
 
@@ -73,7 +157,7 @@
         <a href="#AboutMe">About Me</a>
         <a href="#PersonalProjects">Projects</a>
         <a href="#ContactMe">Contact Me</a>
-        <a href="#Language">Programming<br>Languages</a>
+        <a href="#Language">Technologies</a>
     </aside>
 
     <footer>
