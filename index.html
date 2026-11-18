@@ -1,52 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Jayzir Martinez's portfolio. Mechatronics engineer and developer">
-    <title>Jayzir Martinez | Developer & Engineer</title>
+    <meta name="description" content="Portafolio de Jayzir Martinez — Ingeniero Mecatrónico, Backend & Data Engineer especializado en arquitecturas backend, pipelines ETL y almacenes de datos.">
+    <meta name="author" content="Jayzir Martinez">
+    <meta name="theme-color" content="#0a192f">
+    <link rel="canonical" href="https://jayzirtech.github.io/portfolio_JayzirTech/">
+
+    <!-- Open Graph / WhatsApp / LinkedIn Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jayzirtech.github.io/portfolio_JayzirTech/">
+    <meta property="og:site_name" content="Jayzir Martinez | Portfolio">
+    <meta property="og:title" content="Jayzir Martinez | Backend & Data Engineer">
+    <meta property="og:description" content="Mechatronics Engineer specialized in Backend Architecture, Apache Airflow ETL Pipelines, FastAPI, PostgreSQL & Data Engineering.">
+    <meta property="og:image" content="https://jayzirtech.github.io/portfolio_JayzirTech/index_styles/assets/imgs/og-preview.jpg">
+    <meta property="og:image:secure_url" content="https://jayzirtech.github.io/portfolio_JayzirTech/index_styles/assets/imgs/og-preview.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Jayzir Martinez — Backend & Data Engineer Portfolio">
+    <meta property="og:locale" content="es_CO">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://jayzirtech.github.io/portfolio_JayzirTech/">
+    <meta name="twitter:title" content="Jayzir Martinez | Backend & Data Engineer">
+    <meta name="twitter:description" content="Mechatronics Engineer specialized in Backend Architecture, ETL Pipelines & Data Engineering.">
+    <meta name="twitter:image" content="https://jayzirtech.github.io/portfolio_JayzirTech/index_styles/assets/imgs/og-preview.jpg">
+
+    <title>Jayzir Martinez | Backend &amp; Data Engineer</title>
     <link rel="shortcut icon" href="./index_styles/assets/imgs/Favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./index_styles/assets/css/style.css">
+
+    <!-- Prevent theme flash on load -->
+    <script>
+        (function () {
+            try {
+                const savedTheme = localStorage.getItem('portfolio_theme');
+                const theme = savedTheme || 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+        })();
+    </script>
 </head>
 
 <body>
-    <canvas id="antigravity-stars"></canvas>
+    <canvas id="antigravity-stars" aria-hidden="true"></canvas>
 
-    <header>
-        <h1>Jayzir Martinez</h1>
-        <h2><a href="#PersonalProjects">Backend & Data Engineer | Mechatronics Background</a></h2>
+    <!-- Floating Language & Theme Controls -->
+    <div class="top-controls" role="region" aria-label="Site preferences">
+        <div class="lang-toggle" role="group" aria-label="Language switcher">
+            <button type="button" class="lang-btn" data-lang="es" aria-pressed="true">ES</button>
+            <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button type="button" id="themeToggle" class="theme-toggle" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
+            <!-- Sun Icon (shown in dark mode to switch to light) -->
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <!-- Moon Icon (shown in light mode to switch to dark) -->
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+    </div>
 
-        <nav>
-            <a href="#AboutMe">About Me</a>
-            <a href="#PersonalProjects">Projects</a>
-            <a href="#Language">Tech Stack</a>
-            <a href="#ContactMe">Contact</a>
-        </nav>
+    <header id="Top">
+        <div class="hero-container">
+            <div class="hero-text">
+                <p class="hero-greeting" data-i18n="hero.greeting">Hola, mi nombre es</p>
+                <h1>Jayzir Martinez</h1>
+                <h2>
+                    <a href="#PersonalProjects" data-i18n="hero.role">
+                        Ingeniero Backend &amp; de Datos | Base en Mecatrónica
+                    </a>
+                </h2>
+                <p class="hero-tagline" data-i18n="hero.tagline">
+                    Conectando la ingeniería de sistemas físicos con arquitecturas backend escalables, pipelines ETL automatizados y soluciones de datos.
+                </p>
+
+                <nav aria-label="Main navigation">
+                    <a href="#AboutMe" data-i18n="nav.about">Sobre mí</a>
+                    <a href="#PersonalProjects" data-i18n="nav.projects">Proyectos</a>
+                    <a href="#Language" data-i18n="nav.tech">Tecnologías</a>
+                    <a href="#ContactMe" data-i18n="nav.contact">Contacto</a>
+                </nav>
+            </div>
+
+            <div class="hero-visual">
+                <div class="portrait-stage" id="portraitStage">
+                    <div class="portrait-aura" aria-hidden="true"></div>
+                    <div class="portrait-orbit-outer" aria-hidden="true">
+                        <span class="orbit-node node-1"></span>
+                        <span class="orbit-node node-2"></span>
+                        <span class="orbit-node node-3"></span>
+                    </div>
+                    <div class="portrait-portal" aria-hidden="true"></div>
+                    <div class="portrait-mask">
+                        <img
+                            src="./index_styles/assets/imgs/jayzir-portrait.png"
+                            alt="Jayzir Martinez"
+                            class="portrait-img"
+                            width="310"
+                            height="321"
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
     <main id="AboutMe">
-        <p>
-            Hi! I'm <span>Jayzir Martinez</span>, a <span>Mechatronics Engineer</span> graduated from the Universidad de Barranquilla (IUB), specialized in <span>Backend Architecture & Data Engineering</span>. 
-            Trained through intensive industry programs at RIWI and SENA, I bridge physical systems engineering with scalable backend architectures, automated ETL pipelines, and analytical data warehouses.
+        <h3 data-i18n="about.title">Sobre mí</h3>
+        <p data-i18n-html="about.bio">
+            ¡Hola! Soy <span>Jayzir Martinez</span>, <span>Ingeniero Mecatrónico</span> graduado de la Universidad de Barranquilla (IUB), especializado en <span>Arquitectura Backend e Ingeniería de Datos</span>.
+            Formado a través de programas intensivos orientados a la industria en RIWI y SENA, uno la ingeniería de sistemas físicos con arquitecturas backend escalables, pipelines ETL automatizados y almacenes de datos analíticos.
         </p>
     </main>
 
     <section id="PersonalProjects">
-        <h3>Featured Projects</h3>
+        <h3 data-i18n="projects.title">Proyectos Destacados</h3>
         <div class="projects-grid">
-            
+
             <!-- Project 1: DataMart Analytical ETL Pipeline -->
             <article class="project-card">
                 <div class="project-card-header">
-                    <span class="project-category">Data Engineering / ETL</span>
+                    <span class="project-category" data-i18n="projects.p1.category">Ingeniería de Datos / ETL</span>
                     <div class="project-links">
-                        <a href="https://github.com/JayzirTech/datamart-analytics-etl-pipeline" target="_blank" rel="noopener noreferrer" title="View Source Code">↗</a>
+                        <a href="https://github.com/JayzirTech/datamart-analytics-etl-pipeline" target="_blank" rel="noopener noreferrer" data-i18n-title="projects.sourceTitle" title="Ver código fuente">↗</a>
                     </div>
                 </div>
                 <h4 class="project-title">DataMart Analytical ETL Pipeline</h4>
-                <p class="project-desc">
-                    End-to-end analytical ETL pipeline powered by Apache Airflow (CeleryExecutor & RabbitMQ), PostgreSQL Data Warehouse, and FastAPI product catalog microservice, fully containerized with Docker.
+                <p class="project-desc" data-i18n="projects.p1.desc">
+                    Pipeline ETL analítico de extremo a extremo impulsado por Apache Airflow (CeleryExecutor y RabbitMQ), Data Warehouse en PostgreSQL y microservicio de catálogo de productos en FastAPI, totalmente contenedorizado con Docker.
                 </p>
                 <ul class="project-techs">
                     <li><span class="tech-tag">Airflow</span></li>
@@ -61,14 +161,14 @@
             <!-- Project 2: Mercado Nube Analytics Engine -->
             <article class="project-card">
                 <div class="project-card-header">
-                    <span class="project-category">Data Architecture / BI</span>
+                    <span class="project-category" data-i18n="projects.p2.category">Arquitectura de Datos / BI</span>
                     <div class="project-links">
-                        <a href="https://github.com/JayzirTech/mercado-nube-analytics-engine-" target="_blank" rel="noopener noreferrer" title="View Source Code">↗</a>
+                        <a href="https://github.com/JayzirTech/mercado-nube-analytics-engine-" target="_blank" rel="noopener noreferrer" data-i18n-title="projects.sourceTitle" title="Ver código fuente">↗</a>
                     </div>
                 </div>
                 <h4 class="project-title">Mercado Nube Analytics Engine</h4>
-                <p class="project-desc">
-                    Dimensional Data Warehouse (Star Schema & SCD Type 2) designed to resolve complex analytical queries, handle late-arriving events (>24h), and automate data quality gates.
+                <p class="project-desc" data-i18n="projects.p2.desc">
+                    Data Warehouse dimensional (Esquema Estrella y SCD Tipo 2) diseñado para resolver consultas analíticas complejas, gestionar eventos con llegada tardía (&gt;24h) y automatizar compuertas de calidad de datos.
                 </p>
                 <ul class="project-techs">
                     <li><span class="tech-tag">Star Schema</span></li>
@@ -83,14 +183,14 @@
             <!-- Project 3: Ocularis -->
             <article class="project-card">
                 <div class="project-card-header">
-                    <span class="project-category">Physics Simulation / Web App</span>
+                    <span class="project-category" data-i18n="projects.p3.category">Simulación Física / App Web</span>
                     <div class="project-links">
-                        <a href="https://github.com/JayzirTech/ocularis" target="_blank" rel="noopener noreferrer" title="View Source Code">↗</a>
+                        <a href="https://github.com/JayzirTech/ocularis" target="_blank" rel="noopener noreferrer" data-i18n-title="projects.sourceTitle" title="Ver código fuente">↗</a>
                     </div>
                 </div>
-                <h4 class="project-title">Ocularis — Optical Simulation</h4>
-                <p class="project-desc">
-                    Interactive optical simulation and patient education web app for optometrists. Models ray tracing, focal refractive errors, and corrective lens physics in real time.
+                <h4 class="project-title" data-i18n="projects.p3.title">Ocularis — Simulación Óptica</h4>
+                <p class="project-desc" data-i18n="projects.p3.desc">
+                    Aplicación web interactiva de simulación óptica y educación para pacientes dirigida a optómetras. Modela trazado de rayos, errores refractivos focales y física de lentes correctivos en tiempo real.
                 </p>
                 <ul class="project-techs">
                     <li><span class="tech-tag">JavaScript</span></li>
@@ -103,14 +203,14 @@
             <!-- Project 4: FastAPI Microservice Backend -->
             <article class="project-card">
                 <div class="project-card-header">
-                    <span class="project-category">Backend API</span>
+                    <span class="project-category" data-i18n="projects.p4.category">API Backend</span>
                     <div class="project-links">
-                        <a href="https://github.com/JayzirTech/fastapi_app_jayzirTech" target="_blank" rel="noopener noreferrer" title="View Source Code">↗</a>
+                        <a href="https://github.com/JayzirTech/fastapi_app_jayzirTech" target="_blank" rel="noopener noreferrer" data-i18n-title="projects.sourceTitle" title="Ver código fuente">↗</a>
                     </div>
                 </div>
                 <h4 class="project-title">FastAPI Microservice Backend</h4>
-                <p class="project-desc">
-                    High-throughput asynchronous REST API connected to relational databases, implementing clean architecture, modular routing, and Pydantic data validation.
+                <p class="project-desc" data-i18n="projects.p4.desc">
+                    API REST asíncrona de alto rendimiento conectada a bases de datos relacionales, implementando arquitectura limpia, enrutamiento modular y validación de datos con Pydantic.
                 </p>
                 <ul class="project-techs">
                     <li><span class="tech-tag">Python</span></li>
@@ -123,45 +223,89 @@
         </div>
     </section>
 
-    <section id="ContactMe">
-        <h3>Contact</h3>
-        <ul>
-            <li><a href="https://www.linkedin.com/in/jayzir-martinez/" target="_blank">LinkedIn</a></li>
-            <li><a href="https://github.com/JayzirTech" target="_blank">GitHub</a></li>
-            <li><a href="mailto:jayzirslaider18@gmail.com">Email (jayzirslaider18@gmail.com)</a></li>
-        </ul>
-    </section>
-
-    <section>
-        <h3>Focus & Inspiration</h3>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/R2sT_qRtK9A?si=zylAUg9ojW3ET8bf" title="YouTube video player"
-            frameborder="0" allowfullscreen>
-        </iframe>
-    </section>
-
     <section id="Language">
-        <h3>Languages & Technologies</h3>
-        <div>
-            <img src="./index_styles/assets/imgs/python.png" alt="Python" class="language-img">
-            <img src="./index_styles/assets/imgs/sql.png" alt="SQL" class="language-img">
-            <img src="./index_styles/assets/imgs/javascript.png" alt="JavaScript" class="language-img">
-            <img src="./index_styles/assets/imgs/arduino.png" alt="Arduino" class="language-img">
-            <img src="./index_styles/assets/imgs/html.png" alt="HTML" class="language-img">
-            <img src="./index_styles/assets/imgs/css.png" alt="CSS" class="language-img">
+        <h3 data-i18n="tech.title">Lenguajes y Tecnologías</h3>
+        <p class="section-subtitle" data-i18n="tech.subtitle">Haz clic en cualquier tecnología para visitar su sitio oficial.</p>
+        <div class="tech-grid">
+            <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer" class="tech-item" title="Python">
+                <img src="./index_styles/assets/imgs/python.png" alt="Python" class="language-img">
+                <span class="tech-name">Python</span>
+            </a>
+            <a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer" class="tech-item" title="FastAPI">
+                <img src="./index_styles/assets/imgs/tech/fastapi.svg" alt="FastAPI" class="language-img">
+                <span class="tech-name">FastAPI</span>
+            </a>
+            <a href="https://airflow.apache.org/" target="_blank" rel="noopener noreferrer" class="tech-item" title="Apache Airflow">
+                <img src="./index_styles/assets/imgs/tech/airflow.svg" alt="Apache Airflow" class="language-img">
+                <span class="tech-name">Airflow</span>
+            </a>
+            <a href="https://www.postgresql.org/" target="_blank" rel="noopener noreferrer" class="tech-item" title="PostgreSQL">
+                <img src="./index_styles/assets/imgs/tech/postgresql.svg" alt="PostgreSQL" class="language-img">
+                <span class="tech-name">PostgreSQL</span>
+            </a>
+            <a href="https://www.iso.org/standard/76583.html" target="_blank" rel="noopener noreferrer" class="tech-item" title="SQL (ISO/IEC 9075)">
+                <img src="./index_styles/assets/imgs/sql.png" alt="SQL" class="language-img">
+                <span class="tech-name">SQL</span>
+            </a>
+            <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer" class="tech-item" title="Docker">
+                <img src="./index_styles/assets/imgs/tech/docker.svg" alt="Docker" class="language-img">
+                <span class="tech-name">Docker</span>
+            </a>
+            <a href="https://www.rabbitmq.com/" target="_blank" rel="noopener noreferrer" class="tech-item" title="RabbitMQ">
+                <img src="./index_styles/assets/imgs/tech/rabbitmq.svg" alt="RabbitMQ" class="language-img">
+                <span class="tech-name">RabbitMQ</span>
+            </a>
+            <a href="https://docs.celeryq.dev/" target="_blank" rel="noopener noreferrer" class="tech-item" title="Celery">
+                <img src="./index_styles/assets/imgs/tech/celery.svg" alt="Celery" class="language-img">
+                <span class="tech-name">Celery</span>
+            </a>
+            <a href="https://docs.pydantic.dev/" target="_blank" rel="noopener noreferrer" class="tech-item" title="Pydantic">
+                <img src="./index_styles/assets/imgs/tech/pydantic.svg" alt="Pydantic" class="language-img">
+                <span class="tech-name">Pydantic</span>
+            </a>
+            <a href="https://git-scm.com/" target="_blank" rel="noopener noreferrer" class="tech-item" title="Git">
+                <img src="./index_styles/assets/imgs/tech/git.svg" alt="Git" class="language-img">
+                <span class="tech-name">Git</span>
+            </a>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer" class="tech-item" title="JavaScript">
+                <img src="./index_styles/assets/imgs/javascript.png" alt="JavaScript" class="language-img">
+                <span class="tech-name">JavaScript</span>
+            </a>
+            <a href="https://www.arduino.cc/" target="_blank" rel="noopener noreferrer" class="tech-item" title="Arduino">
+                <img src="./index_styles/assets/imgs/arduino.png" alt="Arduino" class="language-img">
+                <span class="tech-name">Arduino</span>
+            </a>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer" class="tech-item" title="HTML5">
+                <img src="./index_styles/assets/imgs/html.png" alt="HTML5" class="language-img">
+                <span class="tech-name">HTML5</span>
+            </a>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener noreferrer" class="tech-item" title="CSS3">
+                <img src="./index_styles/assets/imgs/css.png" alt="CSS3" class="language-img">
+                <span class="tech-name">CSS3</span>
+            </a>
         </div>
     </section>
 
-    <button id="GoToTop">↑</button>
+    <section id="ContactMe">
+        <h3 data-i18n="contact.title">Contacto</h3>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/jayzir-martinez/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://github.com/JayzirTech" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="mailto:jayzirslaider18@gmail.com"><span data-i18n="contact.emailLabel">Correo</span></a></li>
+        </ul>
+    </section>
 
-    <aside id="sideMenu">
-        <a href="#AboutMe">About Me</a>
-        <a href="#PersonalProjects">Projects</a>
-        <a href="#ContactMe">Contact Me</a>
-        <a href="#Language">Technologies</a>
+    <button id="GoToTop" aria-label="Volver arriba" data-i18n-title="ui.backToTop" title="Volver arriba">↑</button>
+
+    <aside id="sideMenu" aria-label="Quick navigation">
+        <a href="#AboutMe" data-i18n="nav.about">Sobre mí</a>
+        <a href="#PersonalProjects" data-i18n="nav.projects">Proyectos</a>
+        <a href="#Language" data-i18n="nav.tech">Tecnologías</a>
+        <a href="#ContactMe" data-i18n="nav.contact">Contacto</a>
     </aside>
 
     <footer>
-        <p>&lt; Built by Jayzir Martinez / 2026 &gt;</p>
+        <p data-i18n="footer.credit">&lt; Construido por Jayzir Martinez / 2026 &gt;</p>
     </footer>
 
     <script src="./src/script.js"></script>
