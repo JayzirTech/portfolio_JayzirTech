@@ -15,8 +15,8 @@
     <meta property="og:site_name" content="Jayzir Martinez | Portfolio">
     <meta property="og:title" content="Jayzir Martinez | Backend & Data Engineer">
     <meta property="og:description" content="Mechatronics Engineer specialized in Backend Architecture, Apache Airflow ETL Pipelines, FastAPI, PostgreSQL & Data Engineering.">
-    <meta property="og:image" content="https://jayzirtech.github.io/portfolio_JayzirTech/index_styles/assets/imgs/og-preview.jpg">
-    <meta property="og:image:secure_url" content="https://jayzirtech.github.io/portfolio_JayzirTech/index_styles/assets/imgs/og-preview.jpg">
+    <meta property="og:image" content="https://jayzirtech.github.io/portfolio_JayzirTech/index_styles/assets/imgs/og-preview.jpg?v=3">
+    <meta property="og:image:secure_url" content="https://jayzirtech.github.io/portfolio_JayzirTech/index_styles/assets/imgs/og-preview.jpg?v=3">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -29,14 +29,14 @@
     <meta name="twitter:url" content="https://jayzirtech.github.io/portfolio_JayzirTech/">
     <meta name="twitter:title" content="Jayzir Martinez | Backend & Data Engineer">
     <meta name="twitter:description" content="Mechatronics Engineer specialized in Backend Architecture, ETL Pipelines & Data Engineering.">
-    <meta name="twitter:image" content="https://jayzirtech.github.io/portfolio_JayzirTech/index_styles/assets/imgs/og-preview.jpg">
+    <meta name="twitter:image" content="https://jayzirtech.github.io/portfolio_JayzirTech/index_styles/assets/imgs/og-preview.jpg?v=3">
 
     <title>Jayzir Martinez | Backend &amp; Data Engineer</title>
     <link rel="shortcut icon" href="./index_styles/assets/imgs/Favicon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./index_styles/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./index_styles/assets/css/style.css?v=3">
 
     <!-- Prevent theme flash on load -->
     <script>
@@ -53,30 +53,41 @@
 <body>
     <canvas id="antigravity-stars" aria-hidden="true"></canvas>
 
-    <!-- Floating Language & Theme Controls -->
-    <div class="top-controls" role="region" aria-label="Site preferences">
-        <div class="lang-toggle" role="group" aria-label="Language switcher">
-            <button type="button" class="lang-btn" data-lang="es" aria-pressed="true">ES</button>
-            <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+    <!-- Fixed Glassmorphic Top Navigation Bar -->
+    <div class="site-navbar">
+        <div class="site-navbar-inner">
+            <a href="#Top" class="brand-logo" aria-label="Jayzir Martinez Home">&lt;JM /&gt;</a>
+
+            <nav class="desktop-nav" aria-label="Main navigation">
+                <a href="#AboutMe" data-i18n="nav.about">Sobre mí</a>
+                <a href="#PersonalProjects" data-i18n="nav.projects">Proyectos</a>
+                <a href="#Language" data-i18n="nav.tech">Tecnologías</a>
+                <a href="#ContactMe" data-i18n="nav.contact">Contacto</a>
+            </nav>
+
+            <div class="nav-controls" role="region" aria-label="Site preferences">
+                <div class="lang-toggle" role="group" aria-label="Language switcher">
+                    <button type="button" class="lang-btn" data-lang="es" aria-pressed="true">ES</button>
+                    <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+                </div>
+                <button type="button" id="themeToggle" class="theme-toggle" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
+                    <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
-        <button type="button" id="themeToggle" class="theme-toggle" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
-            <!-- Sun Icon (shown in dark mode to switch to light) -->
-            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="3" y2="12"></line>
-                <line x1="21" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-            <!-- Moon Icon (shown in light mode to switch to dark) -->
-            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-        </button>
     </div>
 
     <header id="Top">
@@ -93,12 +104,10 @@
                     Conectando la ingeniería de sistemas físicos con arquitecturas backend escalables, pipelines ETL automatizados y soluciones de datos.
                 </p>
 
-                <nav aria-label="Main navigation">
-                    <a href="#AboutMe" data-i18n="nav.about">Sobre mí</a>
-                    <a href="#PersonalProjects" data-i18n="nav.projects">Proyectos</a>
-                    <a href="#Language" data-i18n="nav.tech">Tecnologías</a>
-                    <a href="#ContactMe" data-i18n="nav.contact">Contacto</a>
-                </nav>
+                <div class="hero-actions">
+                    <a href="#PersonalProjects" class="btn btn-primary" data-i18n="hero.ctaProjects">Ver proyectos</a>
+                    <a href="#ContactMe" class="btn btn-outline" data-i18n="hero.ctaContact">Contactar</a>
+                </div>
             </div>
 
             <div class="hero-visual">
@@ -228,59 +237,59 @@
         <p class="section-subtitle" data-i18n="tech.subtitle">Haz clic en cualquier tecnología para visitar su sitio oficial.</p>
         <div class="tech-grid">
             <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer" class="tech-item" title="Python">
-                <img src="./index_styles/assets/imgs/python.png" alt="Python" class="language-img">
+                <img src="./index_styles/assets/imgs/python.png" alt="Python" class="language-img" width="50" height="50">
                 <span class="tech-name">Python</span>
             </a>
             <a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer" class="tech-item" title="FastAPI">
-                <img src="./index_styles/assets/imgs/tech/fastapi.svg" alt="FastAPI" class="language-img">
+                <img src="./index_styles/assets/imgs/tech/fastapi.svg" alt="FastAPI" class="language-img" width="50" height="50">
                 <span class="tech-name">FastAPI</span>
             </a>
             <a href="https://airflow.apache.org/" target="_blank" rel="noopener noreferrer" class="tech-item" title="Apache Airflow">
-                <img src="./index_styles/assets/imgs/tech/airflow.svg" alt="Apache Airflow" class="language-img">
+                <img src="./index_styles/assets/imgs/tech/airflow.svg" alt="Apache Airflow" class="language-img" width="50" height="50">
                 <span class="tech-name">Airflow</span>
             </a>
             <a href="https://www.postgresql.org/" target="_blank" rel="noopener noreferrer" class="tech-item" title="PostgreSQL">
-                <img src="./index_styles/assets/imgs/tech/postgresql.svg" alt="PostgreSQL" class="language-img">
+                <img src="./index_styles/assets/imgs/tech/postgresql.svg" alt="PostgreSQL" class="language-img" width="50" height="50">
                 <span class="tech-name">PostgreSQL</span>
             </a>
             <a href="https://www.iso.org/standard/76583.html" target="_blank" rel="noopener noreferrer" class="tech-item" title="SQL (ISO/IEC 9075)">
-                <img src="./index_styles/assets/imgs/sql.png" alt="SQL" class="language-img">
+                <img src="./index_styles/assets/imgs/sql.png" alt="SQL" class="language-img" width="50" height="50">
                 <span class="tech-name">SQL</span>
             </a>
             <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer" class="tech-item" title="Docker">
-                <img src="./index_styles/assets/imgs/tech/docker.svg" alt="Docker" class="language-img">
+                <img src="./index_styles/assets/imgs/tech/docker.svg" alt="Docker" class="language-img" width="50" height="50">
                 <span class="tech-name">Docker</span>
             </a>
             <a href="https://www.rabbitmq.com/" target="_blank" rel="noopener noreferrer" class="tech-item" title="RabbitMQ">
-                <img src="./index_styles/assets/imgs/tech/rabbitmq.svg" alt="RabbitMQ" class="language-img">
+                <img src="./index_styles/assets/imgs/tech/rabbitmq.svg" alt="RabbitMQ" class="language-img" width="50" height="50">
                 <span class="tech-name">RabbitMQ</span>
             </a>
             <a href="https://docs.celeryq.dev/" target="_blank" rel="noopener noreferrer" class="tech-item" title="Celery">
-                <img src="./index_styles/assets/imgs/tech/celery.svg" alt="Celery" class="language-img">
+                <img src="./index_styles/assets/imgs/tech/celery.svg" alt="Celery" class="language-img" width="50" height="50">
                 <span class="tech-name">Celery</span>
             </a>
             <a href="https://docs.pydantic.dev/" target="_blank" rel="noopener noreferrer" class="tech-item" title="Pydantic">
-                <img src="./index_styles/assets/imgs/tech/pydantic.svg" alt="Pydantic" class="language-img">
+                <img src="./index_styles/assets/imgs/tech/pydantic.svg" alt="Pydantic" class="language-img" width="50" height="50">
                 <span class="tech-name">Pydantic</span>
             </a>
             <a href="https://git-scm.com/" target="_blank" rel="noopener noreferrer" class="tech-item" title="Git">
-                <img src="./index_styles/assets/imgs/tech/git.svg" alt="Git" class="language-img">
+                <img src="./index_styles/assets/imgs/tech/git.svg" alt="Git" class="language-img" width="50" height="50">
                 <span class="tech-name">Git</span>
             </a>
             <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer" class="tech-item" title="JavaScript">
-                <img src="./index_styles/assets/imgs/javascript.png" alt="JavaScript" class="language-img">
+                <img src="./index_styles/assets/imgs/javascript.png" alt="JavaScript" class="language-img" width="50" height="50">
                 <span class="tech-name">JavaScript</span>
             </a>
             <a href="https://www.arduino.cc/" target="_blank" rel="noopener noreferrer" class="tech-item" title="Arduino">
-                <img src="./index_styles/assets/imgs/arduino.png" alt="Arduino" class="language-img">
+                <img src="./index_styles/assets/imgs/arduino.png" alt="Arduino" class="language-img" width="50" height="50">
                 <span class="tech-name">Arduino</span>
             </a>
             <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer" class="tech-item" title="HTML5">
-                <img src="./index_styles/assets/imgs/html.png" alt="HTML5" class="language-img">
+                <img src="./index_styles/assets/imgs/html.png" alt="HTML5" class="language-img" width="50" height="50">
                 <span class="tech-name">HTML5</span>
             </a>
             <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener noreferrer" class="tech-item" title="CSS3">
-                <img src="./index_styles/assets/imgs/css.png" alt="CSS3" class="language-img">
+                <img src="./index_styles/assets/imgs/css.png" alt="CSS3" class="language-img" width="50" height="50">
                 <span class="tech-name">CSS3</span>
             </a>
         </div>
@@ -291,13 +300,14 @@
         <ul>
             <li><a href="https://www.linkedin.com/in/jayzir-martinez/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
             <li><a href="https://github.com/JayzirTech" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><a href="mailto:jayzirslaider18@gmail.com"><span data-i18n="contact.emailLabel">Correo</span></a></li>
+            <li><a href="mailto:jayzirslaider18@gmail.com"><span data-i18n="contact.emailLabel">Correo</span> (jayzirslaider18@gmail.com)</a></li>
         </ul>
     </section>
 
     <button id="GoToTop" aria-label="Volver arriba" data-i18n-title="ui.backToTop" title="Volver arriba">↑</button>
 
-    <aside id="sideMenu" aria-label="Quick navigation">
+    <!-- Mobile Bottom Navigation -->
+    <aside id="mobileNav" aria-label="Mobile navigation">
         <a href="#AboutMe" data-i18n="nav.about">Sobre mí</a>
         <a href="#PersonalProjects" data-i18n="nav.projects">Proyectos</a>
         <a href="#Language" data-i18n="nav.tech">Tecnologías</a>
@@ -308,7 +318,7 @@
         <p data-i18n="footer.credit">&lt; Construido por Jayzir Martinez / 2026 &gt;</p>
     </footer>
 
-    <script src="./src/script.js"></script>
+    <script src="./src/script.js?v=3"></script>
 </body>
 
 </html>

@@ -9,7 +9,9 @@ const TRANSLATIONS = {
         hero: {
             greeting: 'Hola, mi nombre es',
             role: 'Ingeniero Backend & de Datos | Base en Mecatrónica',
-            tagline: 'Conectando la ingeniería de sistemas físicos con arquitecturas backend escalables, pipelines ETL automatizados y soluciones de datos.'
+            tagline: 'Conectando la ingeniería de sistemas físicos con arquitecturas backend escalables, pipelines ETL automatizados y soluciones de datos.',
+            ctaProjects: 'Ver proyectos',
+            ctaContact: 'Contactar'
         },
         nav: {
             about: 'Sobre mí',
@@ -66,7 +68,9 @@ const TRANSLATIONS = {
         hero: {
             greeting: 'Hi, my name is',
             role: 'Backend & Data Engineer | Mechatronics Background',
-            tagline: 'Bridging physical systems engineering with scalable backend architectures, automated ETL pipelines, and analytical data platforms.'
+            tagline: 'Bridging physical systems engineering with scalable backend architectures, automated ETL pipelines, and analytical data platforms.',
+            ctaProjects: 'View Projects',
+            ctaContact: 'Get in Touch'
         },
         nav: {
             about: 'About Me',
@@ -224,13 +228,13 @@ function initPreferences() {
    Smooth Navigation & Floating Scroll Controls
    ========================================================================== */
 function initNavigation() {
-    const smoothLinks = document.querySelectorAll('nav a[href^="#"], #sideMenu a[href^="#"], header h2 a[href^="#"]');
+    const smoothLinks = document.querySelectorAll('a[href^="#"]');
     const backToTopButton = document.getElementById('GoToTop');
-    const sideMenu = document.getElementById('sideMenu');
 
     smoothLinks.forEach((link) => {
         link.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
+            if (!targetId || targetId === '#') return;
             const targetSection = document.querySelector(targetId);
             if (targetSection) {
                 e.preventDefault();
@@ -244,7 +248,6 @@ function initNavigation() {
 
     window.addEventListener('scroll', () => {
         const scrolled = document.body.scrollTop > 300 || document.documentElement.scrollTop > 300;
-        if (sideMenu) sideMenu.classList.toggle('visible', scrolled);
         if (backToTopButton) backToTopButton.classList.toggle('visible', scrolled);
     }, { passive: true });
 
