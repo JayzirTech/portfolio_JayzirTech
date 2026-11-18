@@ -468,7 +468,7 @@ header {
 }
 
 .portrait-img {
-  width: 112%;
+  width: 116%;
   max-width: none;
   height: auto;
   display: block;
@@ -728,7 +728,7 @@ section p span {
    ========================================================================== */
 .tech-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(122px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 18px;
   margin-top: 24px;
 }
@@ -961,8 +961,8 @@ footer {
   }
 
   .tech-grid {
-    grid-template-columns: repeat(auto-fill, minmax(98px, 1fr));
-    gap: 14px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
   }
 
   main,
