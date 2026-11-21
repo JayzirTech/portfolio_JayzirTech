@@ -33,12 +33,35 @@
             es: 'Suite Médica & Óptica Integrada',
             en: 'Integrated Vision Tech Suite'
         },
+        theme: {
+            accent: '#2dd4bf',
+            accentContrast: '#042f2e',
+            accentSoft: 'rgba(45, 212, 191, 0.08)',
+            accentGlow: 'rgba(45, 212, 191, 0.25)',
+            accentBorder: 'rgba(45, 212, 191, 0.3)'
+        },
         painSummary: {
             es: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Ocularis) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros).',
             en: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Ocularis) and demonstrating the true impact of ophthalmic lens coatings (Filters Simulator).'
         },
         github: 'https://github.com/visiometric-labs/filters-simulator.git',
         demo: 'https://visiometric-labs.github.io/filters-simulator/',
+        gallery: [
+            {
+                src: './index_styles/assets/imgs/projects/ocularis-simulation.png',
+                caption: {
+                    es: 'Módulo 1: Simulación de refracción ocular y trazado de rayos fotónicos en tiempo real.',
+                    en: 'Module 1: Real-time ocular refraction simulation and photonic ray tracing.'
+                }
+            },
+            {
+                src: './index_styles/assets/imgs/projects/filters-simulator-demo.png',
+                caption: {
+                    es: 'Módulo 2: Experiencia subjetiva POV en conducción nocturna comparando lentes estándar vs Crizal Multicapa y filtros amarillos.',
+                    en: 'Module 2: First-person POV night driving experience comparing standard vs Crizal Multicoat and yellow filters.'
+                }
+            }
+        ],
         specs: [
             { key: { es: 'Arquitectura de la Suite', en: 'Suite Architecture' }, value: 'Multi-módulo desacoplado en Vanilla JS (Zero Dependencies)' },
             { key: { es: 'Motor de Renderizado', en: 'Rendering Engine' }, value: 'HTML5 Canvas 2D con aceleración gráfica por hardware' },
@@ -87,12 +110,12 @@
                 id: 'ocularis',
                 route: '#/proyecto/visiometric-suite/ocularis',
                 title: {
-                    es: 'Módulo 1: Ocularis — Simulación de Refracción & Anatomía Ocular',
-                    en: 'Module 1: Ocularis — Refractive & Eye Anatomy Simulation'
+                    es: 'Módulo 1: Simulador de Refracción (Ocularis) — Anatomía y Patologías',
+                    en: 'Module 1: Refraction Simulator (Ocularis) — Anatomy & Eye Conditions'
                 },
                 shortTitle: {
-                    es: 'Ocularis (Refracción)',
-                    en: 'Ocularis (Refraction)'
+                    es: 'Simulador de Refracción (Ocularis)',
+                    en: 'Refraction Simulator (Ocularis)'
                 },
                 desc: {
                     es: 'Simula el ojo humano como un sistema óptico convergente, calculando el trazado de rayos de Snell para demostrar anomalías refractivas (miopía, hipermetropía, astigmatismo) y su corrección con lentes diótricos en tiempo real a 60 FPS.',

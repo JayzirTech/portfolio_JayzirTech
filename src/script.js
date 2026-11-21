@@ -39,11 +39,13 @@ const TRANSLATIONS = {
                 badge: 'DOCUMENTACIÓN TÉCNICA',
                 suiteBadge: 'SUITE MODULAR',
                 suiteOverview: 'Visión General de la Suite',
-                module1: 'Módulo 1: Ocularis (Refracción)',
+                module1: 'Módulo 1: Simulador de Refracción (Ocularis)',
                 module2: 'Módulo 2: Simulador de Filtros',
                 tocTitle: 'En esta página',
                 secOverview: '01. Visión General & Propósito',
                 secProblem: '02. El Problema & Dolor de Negocio',
+                secVideo: 'Demostración en Video',
+                secGallery: 'Capturas de la Experiencia',
                 secModules: '03. Módulos Integrados en la Suite',
                 secSuiteSpecs: '04. Especificaciones Técnicas',
                 secSuiteArch: '05. Arquitectura Global de la Suite',
@@ -75,10 +77,6 @@ const TRANSLATIONS = {
                 category: 'Simulación Física / Mecatrónica & Óptica',
                 title: 'Visiometric Labs — Suite de Simulación Óptica',
                 desc: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Ocularis) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros).'
-            },
-            p4: {
-                category: 'Arquitectura Backend / API REST',
-                desc: 'Resuelve los cuellos de botella y caídas de servidor por alto tráfico de usuarios concurrentes, entregando respuestas inmediatas mediante arquitectura asíncrona y validación estricta de datos.'
             }
         },
         tech: {
@@ -95,7 +93,7 @@ const TRANSLATIONS = {
             switchToDark: 'Cambiar a modo oscuro'
         },
         footer: {
-            credit: '< Construido por Jayzir Martinez / 2026 >'
+            credit: `< Construido por Jayzir Martinez / ${new Date().getFullYear()} >`
         }
     },
     en: {
@@ -135,11 +133,13 @@ const TRANSLATIONS = {
                 badge: 'TECHNICAL DOCUMENTATION',
                 suiteBadge: 'MODULAR SUITE',
                 suiteOverview: 'Suite Overview',
-                module1: 'Module 1: Ocularis (Refraction)',
+                module1: 'Module 1: Refraction Simulator (Ocularis)',
                 module2: 'Module 2: Filters Simulator',
                 tocTitle: 'On this page',
                 secOverview: '01. Overview & Purpose',
                 secProblem: '02. Problem & Business Impact',
+                secVideo: 'Video Demonstration',
+                secGallery: 'Experience Screenshots',
                 secModules: '03. Integrated Suite Modules',
                 secSuiteSpecs: '04. Technical Specifications',
                 secSuiteArch: '05. Global Suite Architecture',
@@ -171,10 +171,6 @@ const TRANSLATIONS = {
                 category: 'Physics Simulation / Mechatronics & Optics',
                 title: 'Visiometric Labs — Optical Simulation Suite',
                 desc: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Ocularis) and demonstrating the true impact of ophthalmic lens coatings (Filters Simulator).'
-            },
-            p4: {
-                category: 'Backend Architecture / REST API',
-                desc: 'Resolves server bottlenecks and downtime caused by concurrent user traffic, delivering instantaneous API responses through async execution and strict data contracts.'
             }
         },
         tech: {
@@ -191,7 +187,7 @@ const TRANSLATIONS = {
             switchToDark: 'Switch to dark mode'
         },
         footer: {
-            credit: '< Built by Jayzir Martinez / 2026 >'
+            credit: `< Built by Jayzir Martinez / ${new Date().getFullYear()} >`
         }
     }
 };
@@ -245,6 +241,10 @@ function applyLanguage(lang) {
         const isActive = btn.getAttribute('data-lang') === lang;
         btn.classList.toggle('active', isActive);
         btn.setAttribute('aria-pressed', String(isActive));
+    });
+
+    document.querySelectorAll('#currentYear').forEach((el) => {
+        el.textContent = new Date().getFullYear();
     });
 
     updateThemeButtonLabel();
@@ -609,6 +609,26 @@ function escapeHtml(str) {
         .replace(/'/g, '&#039;');
 }
 
+function applyProjectTheme(theme) {
+    if (!theme) {
+        resetThemeColors();
+        return;
+    }
+    document.documentElement.style.setProperty('--accent', theme.accent);
+    document.documentElement.style.setProperty('--accent-contrast', theme.accentContrast || '#0a192f');
+    document.documentElement.style.setProperty('--accent-soft', theme.accentSoft);
+    document.documentElement.style.setProperty('--accent-glow', theme.accentGlow);
+    document.documentElement.style.setProperty('--accent-border', theme.accentBorder);
+}
+
+function resetThemeColors() {
+    document.documentElement.style.removeProperty('--accent');
+    document.documentElement.style.removeProperty('--accent-contrast');
+    document.documentElement.style.removeProperty('--accent-soft');
+    document.documentElement.style.removeProperty('--accent-glow');
+    document.documentElement.style.removeProperty('--accent-border');
+}
+
 function renderProjectDetail(projectId, subProjectId) {
     const detailContainer = document.getElementById('projectDetailView');
     if (!detailContainer) return;
@@ -629,6 +649,10 @@ function renderProjectDetail(projectId, subProjectId) {
             activeSubId = null;
         }
     }
+
+    // Apply project theme palette dynamically
+    const themeColors = (project && project.theme) || (parentSuite && parentSuite.theme) || null;
+    applyProjectTheme(themeColors);
 
     const lang = currentLang;
     const dict = TRANSLATIONS[lang] || TRANSLATIONS.es;
@@ -690,6 +714,20 @@ function renderProjectDetail(projectId, subProjectId) {
         { id: 'doc-overview', title: lang === 'es' ? 'Visión General & Propósito' : 'Overview & Purpose' },
         { id: 'doc-problem', title: lang === 'es' ? 'El Problema & Dolor de Negocio' : 'Problem & Business Impact' }
     ];
+
+    if (project.videoEmbed) {
+        docSections.push({
+            id: 'doc-video',
+            title: lang === 'es' ? 'Demostración en Video' : 'Video Demonstration'
+        });
+    }
+
+    if (project.gallery && project.gallery.length > 0) {
+        docSections.push({
+            id: 'doc-gallery',
+            title: lang === 'es' ? 'Capturas de la Experiencia' : 'Experience Screenshots'
+        });
+    }
 
     if (project.suiteModules) {
         docSections.push({
@@ -847,8 +885,16 @@ function renderProjectDetail(projectId, subProjectId) {
                 </div>
             </div>
 
-            <!-- Documentation Grid: Content + Desktop Sidebar -->
+            <!-- Documentation Grid: Desktop Sticky Sidebar (Left) + Content (Right) -->
             <div class="doc-grid">
+                <!-- Sticky Table of Contents (TOC) Desktop Only - Left Column -->
+                <aside class="doc-toc-sidebar" aria-label="Table of Contents">
+                    <div class="doc-toc-title">${docsDict.tocTitle}</div>
+                    <ul class="doc-toc-links">
+                        ${tocListHtml}
+                    </ul>
+                </aside>
+
                 <!-- Main Documentation Area -->
                 <div class="doc-main">
                     
@@ -878,6 +924,35 @@ function renderProjectDetail(projectId, subProjectId) {
                             </ul>
                         </div>
                     </section>
+
+                    <!-- Video Demonstration (if present) -->
+                    ${project.videoEmbed ? `
+                    <section id="doc-video" class="doc-section">
+                        <h2 class="doc-section-h2">
+                            <span class="doc-anchor-hash">#</span> ${getSecTitle('doc-video')}
+                        </h2>
+                        <div class="doc-video-wrapper">
+                            ${project.videoEmbed}
+                        </div>
+                    </section>
+                    ` : ''}
+
+                    <!-- Experience Screenshots Gallery (if present) -->
+                    ${project.gallery && project.gallery.length > 0 ? `
+                    <section id="doc-gallery" class="doc-section">
+                        <h2 class="doc-section-h2">
+                            <span class="doc-anchor-hash">#</span> ${getSecTitle('doc-gallery')}
+                        </h2>
+                        <div class="doc-gallery-grid">
+                            ${project.gallery.map((item) => `
+                                <figure class="doc-gallery-card">
+                                    <img src="${item.src}" alt="${item.caption[lang]}" loading="lazy">
+                                    <figcaption>${item.caption[lang]}</figcaption>
+                                </figure>
+                            `).join('')}
+                        </div>
+                    </section>
+                    ` : ''}
 
                     <!-- Suite Modules Exploration Grid (Only on Suite Overview) -->
                     ${project.suiteModules ? `
@@ -1050,14 +1125,6 @@ function renderProjectDetail(projectId, subProjectId) {
                     </nav>
 
                 </div>
-
-                <!-- Sticky Table of Contents (TOC) Desktop Only -->
-                <aside class="doc-toc-sidebar" aria-label="Table of Contents">
-                    <div class="doc-toc-title">${docsDict.tocTitle}</div>
-                    <ul class="doc-toc-links">
-                        ${tocListHtml}
-                    </ul>
-                </aside>
             </div>
         </div>
     `;
@@ -1169,6 +1236,7 @@ function handleRouting() {
             document.documentElement.style.scrollBehavior = '';
         }, 60);
     } else {
+        resetThemeColors();
         document.body.classList.remove('in-doc-view');
         const siteNavbar = document.querySelector('.site-navbar');
         const mobileNav = document.getElementById('mobileNav');

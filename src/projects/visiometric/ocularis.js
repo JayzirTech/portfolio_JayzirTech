@@ -9,12 +9,12 @@
         suiteId: 'visiometric-suite',
         version: 'v1.1.0-sim',
         title: {
-            es: 'Módulo 1: Ocularis — Simulación Óptica & Refracción',
-            en: 'Module 1: Ocularis — Optical Simulation & Refraction'
+            es: 'Módulo 1: Simulador de Refracción (Ocularis) — Óptica & Patologías',
+            en: 'Module 1: Refraction Simulator (Ocularis) — Optics & Eye Conditions'
         },
         shortTitle: {
-            es: 'Ocularis (Refracción)',
-            en: 'Ocularis (Refraction)'
+            es: 'Simulador de Refracción (Ocularis)',
+            en: 'Refraction Simulator (Ocularis)'
         },
         category: {
             es: 'Simulación Física / Mecatrónica Visual',
@@ -24,12 +24,35 @@
             es: 'Módulo de Refracción en Vivo',
             en: 'Live Refraction Engine'
         },
+        theme: {
+            accent: '#2dd4bf',
+            accentContrast: '#042f2e',
+            accentSoft: 'rgba(45, 212, 191, 0.08)',
+            accentGlow: 'rgba(45, 212, 191, 0.25)',
+            accentBorder: 'rgba(45, 212, 191, 0.3)'
+        },
         painSummary: {
             es: 'Elimina la barrera de comunicación entre el optómetra y el paciente, permitiendo visualizar de forma interactiva y comprensible por qué ven borroso y cómo sus lentes corregirán su visión.',
             en: 'Bridges the communication gap between eye-care specialists and patients by interactively showing why vision is blurred and exactly how corrective lenses restore sharp focus.'
         },
         github: 'https://github.com/JayzirTech/ocularis',
         demo: 'https://jayzirtech.github.io/ocularis/',
+        gallery: [
+            {
+                src: './index_styles/assets/imgs/projects/ocularis-simulation.png',
+                caption: {
+                    es: 'Simulador de física paraxial interactivo mostrando el trazado fotónico de haces de luz en la anatomía ocular.',
+                    en: 'Interactive paraxial physics simulator showing photonic light ray tracing in eye anatomy.'
+                }
+            },
+            {
+                src: './index_styles/assets/imgs/projects/ocularis-preview.png',
+                caption: {
+                    es: 'Portal de inmersión y selección de patologías refractivas (Miopía, Hipermetropía, Astigmatismo).',
+                    en: 'Immersion portal and refractive conditions selection (Myopia, Hyperopia, Astigmatism).'
+                }
+            }
+        ],
         specs: [
             { key: { es: 'Modelo Físico', en: 'Physics Model' }, value: 'Snell Ray-Tracing & Paraxial Optics' },
             { key: { es: 'Patologías Modeladas', en: 'Modeled Conditions' }, value: 'Miopía, Hipermetropía, Astigmatismo' },

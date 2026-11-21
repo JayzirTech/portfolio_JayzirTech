@@ -19,12 +19,20 @@
             es: 'Pipeline Distribuido',
             en: 'Distributed Pipeline'
         },
+        theme: {
+            accent: '#38bdf8',
+            accentContrast: '#07162c',
+            accentSoft: 'rgba(56, 189, 248, 0.08)',
+            accentGlow: 'rgba(56, 189, 248, 0.25)',
+            accentBorder: 'rgba(56, 189, 248, 0.3)'
+        },
         painSummary: {
             es: 'Evita el colapso de bases de datos operacionales cuando finanzas y analistas saturan el sistema con reportes pesados. Centraliza y procesa ventas automáticamente sin interrumpir la operación del negocio.',
             en: 'Prevents operational database crashes when finance and analytics teams run heavy reports on production systems. Automatically centralizes and transforms sales data without business disruption.'
         },
         github: 'https://github.com/JayzirTech/datamart-analytics-etl-pipeline',
         demo: null,
+        videoEmbed: '<iframe width="560" height="315" src="https://www.youtube.com/embed/M46kV_vK2ys?si=DIT9DdLT98SY3KmD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
         specs: [
             { key: { es: 'Orquestador', en: 'Orchestrator' }, value: 'Apache Airflow (CeleryExecutor)' },
             { key: { es: 'Message Broker', en: 'Message Broker' }, value: 'RabbitMQ (AMQP 0-9-1)' },

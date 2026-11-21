@@ -19,6 +19,13 @@
             es: 'Data Warehouse Dimensional',
             en: 'Dimensional Data Warehouse'
         },
+        theme: {
+            accent: '#a855f7',
+            accentContrast: '#180728',
+            accentSoft: 'rgba(168, 85, 247, 0.08)',
+            accentGlow: 'rgba(168, 85, 247, 0.25)',
+            accentBorder: 'rgba(168, 85, 247, 0.3)'
+        },
         painSummary: {
             es: 'Resuelve la pérdida de trazabilidad en ventas online cuando productos y precios cambian o las transacciones llegan con días de retraso, garantizando reportes financieros exactos e inmutables.',
             en: 'Eliminates metric corruption in e-commerce when product prices change or order data arrives late, guaranteeing 100% accurate, tamper-proof financial reporting.'

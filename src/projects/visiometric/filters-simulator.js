@@ -24,12 +24,35 @@
             es: 'Módulo de Tratamientos en Producción',
             en: 'Production Coatings Engine'
         },
+        theme: {
+            accent: '#f59e0b',
+            accentContrast: '#241400',
+            accentSoft: 'rgba(245, 158, 11, 0.08)',
+            accentGlow: 'rgba(245, 158, 11, 0.25)',
+            accentBorder: 'rgba(245, 158, 11, 0.3)'
+        },
         painSummary: {
             es: 'Resuelve la dificultad de explicar y comparar en consulta óptica cómo actúan los filtros de lentes (luz azul, antirreflejo, fotocromáticos, polarizados) frente a diferentes condiciones lumínicas reales.',
             en: 'Solves the clinical challenge of demonstrating and comparing ophthalmic lens coatings (blue cut, anti-reflective, photochromic, polarized) under real-world lighting conditions.'
         },
         github: 'https://github.com/visiometric-labs/filters-simulator.git',
         demo: 'https://visiometric-labs.github.io/filters-simulator/',
+        gallery: [
+            {
+                src: './index_styles/assets/imgs/projects/filters-simulator-demo.png',
+                caption: {
+                    es: 'Vista subjetiva en primera persona (POV) evaluando el corte de destellos nocturnos y la nitidez óptica con recubrimientos Crizal y filtros amarillos.',
+                    en: 'First-person POV subjective comparison evaluating night glare suppression and visual acuity with Crizal multicoating and yellow filters.'
+                }
+            },
+            {
+                src: './index_styles/assets/imgs/projects/filters-simulator-preview.png',
+                caption: {
+                    es: 'Hub interactivo de escenarios clínicos para pruebas de fatiga visual por pantallas (Blue Cut), conducción nocturna y radiación UV.',
+                    en: 'Interactive clinical scenarios hub for testing digital screen fatigue (Blue Cut), night driving, and UV solar radiation.'
+                }
+            }
+        ],
         specs: [
             { key: { es: 'Filtros Soportados', en: 'Supported Filters' }, value: 'Blue Light Cut, Anti-Reflective, Photochromic, Polarized, UV400' },
             { key: { es: 'Motor de Renderizado', en: 'Rendering Engine' }, value: 'Hardware-Accelerated HTML5 Canvas 2D' },
