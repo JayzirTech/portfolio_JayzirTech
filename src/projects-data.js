@@ -466,7 +466,7 @@ export class OpticalFilterEngine {
             en: 'Bridges the communication gap between eye-care specialists and patients by interactively showing why vision is blurred and exactly how corrective lenses restore sharp focus.'
         },
         github: 'https://github.com/JayzirTech/ocularis',
-        demo: null,
+        demo: 'https://jayzirtech.github.io/ocularis/',
         specs: [
             { key: { es: 'Modelo Físico', en: 'Physics Model' }, value: 'Snell Ray-Tracing & Paraxial Optics' },
             { key: { es: 'Patologías Modeladas', en: 'Modeled Conditions' }, value: 'Miopía, Hipermetropía, Astigmatismo' },
