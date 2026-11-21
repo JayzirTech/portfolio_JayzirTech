@@ -614,14 +614,13 @@ function renderProjectDetail(projectId) {
 
     detailContainer.innerHTML = `
         <div class="doc-wrapper">
-            <!-- Documentation Breadcrumbs -->
-            <nav class="doc-breadcrumbs" aria-label="Breadcrumb">
-                <a href="#PersonalProjects">${dict.projects.allProjects}</a>
-                <span class="doc-sep">/</span>
-                <span class="doc-category">${project.category[lang]}</span>
-                <span class="doc-sep">/</span>
-                <span class="doc-current">${project.id}</span>
-            </nav>
+            <!-- Top Back Navigation -->
+            <div class="doc-top-nav">
+                <a href="#PersonalProjects" class="doc-back-link">
+                    <span class="doc-back-arrow" aria-hidden="true">←</span>
+                    <span>${dict.projects.backToList}</span>
+                </a>
+            </div>
 
             <!-- Technical Document Header -->
             <header class="doc-header">
