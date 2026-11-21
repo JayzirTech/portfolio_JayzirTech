@@ -30,6 +30,7 @@ This portfolio features an interactive HTML5 Canvas background effect inspired b
 ## ✨ Featured Projects Showcased
 * **DataMart Analytical ETL Pipeline:** End-to-end containerized ETL orchestrated with Apache Airflow (Celery & RabbitMQ), FastAPI, and PostgreSQL.
 * **Mercado Nube Analytics Engine:** Dimensional Data Warehouse featuring Star Schema and Slowly Changing Dimensions (SCD Type 2).
+* **Optical Filters Simulator:** Real-time ophthalmic lens coatings and light transmission simulation web app developed for Visiometric Labs.
 * **Ocularis — Optical Simulation:** Real-time optical physics modeling and patient education tool for optometrists.
 * **FastAPI Microservice Backend:** Clean architecture RESTful microservice with relational database integration.
 

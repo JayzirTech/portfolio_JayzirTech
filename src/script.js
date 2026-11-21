@@ -26,31 +26,53 @@ const TRANSLATIONS = {
         projects: {
             title: 'Proyectos Destacados',
             sourceTitle: 'Ver código fuente',
-            ctaDetail: 'Ver caso de estudio',
+            ctaDetail: 'Ver documentación técnica',
             backToList: 'Volver a Proyectos',
-            viewRepo: 'Ver Repositorio GitHub',
-            viewLive: 'Ver Demo en Vivo',
-            notFoundTitle: 'Proyecto no encontrado',
-            notFoundDesc: 'El proyecto solicitado no existe o fue movido.',
+            viewRepo: 'Ver Repositorio',
+            viewLive: 'Probar Demo en Vivo',
+            notFoundTitle: 'Documentación no encontrada',
+            notFoundDesc: 'El proyecto solicitado no existe o no se encuentra en el índice.',
             prevProject: 'Anterior',
             nextProject: 'Siguiente',
-            allProjects: 'Todos los proyectos',
+            allProjects: 'Índice de Proyectos',
+            docs: {
+                badge: 'DOCUMENTACIÓN TÉCNICA',
+                tocTitle: 'En esta página',
+                secOverview: '01. Visión General & Propósito',
+                secProblem: '02. El Problema & Dolor de Negocio',
+                secSpecs: '03. Especificaciones Técnicas',
+                secCode: '04. Implementación & Código Clave',
+                secArch: '05. Arquitectura & Flujo de Datos',
+                secDecisions: '06. Decisiones de Diseño & Trade-offs',
+                secChallenges: '07. Retos Técnicos & Solución',
+                secImpact: '08. Impacto & Conclusiones',
+                painCallout: 'Dolor del Usuario / Negocio',
+                copyCode: 'Copiar',
+                copied: '¡Copiado!',
+                specKey: 'Parámetro',
+                specValue: 'Especificación'
+            },
             p1: {
-                category: 'Ingeniería de Datos / ETL',
-                desc: 'Pipeline ETL analítico de extremo a extremo impulsado por Apache Airflow (CeleryExecutor y RabbitMQ), Data Warehouse en PostgreSQL y microservicio de catálogo de productos en FastAPI, totalmente contenedorizado con Docker.'
+                category: 'Ingeniería de Datos / Orquestación',
+                desc: 'Evita el colapso de bases de datos operacionales cuando finanzas y analistas saturan el sistema con reportes pesados. Centraliza y procesa ventas automáticamente sin interrumpir la operación del negocio.'
             },
             p2: {
                 category: 'Arquitectura de Datos / BI',
-                desc: 'Data Warehouse dimensional (Esquema Estrella y SCD Tipo 2) diseñado para resolver consultas analíticas complejas, gestionar eventos con llegada tardía (>24h) y automatizar compuertas de calidad de datos.'
+                desc: 'Resuelve la pérdida de trazabilidad en ventas online cuando productos y precios cambian o las transacciones llegan con días de retraso, garantizando reportes financieros exactos e inmutables.'
             },
             p3: {
-                category: 'Simulación Física / App Web',
+                category: 'Simulación Física / Mecatrónica Visual',
                 title: 'Ocularis — Simulación Óptica',
-                desc: 'Aplicación web interactiva de simulación óptica y educación para pacientes dirigida a optómetras. Modela trazado de rayos, errores refractivos focales y física de lentes correctivos en tiempo real.'
+                desc: 'Elimina la barrera de comunicación entre el optómetra y el paciente, permitiendo visualizar de forma interactiva y comprensible por qué ven borroso y cómo sus lentes corregirán su visión.'
             },
             p4: {
-                category: 'API Backend',
-                desc: 'API REST asíncrona de alto rendimiento conectada a bases de datos relacionales, implementando arquitectura limpia, enrutamiento modular y validación de datos con Pydantic.'
+                category: 'Arquitectura Backend / API REST',
+                desc: 'Resuelve los cuellos de botella y caídas de servidor por alto tráfico de usuarios concurrentes, entregando respuestas inmediatas mediante arquitectura asíncrona y validación estricta de datos.'
+            },
+            p5: {
+                category: 'Simulación Física / Óptica Visual',
+                title: 'Simulador de Filtros Ópticos',
+                desc: 'Resuelve la dificultad de explicar y comparar en consulta óptica cómo actúan los filtros de lentes (luz azul, antirreflejo, fotocromáticos, polarizados) frente a diferentes condiciones lumínicas reales.'
             }
         },
         tech: {
@@ -94,31 +116,53 @@ const TRANSLATIONS = {
         projects: {
             title: 'Featured Projects',
             sourceTitle: 'View Source Code',
-            ctaDetail: 'View Case Study',
+            ctaDetail: 'View Technical Docs',
             backToList: 'Back to Projects',
-            viewRepo: 'View GitHub Repository',
-            viewLive: 'View Live Demo',
-            notFoundTitle: 'Project Not Found',
-            notFoundDesc: 'The requested project could not be found or has been moved.',
+            viewRepo: 'View Repository',
+            viewLive: 'Try Live Demo',
+            notFoundTitle: 'Documentation Not Found',
+            notFoundDesc: 'The requested project was not found in the documentation index.',
             prevProject: 'Previous',
             nextProject: 'Next',
-            allProjects: 'All Projects',
+            allProjects: 'All Projects Index',
+            docs: {
+                badge: 'TECHNICAL DOCUMENTATION',
+                tocTitle: 'On this page',
+                secOverview: '01. Overview & Purpose',
+                secProblem: '02. Problem & Business Impact',
+                secSpecs: '03. Technical Specifications',
+                secCode: '04. Implementation & Key Code',
+                secArch: '05. Architecture & Data Flow',
+                secDecisions: '06. Design Decisions & Trade-offs',
+                secChallenges: '07. Technical Challenges & Fixes',
+                secImpact: '08. Impact & Takeaways',
+                painCallout: 'User & Business Pain Point',
+                copyCode: 'Copy',
+                copied: 'Copied!',
+                specKey: 'Parameter',
+                specValue: 'Specification'
+            },
             p1: {
-                category: 'Data Engineering / ETL',
-                desc: 'End-to-end analytical ETL pipeline powered by Apache Airflow (CeleryExecutor & RabbitMQ), PostgreSQL Data Warehouse, and FastAPI product catalog microservice, fully containerized with Docker.'
+                category: 'Data Engineering / Orchestration',
+                desc: 'Prevents operational database crashes when finance and analytics teams run heavy reports on production systems. Automatically centralizes and transforms sales data without business disruption.'
             },
             p2: {
                 category: 'Data Architecture / BI',
-                desc: 'Dimensional Data Warehouse (Star Schema & SCD Type 2) designed to resolve complex analytical queries, handle late-arriving events (>24h), and automate data quality gates.'
+                desc: 'Eliminates metric corruption in e-commerce when product prices change or order data arrives late, guaranteeing 100% accurate, tamper-proof financial reporting.'
             },
             p3: {
-                category: 'Physics Simulation / Web App',
+                category: 'Physics Simulation / Visual Mechatronics',
                 title: 'Ocularis — Optical Simulation',
-                desc: 'Interactive optical simulation and patient education web app for optometrists. Models ray tracing, focal refractive errors, and corrective lens physics in real time.'
+                desc: 'Bridges the communication gap between eye-care specialists and patients by interactively showing why vision is blurred and exactly how corrective lenses restore sharp focus.'
             },
             p4: {
-                category: 'Backend API',
-                desc: 'High-throughput asynchronous REST API connected to relational databases, implementing clean architecture, modular routing, and Pydantic data validation.'
+                category: 'Backend Architecture / REST API',
+                desc: 'Resolves server bottlenecks and downtime caused by concurrent user traffic, delivering instantaneous API responses through async execution and strict data contracts.'
+            },
+            p5: {
+                category: 'Physics Simulation / Visual Optics',
+                title: 'Optical Filters Simulator',
+                desc: 'Solves the clinical challenge of demonstrating and comparing ophthalmic lens coatings (blue cut, anti-reflective, photochromic, polarized) under real-world lighting conditions.'
             }
         },
         tech: {
@@ -498,13 +542,15 @@ function initAntigravityStars() {
 }
 
 /* ==========================================================================
-   Single Page Application (SPA) Router & Project Detail View
+   Single Page Application (SPA) Router & Technical Documentation View
    ========================================================================== */
 let currentRoute = {
     view: 'home',
     projectId: null,
     section: null
 };
+
+let lastHomeScrollY = 0;
 
 function parseHash(hash) {
     if (!hash || hash === '#' || hash === '#/' || hash === '#Top') {
@@ -517,13 +563,23 @@ function parseHash(hash) {
         return { view: 'project', projectId: projectMatch[1], section: null };
     }
 
-    // Match in-page section jump, e.g. #PersonalProjects, #AboutMe
+    // Match in-page section jump on home (e.g. #PersonalProjects, #AboutMe)
     if (hash.startsWith('#')) {
         const sectionId = hash.replace(/^#\/?/, '');
         return { view: 'home', projectId: null, section: sectionId };
     }
 
     return { view: 'home', projectId: null, section: null };
+}
+
+function escapeHtml(str) {
+    if (!str) return '';
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
 }
 
 function renderProjectDetail(projectId) {
@@ -535,212 +591,287 @@ function renderProjectDetail(projectId) {
     const project = projects[projectIndex];
     const lang = currentLang;
     const dict = TRANSLATIONS[lang] || TRANSLATIONS.es;
+    const docsDict = dict.projects.docs;
 
     if (!project) {
         detailContainer.innerHTML = `
-            <div class="project-detail-container">
-                <div class="detail-content-card" style="text-align: center; padding: 60px 20px;">
-                    <h2 style="color: var(--accent); font-size: 2.4rem; margin-bottom: 12px; font-family: 'JetBrains Mono', monospace;">404</h2>
-                    <h3 style="color: var(--text-heading); margin-bottom: 14px; font-size: 1.5rem;">${dict.projects.notFoundTitle}</h3>
+            <div class="doc-wrapper">
+                <div class="doc-section" style="text-align: center; padding: 60px 20px;">
+                    <h2 style="color: var(--accent); font-size: 2.5rem; margin-bottom: 12px; font-family: 'JetBrains Mono', monospace;">404</h2>
+                    <h3 style="color: var(--text-heading); margin-bottom: 14px; font-size: 1.4rem;">${dict.projects.notFoundTitle}</h3>
                     <p style="color: var(--text-secondary); margin-bottom: 24px;">${dict.projects.notFoundDesc}</p>
-                    <a href="#PersonalProjects" class="btn btn-primary">← ${dict.projects.backToList}</a>
+                    <a href="#PersonalProjects" class="doc-btn doc-btn-primary">← ${dict.projects.backToList}</a>
                 </div>
             </div>
         `;
         return;
     }
 
-    document.title = `${project.title[lang]} | Jayzir Martinez`;
+    document.title = `${project.title[lang]} | Docs — Jayzir Martinez`;
 
     const prevProject = projectIndex > 0 ? projects[projectIndex - 1] : null;
     const nextProject = projectIndex < projects.length - 1 ? projects[projectIndex + 1] : null;
 
     detailContainer.innerHTML = `
-        <div class="project-detail-container">
-            <!-- Top Bar with Back Button and Badges -->
-            <div class="detail-top-bar">
-                <a href="#PersonalProjects" class="btn-back">
-                    <span class="back-arrow" aria-hidden="true">←</span>
-                    <span>${dict.projects.backToList}</span>
-                </a>
-                <div class="detail-badge-group">
-                    <span class="detail-category-badge">${project.category[lang]}</span>
-                    <span class="detail-status-badge">${project.badge[lang]}</span>
-                </div>
-            </div>
+        <div class="doc-wrapper">
+            <!-- Documentation Breadcrumbs -->
+            <nav class="doc-breadcrumbs" aria-label="Breadcrumb">
+                <a href="#PersonalProjects">${dict.projects.allProjects}</a>
+                <span class="doc-sep">/</span>
+                <span class="doc-category">${project.category[lang]}</span>
+                <span class="doc-sep">/</span>
+                <span class="doc-current">${project.id}</span>
+            </nav>
 
-            <!-- Hero Header -->
-            <header class="detail-hero-header">
-                <h1 class="detail-main-title">${project.title[lang]}</h1>
-                <p class="detail-summary-lead">${project.summary[lang]}</p>
-                <div class="detail-action-bar">
-                    <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="btn btn-primary detail-cta-btn">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                        <span>${dict.projects.viewRepo}</span>
-                        <span class="external-icon" aria-hidden="true">↗</span>
-                    </a>
-                    ${project.demo ? `
-                    <a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="btn btn-outline detail-cta-btn">
-                        <span>${dict.projects.viewLive}</span>
-                        <span class="external-icon" aria-hidden="true">↗</span>
-                    </a>` : ''}
+            <!-- Technical Document Header -->
+            <header class="doc-header">
+                <div class="doc-meta-row">
+                    <div class="doc-badges">
+                        <span class="doc-badge-pill">${docsDict.badge}</span>
+                        <span class="doc-version-pill">${project.version || 'v1.0.0'}</span>
+                        <span class="doc-badge-pill">${project.badge[lang]}</span>
+                    </div>
+                    <div class="doc-header-actions">
+                        ${project.github ? `
+                        <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="doc-btn doc-btn-secondary" title="GitHub Repository">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                            <span>${dict.projects.viewRepo}</span>
+                            <span aria-hidden="true">↗</span>
+                        </a>` : ''}
+                        ${project.demo ? `
+                        <a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="doc-btn doc-btn-primary" title="Live Demo Application">
+                            <span>⚡ ${dict.projects.viewLive}</span>
+                            <span aria-hidden="true">↗</span>
+                        </a>` : ''}
+                    </div>
                 </div>
+
+                <h1 class="doc-main-title">${project.title[lang]}</h1>
+                <p class="doc-lead-desc">${project.painSummary[lang]}</p>
             </header>
 
-            <!-- Key Metrics / Stats Cards -->
-            <div class="detail-stats-grid">
-                ${project.stats.map((s) => `
-                    <div class="stat-card">
-                        <span class="stat-label">${s.label[lang]}</span>
-                        <span class="stat-value">${s.value}</span>
-                    </div>
-                `).join('')}
-            </div>
+            <!-- Two-Column Documentation Grid -->
+            <div class="doc-grid">
+                <!-- Main Documentation Area -->
+                <main class="doc-main">
+                    
+                    <!-- 01. Overview Section -->
+                    <section id="doc-overview" class="doc-section">
+                        <h2 class="doc-section-h2">
+                            <span class="doc-anchor-hash">#</span> ${docsDict.secOverview}
+                        </h2>
+                        <p class="doc-p">${project.overview[lang]}</p>
+                    </section>
 
-            <!-- 01. Overview Section -->
-            <section class="detail-content-card">
-                <h2 class="detail-section-title">
-                    <span class="section-num">01.</span>
-                    ${lang === 'es' ? 'Visión General' : 'Overview'}
-                </h2>
-                <p class="detail-paragraph">${project.overview[lang]}</p>
-            </section>
+                    <!-- 02. Problem & Pain Points -->
+                    <section id="doc-problem" class="doc-section">
+                        <h2 class="doc-section-h2">
+                            <span class="doc-anchor-hash">#</span> ${docsDict.secProblem}
+                        </h2>
+                        <p class="doc-p">${project.problem.description[lang]}</p>
 
-            <!-- 02. Problem & Pain Points -->
-            <section class="detail-content-card">
-                <h2 class="detail-section-title">
-                    <span class="section-num">02.</span>
-                    ${project.problem.title[lang]}
-                </h2>
-                <p class="detail-paragraph">${project.problem.description[lang]}</p>
-                <div class="pain-points-box">
-                    <h4 class="box-subtitle">${lang === 'es' ? 'Puntos de Dolor Identificados:' : 'Identified Pain Points:'}</h4>
-                    <ul class="pain-points-list">
-                        ${project.problem.painPoints[lang].map((pt) => `<li>${pt}</li>`).join('')}
+                        <!-- User & Business Pain Callout -->
+                        <div class="doc-callout doc-callout-problem">
+                            <div class="doc-callout-header">
+                                <span aria-hidden="true">⚠️</span>
+                                <span>${docsDict.painCallout}</span>
+                            </div>
+                            <ul class="doc-pain-list">
+                                ${project.problem.painPoints[lang].map((point) => `<li>${point}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- 03. Technical Specifications Table -->
+                    ${project.specs ? `
+                    <section id="doc-specs" class="doc-section">
+                        <h2 class="doc-section-h2">
+                            <span class="doc-anchor-hash">#</span> ${docsDict.secSpecs}
+                        </h2>
+                        <div class="doc-table-wrapper">
+                            <table class="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>${docsDict.specKey}</th>
+                                        <th>${docsDict.specValue}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${project.specs.map((item) => `
+                                        <tr>
+                                            <td class="col-key">${item.key[lang]}</td>
+                                            <td class="col-val">${item.value}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>` : ''}
+
+                    <!-- 04. Core Implementation & Code -->
+                    ${project.codeSnippet ? `
+                    <section id="doc-code" class="doc-section">
+                        <h2 class="doc-section-h2">
+                            <span class="doc-anchor-hash">#</span> ${docsDict.secCode}
+                        </h2>
+                        <div class="doc-code-window">
+                            <div class="doc-code-topbar">
+                                <div class="doc-code-dots" aria-hidden="true">
+                                    <span class="dot-red"></span>
+                                    <span class="dot-yellow"></span>
+                                    <span class="dot-green"></span>
+                                </div>
+                                <span class="doc-code-filename">${project.codeSnippet.filename}</span>
+                                <button type="button" class="doc-code-copy-btn" data-code="${escapeHtml(project.codeSnippet.code)}">
+                                    ${docsDict.copyCode}
+                                </button>
+                            </div>
+                            <pre class="doc-code-pre"><code>${escapeHtml(project.codeSnippet.code)}</code></pre>
+                        </div>
+                    </section>` : ''}
+
+                    <!-- 05. Architecture & Data Pipeline -->
+                    <section id="doc-architecture" class="doc-section">
+                        <h2 class="doc-section-h2">
+                            <span class="doc-anchor-hash">#</span> ${docsDict.secArch}
+                        </h2>
+                        <p class="doc-p">${project.architecture.description[lang]}</p>
+
+                        <div class="doc-pipeline-flow">
+                            ${project.architecture.flow.map((stage) => `
+                                <div class="doc-pipeline-card">
+                                    <span class="doc-pipeline-badge">${stage.step}</span>
+                                    <p class="doc-pipeline-text">${stage.desc}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+
+                    <!-- 06. Engineering Decisions & Trade-offs -->
+                    <section id="doc-decisions" class="doc-section">
+                        <h2 class="doc-section-h2">
+                            <span class="doc-anchor-hash">#</span> ${docsDict.secDecisions}
+                        </h2>
+                        <div class="doc-decisions-grid">
+                            ${project.architecture.keyDecisions.map((item) => `
+                                <div class="doc-decision-card">
+                                    <div class="doc-decision-name">⚡ ${item.title}</div>
+                                    <div class="doc-decision-reason">${item.reason}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+
+                    <!-- 07. Troubleshooting & Challenges -->
+                    <section id="doc-challenges" class="doc-section">
+                        <h2 class="doc-section-h2">
+                            <span class="doc-anchor-hash">#</span> ${docsDict.secChallenges}
+                        </h2>
+                        <div class="doc-troubleshoot-list">
+                            ${project.challenges.map((c, idx) => `
+                                <div class="doc-troubleshoot-box">
+                                    <div class="doc-troubleshoot-head">
+                                        <span class="doc-troubleshoot-idx">ISSUE #${idx + 1}</span>
+                                        <h4 class="doc-troubleshoot-title">${c.title}</h4>
+                                    </div>
+                                    <div class="doc-troubleshoot-body">
+                                        <div class="doc-troubleshoot-row">
+                                            <span class="doc-troubleshoot-label label-issue">${lang === 'es' ? 'Síntoma / Desafío' : 'Symptom / Challenge'}</span>
+                                            <p>${c.challenge}</p>
+                                        </div>
+                                        <div class="doc-troubleshoot-row">
+                                            <span class="doc-troubleshoot-label label-fix">${lang === 'es' ? 'Resolución Técnica' : 'Engineered Fix'}</span>
+                                            <p>${c.solution}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+
+                    <!-- 08. Impact & Conclusion -->
+                    <section id="doc-impact" class="doc-impact-box">
+                        <div class="doc-impact-icon" aria-hidden="true">🚀</div>
+                        <div>
+                            <h4>${docsDict.secImpact}</h4>
+                            <p>${project.impact[lang]}</p>
+                        </div>
+                    </section>
+
+                    <!-- Documentation Footer Navigation -->
+                    <nav class="doc-footer-nav" aria-label="Documentation pagination">
+                        ${prevProject ? `
+                            <a href="#/proyecto/${prevProject.id}" class="doc-nav-card card-prev">
+                                <span class="doc-nav-sub">← ${dict.projects.prevProject}</span>
+                                <span class="doc-nav-name">${prevProject.title[lang]}</span>
+                            </a>
+                        ` : `<div></div>`}
+
+                        <a href="#PersonalProjects" class="doc-nav-card card-index">
+                            <span>⊞ ${dict.projects.allProjects}</span>
+                        </a>
+
+                        ${nextProject ? `
+                            <a href="#/proyecto/${nextProject.id}" class="doc-nav-card card-next">
+                                <span class="doc-nav-sub">${dict.projects.nextProject} →</span>
+                                <span class="doc-nav-name">${nextProject.title[lang]}</span>
+                            </a>
+                        ` : `<div></div>`}
+                    </nav>
+
+                </main>
+
+                <!-- Sticky Table of Contents (TOC) -->
+                <aside class="doc-toc-sidebar" aria-label="Table of Contents">
+                    <div class="doc-toc-title">${docsDict.tocTitle}</div>
+                    <ul class="doc-toc-links">
+                        <li><a href="#doc-overview">${docsDict.secOverview}</a></li>
+                        <li><a href="#doc-problem">${docsDict.secProblem}</a></li>
+                        ${project.specs ? `<li><a href="#doc-specs">${docsDict.secSpecs}</a></li>` : ''}
+                        ${project.codeSnippet ? `<li><a href="#doc-code">${docsDict.secCode}</a></li>` : ''}
+                        <li><a href="#doc-architecture">${docsDict.secArch}</a></li>
+                        <li><a href="#doc-decisions">${docsDict.secDecisions}</a></li>
+                        <li><a href="#doc-challenges">${docsDict.secChallenges}</a></li>
+                        <li><a href="#doc-impact">${docsDict.secImpact}</a></li>
                     </ul>
-                </div>
-            </section>
-
-            <!-- 03. Architecture & Data Flow -->
-            <section class="detail-content-card">
-                <h2 class="detail-section-title">
-                    <span class="section-num">03.</span>
-                    ${project.architecture.title[lang]}
-                </h2>
-                <p class="detail-paragraph">${project.architecture.description[lang]}</p>
-                
-                <h4 class="box-subtitle">${lang === 'es' ? 'Flujo de Ejecución por Fases:' : 'Execution Pipeline Stages:'}</h4>
-                <div class="architecture-pipeline">
-                    ${project.architecture.flow[lang].map((f) => `
-                        <div class="pipeline-card">
-                            <div class="pipeline-step-badge">${f.step}</div>
-                            <p class="pipeline-step-desc">${f.desc}</p>
-                        </div>
-                    `).join('')}
-                </div>
-
-                <h4 class="box-subtitle">${lang === 'es' ? 'Decisiones Clave de Ingeniería & Compensaciones (Trade-offs):' : 'Key Engineering Decisions & Trade-offs:'}</h4>
-                <div class="decisions-grid">
-                    ${project.architecture.keyDecisions[lang].map((d) => `
-                        <div class="decision-card">
-                            <div class="decision-title">⚡ ${d.title}</div>
-                            <div class="decision-reason">${d.reason}</div>
-                        </div>
-                    `).join('')}
-                </div>
-            </section>
-
-            <!-- 04. Technical Capabilities / Features -->
-            <section class="detail-content-card">
-                <h2 class="detail-section-title">
-                    <span class="section-num">04.</span>
-                    ${lang === 'es' ? 'Capacidades y Características Principales' : 'Key Technical Capabilities & Features'}
-                </h2>
-                <div class="features-grid">
-                    ${project.features[lang].map((feat) => `
-                        <div class="feature-item">
-                            <h4 class="feature-item-title">✔ ${feat.title}</h4>
-                            <p class="feature-item-desc">${feat.desc}</p>
-                        </div>
-                    `).join('')}
-                </div>
-            </section>
-
-            <!-- 05. Tech Stack -->
-            <section class="detail-content-card">
-                <h2 class="detail-section-title">
-                    <span class="section-num">05.</span>
-                    ${lang === 'es' ? 'Tecnologías y Herramientas' : 'Technologies & Tooling'}
-                </h2>
-                <div class="tech-tags-list">
-                    ${project.tags.map((t) => `<span class="tech-tag">${t}</span>`).join('')}
-                </div>
-            </section>
-
-            <!-- 06. Challenges & Solutions -->
-            <section class="detail-content-card">
-                <h2 class="detail-section-title">
-                    <span class="section-num">06.</span>
-                    ${lang === 'es' ? 'Desafíos de Ingeniería y Soluciones' : 'Engineering Challenges & Applied Solutions'}
-                </h2>
-                <div class="challenges-list">
-                    ${project.challenges[lang].map((c, idx) => `
-                        <div class="challenge-box">
-                            <div class="challenge-header">
-                                <span class="challenge-num">${idx + 1}</span>
-                                <h4 class="challenge-title">${c.title}</h4>
-                            </div>
-                            <div class="challenge-body">
-                                <div class="challenge-block">
-                                    <span class="challenge-tag tag-challenge">${lang === 'es' ? 'Desafío Técnico' : 'Technical Challenge'}</span>
-                                    <p>${c.challenge}</p>
-                                </div>
-                                <div class="challenge-block">
-                                    <span class="challenge-tag tag-solution">${lang === 'es' ? 'Solución Implementada' : 'Engineered Solution'}</span>
-                                    <p>${c.solution}</p>
-                                </div>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-            </section>
-
-            <!-- Impact Banner -->
-            <div class="impact-card">
-                <div class="impact-icon" aria-hidden="true">🚀</div>
-                <div class="impact-content">
-                    <h4>${lang === 'es' ? 'Impacto y Conclusión' : 'Impact & Takeaways'}</h4>
-                    <p>${project.impact[lang]}</p>
-                </div>
+                </aside>
             </div>
-
-            <!-- Bottom Project Navigation -->
-            <nav class="project-bottom-nav" aria-label="Project pagination">
-                ${prevProject ? `
-                    <a href="#/proyecto/${prevProject.id}" class="nav-project-btn prev-btn">
-                        <span class="nav-dir">← ${dict.projects.prevProject}</span>
-                        <span class="nav-title">${prevProject.title[lang]}</span>
-                    </a>
-                ` : `<div></div>`}
-                
-                <a href="#PersonalProjects" class="nav-project-btn gallery-btn">
-                    <span>⊞ ${dict.projects.allProjects}</span>
-                </a>
-
-                ${nextProject ? `
-                    <a href="#/proyecto/${nextProject.id}" class="nav-project-btn next-btn">
-                        <span class="nav-dir">${dict.projects.nextProject} →</span>
-                        <span class="nav-title">${nextProject.title[lang]}</span>
-                    </a>
-                ` : `<div></div>`}
-            </nav>
         </div>
     `;
+
+    // Initialize Copy Code buttons
+    detailContainer.querySelectorAll('.doc-code-copy-btn').forEach((btn) => {
+        btn.addEventListener('click', function () {
+            const codeToCopy = this.getAttribute('data-code');
+            if (!codeToCopy) return;
+            navigator.clipboard.writeText(codeToCopy).then(() => {
+                const originalText = this.textContent;
+                this.textContent = docsDict.copied;
+                setTimeout(() => {
+                    this.textContent = originalText;
+                }, 2000);
+            }).catch(() => {});
+        });
+    });
+
+    // Initialize internal TOC links smooth scrolling
+    detailContainer.querySelectorAll('.doc-toc-links a').forEach((link) => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (!targetId) return;
+            const targetEl = detailContainer.querySelector(targetId);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
 }
 
 function handleRouting() {
     const hash = window.location.hash || '';
     const route = parseHash(hash);
+    const prevRoute = currentRoute;
     currentRoute = route;
 
     const homeView = document.getElementById('homeView');
@@ -749,21 +880,40 @@ function handleRouting() {
     if (!homeView || !projectDetailView) return;
 
     if (route.view === 'project') {
+        // Save current scroll position on home before switching
+        if (prevRoute.view === 'home') {
+            lastHomeScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        }
+
         homeView.setAttribute('hidden', '');
         projectDetailView.removeAttribute('hidden');
         renderProjectDetail(route.projectId);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Instant reset to top without animated scrolling
+        window.scrollTo(0, 0);
     } else {
         projectDetailView.setAttribute('hidden', '');
         homeView.removeAttribute('hidden');
         document.title = TRANSLATIONS[currentLang].meta.title;
 
-        if (route.section) {
+        // If returning from project view, immediately restore the home position without smooth scrolling
+        if (prevRoute.view === 'project') {
+            if (route.section) {
+                const targetEl = document.getElementById(route.section);
+                if (targetEl) {
+                    const top = targetEl.getBoundingClientRect().top + window.pageYOffset - 72;
+                    window.scrollTo(0, top);
+                } else {
+                    window.scrollTo(0, lastHomeScrollY);
+                }
+            } else {
+                window.scrollTo(0, lastHomeScrollY);
+            }
+        } else if (route.section) {
+            // In-page navigation on home
             const targetEl = document.getElementById(route.section);
             if (targetEl) {
-                setTimeout(() => {
-                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 50);
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
     }
