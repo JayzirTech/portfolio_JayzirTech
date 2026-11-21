@@ -1,23 +1,28 @@
 /**
  * ==========================================================================
- * Project: Simulador de Filtros Ópticos (Filters Simulator)
+ * Visiometric Labs — Módulo 2: Simulador de Filtros Ópticos
  * ==========================================================================
  */
 (function () {
-    const project = {
+    const filtersSimulatorModule = {
         id: 'filters-simulator',
+        suiteId: 'visiometric-suite',
         version: 'v1.0.0-live',
         title: {
-            es: 'Simulador de Filtros Ópticos',
-            en: 'Optical Filters Simulator'
+            es: 'Módulo 2: Simulador de Filtros Ópticos — Recubrimientos & Tratamientos',
+            en: 'Module 2: Optical Filters Simulator — Coatings & Treatments'
+        },
+        shortTitle: {
+            es: 'Simulador de Filtros (Recubrimientos)',
+            en: 'Filters Simulator (Coatings)'
         },
         category: {
             es: 'Simulación Física / Óptica Visual',
             en: 'Physics Simulation / Visual Optics'
         },
         badge: {
-            es: 'Simulador Clínico en Producción',
-            en: 'Production Clinical Simulator'
+            es: 'Módulo de Tratamientos en Producción',
+            en: 'Production Coatings Engine'
         },
         painSummary: {
             es: 'Resuelve la dificultad de explicar y comparar en consulta óptica cómo actúan los filtros de lentes (luz azul, antirreflejo, fotocromáticos, polarizados) frente a diferentes condiciones lumínicas reales.',
@@ -41,8 +46,8 @@
         ],
         tags: ['JavaScript ES6+', 'HTML5 Canvas', 'Optical Physics', 'Spectral Filtering', 'UI/UX', 'Glassmorphism', 'Visiometric Labs'],
         overview: {
-            es: 'Simulador interactivo desarrollado para Visiometric Labs que permite a optómetras y pacientes comparar en tiempo real el comportamiento óptico de diversos tratamientos y filtros oftálmicos. Modela digitalmente el espectro de atenuación lumínica, reflejos parásitos y transición fotocromática en escenarios de la vida cotidiana.',
-            en: 'Interactive clinical optical simulator developed for Visiometric Labs, allowing eye-care practitioners and patients to compare the real-world performance of ophthalmic lens coatings in real time. It digitally models spectral light transmission, parasitic glare attenuation, and photochromic activation across everyday scenarios.'
+            es: 'Simulador interactivo desarrollado como segundo módulo de la suite Visiometric Labs que permite a optómetras y pacientes comparar en tiempo real el comportamiento óptico de diversos tratamientos y filtros oftálmicos. Modela digitalmente el espectro de atenuación lumínica, reflejos parásitos y transición fotocromática en escenarios de la vida cotidiana.',
+            en: 'Interactive clinical optical simulator developed as the second module of the Visiometric Labs suite, allowing eye-care practitioners and patients to compare the real-world performance of ophthalmic lens coatings in real time. It digitally models spectral light transmission, parasitic glare attenuation, and photochromic activation across everyday scenarios.'
         },
         problem: {
             title: {
@@ -153,10 +158,9 @@ export class OpticalFilterEngine {
     };
 
     if (typeof window !== 'undefined') {
-        window.PROJECTS_DATA = window.PROJECTS_DATA || [];
-        window.PROJECTS_DATA.push(project);
+        window.FILTERS_SIMULATOR_MODULE = filtersSimulatorModule;
     }
     if (typeof module !== 'undefined') {
-        module.exports = project;
+        module.exports = filtersSimulatorModule;
     }
 })();

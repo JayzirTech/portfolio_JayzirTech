@@ -37,9 +37,13 @@ const TRANSLATIONS = {
             allProjects: 'Índice de Proyectos',
             docs: {
                 badge: 'DOCUMENTACIÓN TÉCNICA',
-                tocTitle: 'En esta página',
+                suiteBadge: 'SUITE MODULAR',
+                suiteOverview: 'Visión General de la Suite',
+                module1: 'Módulo 1: Ocularis (Refracción)',
+                module2: 'Módulo 2: Simulador de Filtros',
                 secOverview: '01. Visión General & Propósito',
                 secProblem: '02. El Problema & Dolor de Negocio',
+                secModules: '03. Módulos Integrados en la Suite',
                 secSpecs: '03. Especificaciones Técnicas',
                 secCode: '04. Implementación & Código Clave',
                 secArch: '05. Arquitectura & Flujo de Datos',
@@ -50,7 +54,8 @@ const TRANSLATIONS = {
                 copyCode: 'Copiar',
                 copied: '¡Copiado!',
                 specKey: 'Parámetro',
-                specValue: 'Especificación'
+                specValue: 'Especificación',
+                exploreDoc: 'Ver documentación técnica del módulo'
             },
             p1: {
                 category: 'Ingeniería de Datos / Orquestación',
@@ -61,18 +66,13 @@ const TRANSLATIONS = {
                 desc: 'Resuelve la pérdida de trazabilidad en ventas online cuando productos y precios cambian o las transacciones llegan con días de retraso, garantizando reportes financieros exactos e inmutables.'
             },
             p3: {
-                category: 'Simulación Física / Mecatrónica Visual',
-                title: 'Ocularis — Simulación Óptica',
-                desc: 'Elimina la barrera de comunicación entre el optómetra y el paciente, permitiendo visualizar de forma interactiva y comprensible por qué ven borroso y cómo sus lentes corregirán su visión.'
+                category: 'Simulación Física / Mecatrónica & Óptica',
+                title: 'Visiometric Labs — Suite de Simulación Óptica',
+                desc: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Ocularis) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros).'
             },
             p4: {
                 category: 'Arquitectura Backend / API REST',
                 desc: 'Resuelve los cuellos de botella y caídas de servidor por alto tráfico de usuarios concurrentes, entregando respuestas inmediatas mediante arquitectura asíncrona y validación estricta de datos.'
-            },
-            p5: {
-                category: 'Simulación Física / Óptica Visual',
-                title: 'Simulador de Filtros Ópticos',
-                desc: 'Resuelve la dificultad de explicar y comparar en consulta óptica cómo actúan los filtros de lentes (luz azul, antirreflejo, fotocromáticos, polarizados) frente a diferentes condiciones lumínicas reales.'
             }
         },
         tech: {
@@ -127,9 +127,13 @@ const TRANSLATIONS = {
             allProjects: 'All Projects Index',
             docs: {
                 badge: 'TECHNICAL DOCUMENTATION',
-                tocTitle: 'On this page',
+                suiteBadge: 'MODULAR SUITE',
+                suiteOverview: 'Suite Overview',
+                module1: 'Module 1: Ocularis (Refraction)',
+                module2: 'Module 2: Filters Simulator',
                 secOverview: '01. Overview & Purpose',
                 secProblem: '02. Problem & Business Impact',
+                secModules: '03. Integrated Suite Modules',
                 secSpecs: '03. Technical Specifications',
                 secCode: '04. Implementation & Key Code',
                 secArch: '05. Architecture & Data Flow',
@@ -140,7 +144,8 @@ const TRANSLATIONS = {
                 copyCode: 'Copy',
                 copied: 'Copied!',
                 specKey: 'Parameter',
-                specValue: 'Specification'
+                specValue: 'Specification',
+                exploreDoc: 'View module technical documentation'
             },
             p1: {
                 category: 'Data Engineering / Orchestration',
@@ -151,18 +156,13 @@ const TRANSLATIONS = {
                 desc: 'Eliminates metric corruption in e-commerce when product prices change or order data arrives late, guaranteeing 100% accurate, tamper-proof financial reporting.'
             },
             p3: {
-                category: 'Physics Simulation / Visual Mechatronics',
-                title: 'Ocularis — Optical Simulation',
-                desc: 'Bridges the communication gap between eye-care specialists and patients by interactively showing why vision is blurred and exactly how corrective lenses restore sharp focus.'
+                category: 'Physics Simulation / Mechatronics & Optics',
+                title: 'Visiometric Labs — Optical Simulation Suite',
+                desc: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Ocularis) and demonstrating the true impact of ophthalmic lens coatings (Filters Simulator).'
             },
             p4: {
                 category: 'Backend Architecture / REST API',
                 desc: 'Resolves server bottlenecks and downtime caused by concurrent user traffic, delivering instantaneous API responses through async execution and strict data contracts.'
-            },
-            p5: {
-                category: 'Physics Simulation / Visual Optics',
-                title: 'Optical Filters Simulator',
-                desc: 'Solves the clinical challenge of demonstrating and comparing ophthalmic lens coatings (blue cut, anti-reflective, photochromic, polarized) under real-world lighting conditions.'
             }
         },
         tech: {
@@ -239,7 +239,7 @@ function applyLanguage(lang) {
 
     // If currently on a project detail page, re-render in selected language
     if (typeof currentRoute !== 'undefined' && currentRoute.view === 'project') {
-        renderProjectDetail(currentRoute.projectId);
+        renderProjectDetail(currentRoute.projectId, currentRoute.subProjectId);
     } else {
         document.title = dict.meta.title;
     }
@@ -556,22 +556,34 @@ let lastHomeScrollY = 0;
 
 function parseHash(hash) {
     if (!hash || hash === '#' || hash === '#/' || hash === '#Top') {
-        return { view: 'home', projectId: null, section: hash === '#Top' ? 'Top' : null };
+        return { view: 'home', projectId: null, subProjectId: null, section: hash === '#Top' ? 'Top' : null };
     }
 
-    // Match #/proyecto/:id or #/project/:id
-    const projectMatch = hash.match(/^#\/(?:proyecto|project)\/([a-zA-Z0-9_-]+)/);
+    // Match #/proyecto/:id/:subId or #/project/:id/:subId or #/proyecto/:id
+    const projectMatch = hash.match(/^#\/(?:proyecto|project)\/([a-zA-Z0-9_-]+)(?:\/([a-zA-Z0-9_-]+))?/);
     if (projectMatch) {
-        return { view: 'project', projectId: projectMatch[1], section: null };
+        let projectId = projectMatch[1];
+        let subProjectId = projectMatch[2] || null;
+
+        // Aliases for optical projects
+        if (projectId === 'ocularis') {
+            projectId = 'visiometric-suite';
+            subProjectId = 'ocularis';
+        } else if (projectId === 'filters-simulator' || projectId === 'filtros' || projectId === 'filtros-simulator') {
+            projectId = 'visiometric-suite';
+            subProjectId = 'filters-simulator';
+        }
+
+        return { view: 'project', projectId, subProjectId, section: null };
     }
 
     // Match in-page section jump on home (e.g. #PersonalProjects, #AboutMe)
     if (hash.startsWith('#')) {
         const sectionId = hash.replace(/^#\/?/, '');
-        return { view: 'home', projectId: null, section: sectionId };
+        return { view: 'home', projectId: null, subProjectId: null, section: sectionId };
     }
 
-    return { view: 'home', projectId: null, section: null };
+    return { view: 'home', projectId: null, subProjectId: null, section: null };
 }
 
 function escapeHtml(str) {
@@ -584,13 +596,27 @@ function escapeHtml(str) {
         .replace(/'/g, '&#039;');
 }
 
-function renderProjectDetail(projectId) {
+function renderProjectDetail(projectId, subProjectId) {
     const detailContainer = document.getElementById('projectDetailView');
     if (!detailContainer) return;
 
     const projects = window.PROJECTS_DATA || [];
-    const projectIndex = projects.findIndex((p) => p.id === projectId);
-    const project = projects[projectIndex];
+    let projectIndex = projects.findIndex((p) => p.id === projectId);
+    let project = projects[projectIndex];
+    let parentSuite = null;
+    let activeSubId = null;
+
+    // Handle suite resolution and submodules
+    if (project && (project.isSuite || project.subModules)) {
+        parentSuite = project;
+        if (subProjectId && project.subModules && project.subModules[subProjectId]) {
+            project = project.subModules[subProjectId];
+            activeSubId = subProjectId;
+        } else {
+            activeSubId = null;
+        }
+    }
+
     const lang = currentLang;
     const dict = TRANSLATIONS[lang] || TRANSLATIONS.es;
     const docsDict = dict.projects.docs;
@@ -611,8 +637,39 @@ function renderProjectDetail(projectId) {
 
     document.title = `${project.title[lang]} | Docs — Jayzir Martinez`;
 
-    const prevProject = projectIndex > 0 ? projects[projectIndex - 1] : null;
-    const nextProject = projectIndex < projects.length - 1 ? projects[projectIndex + 1] : null;
+    let prevNav = null;
+    let nextNav = null;
+
+    if (parentSuite) {
+        if (!activeSubId) {
+            // Suite Overview
+            if (projectIndex > 0) {
+                prevNav = { href: `#/proyecto/${projects[projectIndex - 1].id}`, name: projects[projectIndex - 1].title[lang] };
+            }
+            if (parentSuite.subModules && parentSuite.subModules.ocularis) {
+                nextNav = { href: `#/proyecto/${parentSuite.id}/ocularis`, name: parentSuite.subModules.ocularis.title[lang] };
+            }
+        } else if (activeSubId === 'ocularis') {
+            prevNav = { href: `#/proyecto/${parentSuite.id}`, name: `${docsDict.suiteOverview || 'Visión General'} (${parentSuite.shortTitle ? parentSuite.shortTitle[lang] : parentSuite.title[lang]})` };
+            if (parentSuite.subModules && parentSuite.subModules['filters-simulator']) {
+                nextNav = { href: `#/proyecto/${parentSuite.id}/filters-simulator`, name: parentSuite.subModules['filters-simulator'].title[lang] };
+            }
+        } else if (activeSubId === 'filters-simulator') {
+            if (parentSuite.subModules && parentSuite.subModules.ocularis) {
+                prevNav = { href: `#/proyecto/${parentSuite.id}/ocularis`, name: parentSuite.subModules.ocularis.title[lang] };
+            }
+            if (projectIndex < projects.length - 1) {
+                nextNav = { href: `#/proyecto/${projects[projectIndex + 1].id}`, name: projects[projectIndex + 1].title[lang] };
+            }
+        }
+    } else {
+        if (projectIndex > 0) {
+            prevNav = { href: `#/proyecto/${projects[projectIndex - 1].id}`, name: projects[projectIndex - 1].title[lang] };
+        }
+        if (projectIndex < projects.length - 1) {
+            nextNav = { href: `#/proyecto/${projects[projectIndex + 1].id}`, name: projects[projectIndex + 1].title[lang] };
+        }
+    }
 
     detailContainer.innerHTML = `
         <div class="doc-wrapper">
@@ -623,6 +680,30 @@ function renderProjectDetail(projectId) {
                     <span>${dict.projects.backToList}</span>
                 </a>
             </div>
+
+            <!-- Suite Subnav Tabs (if part of a suite) -->
+            ${parentSuite ? `
+            <div class="doc-suite-nav">
+                <div class="doc-suite-nav-header">
+                    <span class="doc-suite-tag">${docsDict.suiteBadge || 'SUITE MODULAR'}</span>
+                    <span class="doc-suite-title">${parentSuite.title[lang]}</span>
+                </div>
+                <nav class="doc-suite-tabs" aria-label="Navegación de módulos de la Suite">
+                    <a href="#/proyecto/${parentSuite.id}" class="doc-suite-tab ${!activeSubId ? 'active' : ''}">
+                        <span class="tab-icon">⊞</span>
+                        <span>${docsDict.suiteOverview || 'Visión General de la Suite'}</span>
+                    </a>
+                    <a href="#/proyecto/${parentSuite.id}/ocularis" class="doc-suite-tab ${activeSubId === 'ocularis' ? 'active' : ''}">
+                        <span class="tab-icon">👁️</span>
+                        <span>${docsDict.module1 || 'Módulo 1: Ocularis (Refracción)'}</span>
+                    </a>
+                    <a href="#/proyecto/${parentSuite.id}/filters-simulator" class="doc-suite-tab ${activeSubId === 'filters-simulator' ? 'active' : ''}">
+                        <span class="tab-icon">🔬</span>
+                        <span>${docsDict.module2 || 'Módulo 2: Simulador de Filtros'}</span>
+                    </a>
+                </nav>
+            </div>
+            ` : ''}
 
             <!-- Technical Document Header -->
             <header class="doc-header">
@@ -666,6 +747,7 @@ function renderProjectDetail(projectId) {
                     <ul class="doc-mobile-toc-links">
                         <li><a href="#doc-overview">${docsDict.secOverview}</a></li>
                         <li><a href="#doc-problem">${docsDict.secProblem}</a></li>
+                        ${project.suiteModules ? `<li><a href="#doc-modules">${docsDict.secModules || '03. Módulos de la Suite'}</a></li>` : ''}
                         ${project.specs ? `<li><a href="#doc-specs">${docsDict.secSpecs}</a></li>` : ''}
                         ${project.codeSnippet ? `<li><a href="#doc-code">${docsDict.secCode}</a></li>` : ''}
                         <li><a href="#doc-architecture">${docsDict.secArch}</a></li>
@@ -707,6 +789,39 @@ function renderProjectDetail(projectId) {
                             </ul>
                         </div>
                     </section>
+
+                    <!-- Suite Modules Exploration Grid (Only on Suite Overview) -->
+                    ${project.suiteModules ? `
+                    <section id="doc-modules" class="doc-section">
+                        <h2 class="doc-section-h2">
+                            <span class="doc-anchor-hash">#</span> ${docsDict.secModules || '03. Módulos de la Suite'}
+                        </h2>
+                        <div class="doc-suite-modules-grid">
+                            ${project.suiteModules.map((mod) => `
+                                <div class="doc-module-card">
+                                    <div class="doc-module-card-header">
+                                        <span class="doc-module-badge">${mod.shortTitle[lang]}</span>
+                                    </div>
+                                    <h3 class="doc-module-title">${mod.title[lang]}</h3>
+                                    <p class="doc-module-desc">${mod.desc[lang]}</p>
+                                    <div class="doc-module-tags">
+                                        ${mod.tags.map((t) => `<span class="tech-tag">${t}</span>`).join('')}
+                                    </div>
+                                    <div class="doc-module-actions">
+                                        <a href="${mod.route}" class="doc-btn doc-btn-primary">
+                                            <span>${docsDict.exploreDoc || 'Ver documentación técnica'}</span>
+                                            <span aria-hidden="true">→</span>
+                                        </a>
+                                        ${mod.demo ? `
+                                        <a href="${mod.demo}" target="_blank" rel="noopener noreferrer" class="doc-btn doc-btn-secondary" title="Live Demo">
+                                            <span>⚡ ${dict.projects.viewLive}</span>
+                                            <span aria-hidden="true">↗</span>
+                                        </a>` : ''}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>` : ''}
 
                     <!-- 03. Technical Specifications Table -->
                     ${project.specs ? `
@@ -826,10 +941,10 @@ function renderProjectDetail(projectId) {
 
                     <!-- Documentation Footer Navigation -->
                     <nav class="doc-footer-nav" aria-label="Documentation pagination">
-                        ${prevProject ? `
-                            <a href="#/proyecto/${prevProject.id}" class="doc-nav-card card-prev">
+                        ${prevNav ? `
+                            <a href="${prevNav.href}" class="doc-nav-card card-prev">
                                 <span class="doc-nav-sub">← ${dict.projects.prevProject}</span>
-                                <span class="doc-nav-name">${prevProject.title[lang]}</span>
+                                <span class="doc-nav-name">${prevNav.name}</span>
                             </a>
                         ` : `<div></div>`}
 
@@ -837,10 +952,10 @@ function renderProjectDetail(projectId) {
                             <span>⊞ ${dict.projects.allProjects}</span>
                         </a>
 
-                        ${nextProject ? `
-                            <a href="#/proyecto/${nextProject.id}" class="doc-nav-card card-next">
+                        ${nextNav ? `
+                            <a href="${nextNav.href}" class="doc-nav-card card-next">
                                 <span class="doc-nav-sub">${dict.projects.nextProject} →</span>
-                                <span class="doc-nav-name">${nextProject.title[lang]}</span>
+                                <span class="doc-nav-name">${nextNav.name}</span>
                             </a>
                         ` : `<div></div>`}
                     </nav>
@@ -853,6 +968,7 @@ function renderProjectDetail(projectId) {
                     <ul class="doc-toc-links">
                         <li><a href="#doc-overview">${docsDict.secOverview}</a></li>
                         <li><a href="#doc-problem">${docsDict.secProblem}</a></li>
+                        ${project.suiteModules ? `<li><a href="#doc-modules">${docsDict.secModules || '03. Módulos de la Suite'}</a></li>` : ''}
                         ${project.specs ? `<li><a href="#doc-specs">${docsDict.secSpecs}</a></li>` : ''}
                         ${project.codeSnippet ? `<li><a href="#doc-code">${docsDict.secCode}</a></li>` : ''}
                         <li><a href="#doc-architecture">${docsDict.secArch}</a></li>
@@ -956,7 +1072,7 @@ function handleRouting() {
 
         homeView.setAttribute('hidden', '');
         projectDetailView.removeAttribute('hidden');
-        renderProjectDetail(route.projectId);
+        renderProjectDetail(route.projectId, route.subProjectId);
 
         // Instant jump to top
         window.scrollTo(0, 0);

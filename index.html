@@ -201,50 +201,30 @@
                     </div>
                 </article>
 
-                <!-- Project 3: Simulador de Filtros Ópticos -->
-                <article class="project-card" data-project-id="filters-simulator">
+                <!-- Project 3: Visiometric Labs — Suite de Simulación Óptica -->
+                <article class="project-card" data-project-id="visiometric-suite">
                     <div class="project-card-header">
-                        <span class="project-category" data-i18n="projects.p5.category">Simulación Física / Óptica Visual</span>
+                        <span class="project-category" data-i18n="projects.p3.category">Simulación Física / Mecatrónica &amp; Óptica</span>
                     </div>
                     <h4 class="project-title">
-                        <a href="#/proyecto/filters-simulator" data-i18n="projects.p5.title">Simulador de Filtros Ópticos</a>
-                    </h4>
-                    <p class="project-desc" data-i18n="projects.p5.desc">
-                        Resuelve la dificultad de explicar y comparar en consulta óptica cómo actúan los filtros de lentes (luz azul, antirreflejo, fotocromáticos, polarizados) frente a diferentes condiciones lumínicas reales.
-                    </p>
-                    <ul class="project-techs">
-                        <li><span class="tech-tag">JavaScript</span></li>
-                        <li><span class="tech-tag">Canvas 2D</span></li>
-                        <li><span class="tech-tag">Optical Physics</span></li>
-                        <li><span class="tech-tag">Visiometric Labs</span></li>
-                    </ul>
-                    <div class="project-card-footer">
-                        <a href="#/proyecto/filters-simulator" class="btn-card-detail">
-                            <span data-i18n="projects.ctaDetail">Ver documentación técnica</span>
-                            <span class="btn-arrow" aria-hidden="true">→</span>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Project 4: Ocularis -->
-                <article class="project-card" data-project-id="ocularis">
-                    <div class="project-card-header">
-                        <span class="project-category" data-i18n="projects.p3.category">Simulación Física / Mecatrónica Visual</span>
-                    </div>
-                    <h4 class="project-title">
-                        <a href="#/proyecto/ocularis" data-i18n="projects.p3.title">Ocularis — Simulación Óptica</a>
+                        <a href="#/proyecto/visiometric-suite" data-i18n="projects.p3.title">Visiometric Labs — Suite de Simulación Óptica</a>
                     </h4>
                     <p class="project-desc" data-i18n="projects.p3.desc">
-                        Elimina la barrera de comunicación entre el optómetra y el paciente, permitiendo visualizar de forma interactiva y comprensible por qué ven borroso y cómo sus lentes corregirán su visión.
+                        Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Ocularis) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros).
                     </p>
+                    <div class="project-submodules-preview">
+                        <a href="#/proyecto/visiometric-suite/ocularis" class="submodule-pill">👁️ Módulo 1: Ocularis (Refracción)</a>
+                        <a href="#/proyecto/visiometric-suite/filters-simulator" class="submodule-pill">🔬 Módulo 2: Simulador de Filtros</a>
+                    </div>
                     <ul class="project-techs">
                         <li><span class="tech-tag">JavaScript</span></li>
-                        <li><span class="tech-tag">Physics Modeling</span></li>
-                        <li><span class="tech-tag">SVG / Canvas</span></li>
-                        <li><span class="tech-tag">UI / UX</span></li>
+                        <li><span class="tech-tag">HTML5 Canvas 2D</span></li>
+                        <li><span class="tech-tag">Ray Tracing</span></li>
+                        <li><span class="tech-tag">Physics Optics</span></li>
+                        <li><span class="tech-tag">Spectral Coatings</span></li>
                     </ul>
                     <div class="project-card-footer">
-                        <a href="#/proyecto/ocularis" class="btn-card-detail">
+                        <a href="#/proyecto/visiometric-suite" class="btn-card-detail">
                             <span data-i18n="projects.ctaDetail">Ver documentación técnica</span>
                             <span class="btn-arrow" aria-hidden="true">→</span>
                         </a>
@@ -381,10 +361,11 @@
     <!-- Modular Project Documentation Modules -->
     <script src="./src/projects/datamart-pipeline.js"></script>
     <script src="./src/projects/mercado-nube.js"></script>
-    <script src="./src/projects/filters-simulator.js"></script>
-    <script src="./src/projects/ocularis.js"></script>
+    <script src="./src/projects/visiometric/ocularis.js"></script>
+    <script src="./src/projects/visiometric/filters-simulator.js"></script>
+    <script src="./src/projects/visiometric/index.js"></script>
     <script src="./src/projects/fastapi-backend.js"></script>
-    <script src="./src/script.js?v=6"></script>
+    <script src="./src/script.js?v=7"></script>
 </body>
 
 </html>

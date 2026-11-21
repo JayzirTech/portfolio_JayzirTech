@@ -1,23 +1,28 @@
 /**
  * ==========================================================================
- * Project: Ocularis — Simulación Óptica
+ * Visiometric Labs — Módulo 1: Ocularis (Simulación Óptica & Refracción)
  * ==========================================================================
  */
 (function () {
-    const project = {
+    const ocularisModule = {
         id: 'ocularis',
+        suiteId: 'visiometric-suite',
         version: 'v1.1.0-sim',
         title: {
-            es: 'Ocularis — Simulación Óptica',
-            en: 'Ocularis — Optical Simulation'
+            es: 'Módulo 1: Ocularis — Simulación Óptica & Refracción',
+            en: 'Module 1: Ocularis — Optical Simulation & Refraction'
+        },
+        shortTitle: {
+            es: 'Ocularis (Refracción)',
+            en: 'Ocularis (Refraction)'
         },
         category: {
             es: 'Simulación Física / Mecatrónica Visual',
             en: 'Physics Simulation / Visual Mechatronics'
         },
         badge: {
-            es: 'Modelado Físico en Vivo',
-            en: 'Live Physics Modeling'
+            es: 'Módulo de Refracción en Vivo',
+            en: 'Live Refraction Engine'
         },
         painSummary: {
             es: 'Elimina la barrera de comunicación entre el optómetra y el paciente, permitiendo visualizar de forma interactiva y comprensible por qué ven borroso y cómo sus lentes corregirán su visión.',
@@ -41,8 +46,8 @@
         ],
         tags: ['JavaScript ES6+', 'HTML5 Canvas', 'Ray Tracing', 'Optics Physics', 'Mathematical Modeling', 'UI/UX', 'Glassmorphism'],
         overview: {
-            es: 'Ocularis es una aplicación de física médica que modela el ojo humano como un sistema óptico mecatrónico de lentes convergentes. Resuelve el desafío educativo en consultorios al calcular el trazado trigonométrico de rayos de luz en tiempo real y demostrar exactamente cómo los lentes desvían el punto focal hacia la fóvea retiniana.',
-            en: 'Ocularis is a visual physics platform modeling the human eye as an optical system of converging lenses. It bridges technical mechatronics principles with patient communication by computing Snell-based ray tracing in real time to show how corrective lenses refocus light onto the retinal plane.'
+            es: 'Ocularis es el primer módulo de la suite Visiometric Labs, modelando el ojo humano como un sistema óptico mecatrónico de lentes convergentes. Resuelve el desafío educativo en consultorios al calcular el trazado trigonométrico de rayos de luz en tiempo real y demostrar exactamente cómo los lentes desvían el punto focal hacia la fóvea retiniana.',
+            en: 'Ocularis is the primary module of the Visiometric Labs suite, modeling the human eye as an optical mechatronic system of converging lenses. It bridges clinical consultations with intuitive physics by computing Snell-based ray tracing in real time to show how corrective lenses refocus light onto the retinal plane.'
         },
         problem: {
             title: {
@@ -145,10 +150,9 @@ export function traceLightRay(originY, refractivePower, lensPositionX, retinaPos
     };
 
     if (typeof window !== 'undefined') {
-        window.PROJECTS_DATA = window.PROJECTS_DATA || [];
-        window.PROJECTS_DATA.push(project);
+        window.OCULARIS_MODULE = ocularisModule;
     }
     if (typeof module !== 'undefined') {
-        module.exports = project;
+        module.exports = ocularisModule;
     }
 })();
