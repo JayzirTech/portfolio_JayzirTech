@@ -93,6 +93,13 @@ body.mobile-toc-open {
     overflow: hidden;
 }
 
+body.in-doc-view {
+    .site-navbar,
+    #mobileNav {
+        display: none !important;
+    }
+}
+
 body {
     background-color: var(--bg-primary);
     background-image: var(--bg-radial);
@@ -1113,7 +1120,18 @@ footer {
 
 /* Top Back Navigation */
 .doc-top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
     margin-bottom: 24px;
+}
+
+.doc-top-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .doc-back-link {
@@ -1364,7 +1382,7 @@ footer {
     display: none;
     margin: 0 0 20px 0;
     position: sticky;
-    top: 76px;
+    top: 14px;
     z-index: 40;
 }
 
@@ -1528,14 +1546,14 @@ footer {
 /* Sidebar Table of Contents */
 .doc-toc-sidebar {
     position: sticky;
-    top: 86px;
+    top: 24px;
     background: var(--bg-surface);
     border: 1px solid var(--accent-border);
     border-radius: 12px;
     padding: 22px 20px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    max-height: calc(100vh - 110px);
+    max-height: calc(100vh - 48px);
     overflow-y: auto;
 }
 
