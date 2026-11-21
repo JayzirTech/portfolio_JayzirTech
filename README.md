@@ -12,6 +12,14 @@ This portfolio features an interactive HTML5 Canvas background effect inspired b
 
 ---
 
+## ⚡ Architecture: Zero-Dependency Single Page Application (SPA)
+* **Client-Side Hash Routing:** Modular hash router (`#/` and `#/proyecto/:id`) enabling deep linking, shareable project URLs, and browser history (Back/Forward) without full page reloads.
+* **Uninterrupted Ambient Canvas:** The antigravity interactive starfield continues rendering smoothly across view navigations without resetting.
+* **Bilingual Case Studies (ES / EN):** Dedicated deep-dive technical project views detailing the problem, pipeline data flow, key engineering trade-offs, and solution implementations with instant real-time language toggling.
+* **Modular Data Store:** Clean separated data model in `src/projects-data.js` for effortless project maintenance and updates.
+
+---
+
 ## 🛠️ Technologies Used
 * **HTML5:** Semantic architecture with modern accessibility standards.
 * **SASS (SCSS) & CSS3:** Modular stylesheets, CSS variables, glassmorphism, responsive grid layouts, and custom scroll interactions.

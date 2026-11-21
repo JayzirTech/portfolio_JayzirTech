@@ -90,147 +90,181 @@
         </div>
     </div>
 
-    <header id="Top">
-        <div class="hero-container">
-            <div class="hero-text">
-                <p class="hero-greeting" data-i18n="hero.greeting">Hola, mi nombre es</p>
-                <h1>Jayzir Martinez</h1>
-                <h2>
-                    <a href="#PersonalProjects" data-i18n="hero.role">
-                        Ingeniero Backend &amp; de Datos | Base en Mecatrónica
-                    </a>
-                </h2>
-                <p class="hero-tagline" data-i18n="hero.tagline">
-                    Conectando la ingeniería de sistemas físicos con arquitecturas backend escalables, pipelines ETL automatizados y soluciones de datos.
-                </p>
+    <!-- SPA View: Home Page -->
+    <div id="homeView" class="spa-view">
+        <header id="Top">
+            <div class="hero-container">
+                <div class="hero-text">
+                    <p class="hero-greeting" data-i18n="hero.greeting">Hola, mi nombre es</p>
+                    <h1>Jayzir Martinez</h1>
+                    <h2>
+                        <a href="#PersonalProjects" data-i18n="hero.role">
+                            Ingeniero Backend &amp; de Datos | Base en Mecatrónica
+                        </a>
+                    </h2>
+                    <p class="hero-tagline" data-i18n="hero.tagline">
+                        Conectando la ingeniería de sistemas físicos con arquitecturas backend escalables, pipelines ETL automatizados y soluciones de datos.
+                    </p>
 
-                <div class="hero-actions">
-                    <a href="#PersonalProjects" class="btn btn-primary" data-i18n="hero.ctaProjects">Ver proyectos</a>
-                    <a href="#ContactMe" class="btn btn-outline" data-i18n="hero.ctaContact">Contactar</a>
+                    <div class="hero-actions">
+                        <a href="#PersonalProjects" class="btn btn-primary" data-i18n="hero.ctaProjects">Ver proyectos</a>
+                        <a href="#ContactMe" class="btn btn-outline" data-i18n="hero.ctaContact">Contactar</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="portrait-stage" id="portraitStage">
+                        <div class="portrait-aura" aria-hidden="true"></div>
+                        <div class="portrait-orbit-outer" aria-hidden="true">
+                            <span class="orbit-node node-1"></span>
+                            <span class="orbit-node node-2"></span>
+                            <span class="orbit-node node-3"></span>
+                        </div>
+                        <div class="portrait-portal" aria-hidden="true"></div>
+                        <div class="portrait-mask">
+                            <img
+                                src="./index_styles/assets/imgs/jayzir-portrait.png?v=4"
+                                alt="Jayzir Martinez"
+                                class="portrait-img"
+                                width="760"
+                                height="731"
+                            >
+                        </div>
+                    </div>
                 </div>
             </div>
+        </header>
 
-            <div class="hero-visual">
-                <div class="portrait-stage" id="portraitStage">
-                    <div class="portrait-aura" aria-hidden="true"></div>
-                    <div class="portrait-orbit-outer" aria-hidden="true">
-                        <span class="orbit-node node-1"></span>
-                        <span class="orbit-node node-2"></span>
-                        <span class="orbit-node node-3"></span>
+        <section id="AboutMe">
+            <h3 data-i18n="about.title">Sobre mí</h3>
+            <p data-i18n-html="about.bio">
+                ¡Hola! Soy <span>Jayzir Martinez</span>, <span>Ingeniero Mecatrónico</span> graduado de la Universidad de Barranquilla (IUB), especializado en <span>Arquitectura Backend e Ingeniería de Datos</span>.
+                Formado a través de programas intensivos orientados a la industria en RIWI y SENA, uno la ingeniería de sistemas físicos con arquitecturas backend escalables, pipelines ETL automatizados y almacenes de datos analíticos.
+            </p>
+        </section>
+
+        <section id="PersonalProjects">
+            <h3 data-i18n="projects.title">Proyectos Destacados</h3>
+            <div class="projects-grid">
+
+                <!-- Project 1: DataMart Analytical ETL Pipeline -->
+                <article class="project-card" data-project-id="datamart-pipeline">
+                    <div class="project-card-header">
+                        <span class="project-category" data-i18n="projects.p1.category">Ingeniería de Datos / ETL</span>
+                        <div class="project-links">
+                            <a href="https://github.com/JayzirTech/datamart-analytics-etl-pipeline" target="_blank" rel="noopener noreferrer" data-i18n-title="projects.sourceTitle" title="Ver código fuente">↗</a>
+                        </div>
                     </div>
-                    <div class="portrait-portal" aria-hidden="true"></div>
-                    <div class="portrait-mask">
-                        <img
-                            src="./index_styles/assets/imgs/jayzir-portrait.png?v=4"
-                            alt="Jayzir Martinez"
-                            class="portrait-img"
-                            width="760"
-                            height="731"
-                        >
+                    <h4 class="project-title">
+                        <a href="#/proyecto/datamart-pipeline">DataMart Analytical ETL Pipeline</a>
+                    </h4>
+                    <p class="project-desc" data-i18n="projects.p1.desc">
+                        Pipeline ETL analítico de extremo a extremo impulsado por Apache Airflow (CeleryExecutor y RabbitMQ), Data Warehouse en PostgreSQL y microservicio de catálogo de productos en FastAPI, totalmente contenedorizado con Docker.
+                    </p>
+                    <ul class="project-techs">
+                        <li><span class="tech-tag">Airflow</span></li>
+                        <li><span class="tech-tag">FastAPI</span></li>
+                        <li><span class="tech-tag">RabbitMQ</span></li>
+                        <li><span class="tech-tag">Celery</span></li>
+                        <li><span class="tech-tag">PostgreSQL</span></li>
+                        <li><span class="tech-tag">Docker</span></li>
+                    </ul>
+                    <div class="project-card-footer">
+                        <a href="#/proyecto/datamart-pipeline" class="btn-card-detail">
+                            <span data-i18n="projects.ctaDetail">Ver caso de estudio</span>
+                            <span class="btn-arrow" aria-hidden="true">→</span>
+                        </a>
                     </div>
-                </div>
+                </article>
+
+                <!-- Project 2: Mercado Nube Analytics Engine -->
+                <article class="project-card" data-project-id="mercado-nube">
+                    <div class="project-card-header">
+                        <span class="project-category" data-i18n="projects.p2.category">Arquitectura de Datos / BI</span>
+                        <div class="project-links">
+                            <a href="https://github.com/JayzirTech/mercado-nube-analytics-engine-" target="_blank" rel="noopener noreferrer" data-i18n-title="projects.sourceTitle" title="Ver código fuente">↗</a>
+                        </div>
+                    </div>
+                    <h4 class="project-title">
+                        <a href="#/proyecto/mercado-nube">Mercado Nube Analytics Engine</a>
+                    </h4>
+                    <p class="project-desc" data-i18n="projects.p2.desc">
+                        Data Warehouse dimensional (Esquema Estrella y SCD Tipo 2) diseñado para resolver consultas analíticas complejas, gestionar eventos con llegada tardía (&gt;24h) y automatizar compuertas de calidad de datos.
+                    </p>
+                    <ul class="project-techs">
+                        <li><span class="tech-tag">Star Schema</span></li>
+                        <li><span class="tech-tag">SCD Type 2</span></li>
+                        <li><span class="tech-tag">SQL</span></li>
+                        <li><span class="tech-tag">PostgreSQL</span></li>
+                        <li><span class="tech-tag">Airflow</span></li>
+                        <li><span class="tech-tag">Docker</span></li>
+                    </ul>
+                    <div class="project-card-footer">
+                        <a href="#/proyecto/mercado-nube" class="btn-card-detail">
+                            <span data-i18n="projects.ctaDetail">Ver caso de estudio</span>
+                            <span class="btn-arrow" aria-hidden="true">→</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 3: Ocularis -->
+                <article class="project-card" data-project-id="ocularis">
+                    <div class="project-card-header">
+                        <span class="project-category" data-i18n="projects.p3.category">Simulación Física / App Web</span>
+                        <div class="project-links">
+                            <a href="https://github.com/JayzirTech/ocularis" target="_blank" rel="noopener noreferrer" data-i18n-title="projects.sourceTitle" title="Ver código fuente">↗</a>
+                        </div>
+                    </div>
+                    <h4 class="project-title" data-i18n="projects.p3.title">
+                        <a href="#/proyecto/ocularis">Ocularis — Simulación Óptica</a>
+                    </h4>
+                    <p class="project-desc" data-i18n="projects.p3.desc">
+                        Aplicación web interactiva de simulación óptica y educación para pacientes dirigida a optómetras. Modela trazado de rayos, errores refractivos focales y física de lentes correctivos en tiempo real.
+                    </p>
+                    <ul class="project-techs">
+                        <li><span class="tech-tag">JavaScript</span></li>
+                        <li><span class="tech-tag">Physics Modeling</span></li>
+                        <li><span class="tech-tag">SVG / Canvas</span></li>
+                        <li><span class="tech-tag">UI / UX</span></li>
+                    </ul>
+                    <div class="project-card-footer">
+                        <a href="#/proyecto/ocularis" class="btn-card-detail">
+                            <span data-i18n="projects.ctaDetail">Ver caso de estudio</span>
+                            <span class="btn-arrow" aria-hidden="true">→</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 4: FastAPI Microservice Backend -->
+                <article class="project-card" data-project-id="fastapi-backend">
+                    <div class="project-card-header">
+                        <span class="project-category" data-i18n="projects.p4.category">API Backend</span>
+                        <div class="project-links">
+                            <a href="https://github.com/JayzirTech/fastapi_app_jayzirTech" target="_blank" rel="noopener noreferrer" data-i18n-title="projects.sourceTitle" title="Ver código fuente">↗</a>
+                        </div>
+                    </div>
+                    <h4 class="project-title">
+                        <a href="#/proyecto/fastapi-backend">FastAPI Microservice Backend</a>
+                    </h4>
+                    <p class="project-desc" data-i18n="projects.p4.desc">
+                        API REST asíncrona de alto rendimiento conectada a bases de datos relacionales, implementando arquitectura limpia, enrutamiento modular y validación de datos con Pydantic.
+                    </p>
+                    <ul class="project-techs">
+                        <li><span class="tech-tag">Python</span></li>
+                        <li><span class="tech-tag">FastAPI</span></li>
+                        <li><span class="tech-tag">PostgreSQL</span></li>
+                        <li><span class="tech-tag">Pydantic</span></li>
+                    </ul>
+                    <div class="project-card-footer">
+                        <a href="#/proyecto/fastapi-backend" class="btn-card-detail">
+                            <span data-i18n="projects.ctaDetail">Ver caso de estudio</span>
+                            <span class="btn-arrow" aria-hidden="true">→</span>
+                        </a>
+                    </div>
+                </article>
+
             </div>
-        </div>
-    </header>
-
-    <main id="AboutMe">
-        <h3 data-i18n="about.title">Sobre mí</h3>
-        <p data-i18n-html="about.bio">
-            ¡Hola! Soy <span>Jayzir Martinez</span>, <span>Ingeniero Mecatrónico</span> graduado de la Universidad de Barranquilla (IUB), especializado en <span>Arquitectura Backend e Ingeniería de Datos</span>.
-            Formado a través de programas intensivos orientados a la industria en RIWI y SENA, uno la ingeniería de sistemas físicos con arquitecturas backend escalables, pipelines ETL automatizados y almacenes de datos analíticos.
-        </p>
-    </main>
-
-    <section id="PersonalProjects">
-        <h3 data-i18n="projects.title">Proyectos Destacados</h3>
-        <div class="projects-grid">
-
-            <!-- Project 1: DataMart Analytical ETL Pipeline -->
-            <article class="project-card">
-                <div class="project-card-header">
-                    <span class="project-category" data-i18n="projects.p1.category">Ingeniería de Datos / ETL</span>
-                    <div class="project-links">
-                        <a href="https://github.com/JayzirTech/datamart-analytics-etl-pipeline" target="_blank" rel="noopener noreferrer" data-i18n-title="projects.sourceTitle" title="Ver código fuente">↗</a>
-                    </div>
-                </div>
-                <h4 class="project-title">DataMart Analytical ETL Pipeline</h4>
-                <p class="project-desc" data-i18n="projects.p1.desc">
-                    Pipeline ETL analítico de extremo a extremo impulsado por Apache Airflow (CeleryExecutor y RabbitMQ), Data Warehouse en PostgreSQL y microservicio de catálogo de productos en FastAPI, totalmente contenedorizado con Docker.
-                </p>
-                <ul class="project-techs">
-                    <li><span class="tech-tag">Airflow</span></li>
-                    <li><span class="tech-tag">FastAPI</span></li>
-                    <li><span class="tech-tag">RabbitMQ</span></li>
-                    <li><span class="tech-tag">Celery</span></li>
-                    <li><span class="tech-tag">PostgreSQL</span></li>
-                    <li><span class="tech-tag">Docker</span></li>
-                </ul>
-            </article>
-
-            <!-- Project 2: Mercado Nube Analytics Engine -->
-            <article class="project-card">
-                <div class="project-card-header">
-                    <span class="project-category" data-i18n="projects.p2.category">Arquitectura de Datos / BI</span>
-                    <div class="project-links">
-                        <a href="https://github.com/JayzirTech/mercado-nube-analytics-engine-" target="_blank" rel="noopener noreferrer" data-i18n-title="projects.sourceTitle" title="Ver código fuente">↗</a>
-                    </div>
-                </div>
-                <h4 class="project-title">Mercado Nube Analytics Engine</h4>
-                <p class="project-desc" data-i18n="projects.p2.desc">
-                    Data Warehouse dimensional (Esquema Estrella y SCD Tipo 2) diseñado para resolver consultas analíticas complejas, gestionar eventos con llegada tardía (&gt;24h) y automatizar compuertas de calidad de datos.
-                </p>
-                <ul class="project-techs">
-                    <li><span class="tech-tag">Star Schema</span></li>
-                    <li><span class="tech-tag">SCD Type 2</span></li>
-                    <li><span class="tech-tag">SQL</span></li>
-                    <li><span class="tech-tag">PostgreSQL</span></li>
-                    <li><span class="tech-tag">Airflow</span></li>
-                    <li><span class="tech-tag">Docker</span></li>
-                </ul>
-            </article>
-
-            <!-- Project 3: Ocularis -->
-            <article class="project-card">
-                <div class="project-card-header">
-                    <span class="project-category" data-i18n="projects.p3.category">Simulación Física / App Web</span>
-                    <div class="project-links">
-                        <a href="https://github.com/JayzirTech/ocularis" target="_blank" rel="noopener noreferrer" data-i18n-title="projects.sourceTitle" title="Ver código fuente">↗</a>
-                    </div>
-                </div>
-                <h4 class="project-title" data-i18n="projects.p3.title">Ocularis — Simulación Óptica</h4>
-                <p class="project-desc" data-i18n="projects.p3.desc">
-                    Aplicación web interactiva de simulación óptica y educación para pacientes dirigida a optómetras. Modela trazado de rayos, errores refractivos focales y física de lentes correctivos en tiempo real.
-                </p>
-                <ul class="project-techs">
-                    <li><span class="tech-tag">JavaScript</span></li>
-                    <li><span class="tech-tag">Physics Modeling</span></li>
-                    <li><span class="tech-tag">SVG / Canvas</span></li>
-                    <li><span class="tech-tag">UI / UX</span></li>
-                </ul>
-            </article>
-
-            <!-- Project 4: FastAPI Microservice Backend -->
-            <article class="project-card">
-                <div class="project-card-header">
-                    <span class="project-category" data-i18n="projects.p4.category">API Backend</span>
-                    <div class="project-links">
-                        <a href="https://github.com/JayzirTech/fastapi_app_jayzirTech" target="_blank" rel="noopener noreferrer" data-i18n-title="projects.sourceTitle" title="Ver código fuente">↗</a>
-                    </div>
-                </div>
-                <h4 class="project-title">FastAPI Microservice Backend</h4>
-                <p class="project-desc" data-i18n="projects.p4.desc">
-                    API REST asíncrona de alto rendimiento conectada a bases de datos relacionales, implementando arquitectura limpia, enrutamiento modular y validación de datos con Pydantic.
-                </p>
-                <ul class="project-techs">
-                    <li><span class="tech-tag">Python</span></li>
-                    <li><span class="tech-tag">FastAPI</span></li>
-                    <li><span class="tech-tag">PostgreSQL</span></li>
-                    <li><span class="tech-tag">Pydantic</span></li>
-                </ul>
-            </article>
-
-        </div>
-    </section>
+        </section>
 
     <section id="Language">
         <h3 data-i18n="tech.title">Lenguajes y Tecnologías</h3>
@@ -312,6 +346,10 @@
             <li><a href="mailto:jayzirslaider18@gmail.com"><span data-i18n="contact.emailLabel">Correo</span></a></li>
         </ul>
     </section>
+    </div> <!-- end #homeView -->
+
+    <!-- SPA View: Project Detail Page -->
+    <main id="projectDetailView" class="spa-view" hidden aria-live="polite"></main>
 
     <button id="GoToTop" aria-label="Volver arriba" data-i18n-title="ui.backToTop" title="Volver arriba">↑</button>
 
@@ -327,7 +365,8 @@
         <p data-i18n="footer.credit">&lt; Construido por Jayzir Martinez / 2026 &gt;</p>
     </footer>
 
-    <script src="./src/script.js?v=4"></script>
+    <script src="./src/projects-data.js"></script>
+    <script src="./src/script.js?v=5"></script>
 </body>
 
 </html>

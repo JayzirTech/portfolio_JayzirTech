@@ -26,6 +26,15 @@ const TRANSLATIONS = {
         projects: {
             title: 'Proyectos Destacados',
             sourceTitle: 'Ver código fuente',
+            ctaDetail: 'Ver caso de estudio',
+            backToList: 'Volver a Proyectos',
+            viewRepo: 'Ver Repositorio GitHub',
+            viewLive: 'Ver Demo en Vivo',
+            notFoundTitle: 'Proyecto no encontrado',
+            notFoundDesc: 'El proyecto solicitado no existe o fue movido.',
+            prevProject: 'Anterior',
+            nextProject: 'Siguiente',
+            allProjects: 'Todos los proyectos',
             p1: {
                 category: 'Ingeniería de Datos / ETL',
                 desc: 'Pipeline ETL analítico de extremo a extremo impulsado por Apache Airflow (CeleryExecutor y RabbitMQ), Data Warehouse en PostgreSQL y microservicio de catálogo de productos en FastAPI, totalmente contenedorizado con Docker.'
@@ -85,6 +94,15 @@ const TRANSLATIONS = {
         projects: {
             title: 'Featured Projects',
             sourceTitle: 'View Source Code',
+            ctaDetail: 'View Case Study',
+            backToList: 'Back to Projects',
+            viewRepo: 'View GitHub Repository',
+            viewLive: 'View Live Demo',
+            notFoundTitle: 'Project Not Found',
+            notFoundDesc: 'The requested project could not be found or has been moved.',
+            prevProject: 'Previous',
+            nextProject: 'Next',
+            allProjects: 'All Projects',
             p1: {
                 category: 'Data Engineering / ETL',
                 desc: 'End-to-end analytical ETL pipeline powered by Apache Airflow (CeleryExecutor & RabbitMQ), PostgreSQL Data Warehouse, and FastAPI product catalog microservice, fully containerized with Docker.'
@@ -175,6 +193,13 @@ function applyLanguage(lang) {
 
     updateThemeButtonLabel();
 
+    // If currently on a project detail page, re-render in selected language
+    if (typeof currentRoute !== 'undefined' && currentRoute.view === 'project') {
+        renderProjectDetail(currentRoute.projectId);
+    } else {
+        document.title = dict.meta.title;
+    }
+
     try {
         localStorage.setItem('portfolio_lang', lang);
     } catch (e) {}
@@ -228,13 +253,24 @@ function initPreferences() {
    Smooth Navigation & Floating Scroll Controls
    ========================================================================== */
 function initNavigation() {
-    const smoothLinks = document.querySelectorAll('a[href^="#"]');
     const backToTopButton = document.getElementById('GoToTop');
 
-    smoothLinks.forEach((link) => {
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        const href = link.getAttribute('href');
+        // Skip SPA route hashes like #/proyecto/... or #/
+        if (!href || href.startsWith('#/')) return;
+
         link.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
             if (!targetId || targetId === '#') return;
+
+            // If on project detail view, route to home and let hash handle section
+            if (typeof currentRoute !== 'undefined' && currentRoute.view === 'project') {
+                e.preventDefault();
+                window.location.hash = targetId;
+                return;
+            }
+
             const targetSection = document.querySelector(targetId);
             if (targetSection) {
                 e.preventDefault();
@@ -242,6 +278,9 @@ function initNavigation() {
                     behavior: 'smooth',
                     block: 'start'
                 });
+                try {
+                    history.pushState(null, '', targetId);
+                } catch (err) {}
             }
         });
     });
@@ -459,6 +498,283 @@ function initAntigravityStars() {
 }
 
 /* ==========================================================================
+   Single Page Application (SPA) Router & Project Detail View
+   ========================================================================== */
+let currentRoute = {
+    view: 'home',
+    projectId: null,
+    section: null
+};
+
+function parseHash(hash) {
+    if (!hash || hash === '#' || hash === '#/' || hash === '#Top') {
+        return { view: 'home', projectId: null, section: hash === '#Top' ? 'Top' : null };
+    }
+
+    // Match #/proyecto/:id or #/project/:id
+    const projectMatch = hash.match(/^#\/(?:proyecto|project)\/([a-zA-Z0-9_-]+)/);
+    if (projectMatch) {
+        return { view: 'project', projectId: projectMatch[1], section: null };
+    }
+
+    // Match in-page section jump, e.g. #PersonalProjects, #AboutMe
+    if (hash.startsWith('#')) {
+        const sectionId = hash.replace(/^#\/?/, '');
+        return { view: 'home', projectId: null, section: sectionId };
+    }
+
+    return { view: 'home', projectId: null, section: null };
+}
+
+function renderProjectDetail(projectId) {
+    const detailContainer = document.getElementById('projectDetailView');
+    if (!detailContainer) return;
+
+    const projects = window.PROJECTS_DATA || [];
+    const projectIndex = projects.findIndex((p) => p.id === projectId);
+    const project = projects[projectIndex];
+    const lang = currentLang;
+    const dict = TRANSLATIONS[lang] || TRANSLATIONS.es;
+
+    if (!project) {
+        detailContainer.innerHTML = `
+            <div class="project-detail-container">
+                <div class="detail-content-card" style="text-align: center; padding: 60px 20px;">
+                    <h2 style="color: var(--accent); font-size: 2.4rem; margin-bottom: 12px; font-family: 'JetBrains Mono', monospace;">404</h2>
+                    <h3 style="color: var(--text-heading); margin-bottom: 14px; font-size: 1.5rem;">${dict.projects.notFoundTitle}</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">${dict.projects.notFoundDesc}</p>
+                    <a href="#PersonalProjects" class="btn btn-primary">← ${dict.projects.backToList}</a>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    document.title = `${project.title[lang]} | Jayzir Martinez`;
+
+    const prevProject = projectIndex > 0 ? projects[projectIndex - 1] : null;
+    const nextProject = projectIndex < projects.length - 1 ? projects[projectIndex + 1] : null;
+
+    detailContainer.innerHTML = `
+        <div class="project-detail-container">
+            <!-- Top Bar with Back Button and Badges -->
+            <div class="detail-top-bar">
+                <a href="#PersonalProjects" class="btn-back">
+                    <span class="back-arrow" aria-hidden="true">←</span>
+                    <span>${dict.projects.backToList}</span>
+                </a>
+                <div class="detail-badge-group">
+                    <span class="detail-category-badge">${project.category[lang]}</span>
+                    <span class="detail-status-badge">${project.badge[lang]}</span>
+                </div>
+            </div>
+
+            <!-- Hero Header -->
+            <header class="detail-hero-header">
+                <h1 class="detail-main-title">${project.title[lang]}</h1>
+                <p class="detail-summary-lead">${project.summary[lang]}</p>
+                <div class="detail-action-bar">
+                    <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="btn btn-primary detail-cta-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                        <span>${dict.projects.viewRepo}</span>
+                        <span class="external-icon" aria-hidden="true">↗</span>
+                    </a>
+                    ${project.demo ? `
+                    <a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="btn btn-outline detail-cta-btn">
+                        <span>${dict.projects.viewLive}</span>
+                        <span class="external-icon" aria-hidden="true">↗</span>
+                    </a>` : ''}
+                </div>
+            </header>
+
+            <!-- Key Metrics / Stats Cards -->
+            <div class="detail-stats-grid">
+                ${project.stats.map((s) => `
+                    <div class="stat-card">
+                        <span class="stat-label">${s.label[lang]}</span>
+                        <span class="stat-value">${s.value}</span>
+                    </div>
+                `).join('')}
+            </div>
+
+            <!-- 01. Overview Section -->
+            <section class="detail-content-card">
+                <h2 class="detail-section-title">
+                    <span class="section-num">01.</span>
+                    ${lang === 'es' ? 'Visión General' : 'Overview'}
+                </h2>
+                <p class="detail-paragraph">${project.overview[lang]}</p>
+            </section>
+
+            <!-- 02. Problem & Pain Points -->
+            <section class="detail-content-card">
+                <h2 class="detail-section-title">
+                    <span class="section-num">02.</span>
+                    ${project.problem.title[lang]}
+                </h2>
+                <p class="detail-paragraph">${project.problem.description[lang]}</p>
+                <div class="pain-points-box">
+                    <h4 class="box-subtitle">${lang === 'es' ? 'Puntos de Dolor Identificados:' : 'Identified Pain Points:'}</h4>
+                    <ul class="pain-points-list">
+                        ${project.problem.painPoints[lang].map((pt) => `<li>${pt}</li>`).join('')}
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 03. Architecture & Data Flow -->
+            <section class="detail-content-card">
+                <h2 class="detail-section-title">
+                    <span class="section-num">03.</span>
+                    ${project.architecture.title[lang]}
+                </h2>
+                <p class="detail-paragraph">${project.architecture.description[lang]}</p>
+                
+                <h4 class="box-subtitle">${lang === 'es' ? 'Flujo de Ejecución por Fases:' : 'Execution Pipeline Stages:'}</h4>
+                <div class="architecture-pipeline">
+                    ${project.architecture.flow[lang].map((f) => `
+                        <div class="pipeline-card">
+                            <div class="pipeline-step-badge">${f.step}</div>
+                            <p class="pipeline-step-desc">${f.desc}</p>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <h4 class="box-subtitle">${lang === 'es' ? 'Decisiones Clave de Ingeniería & Compensaciones (Trade-offs):' : 'Key Engineering Decisions & Trade-offs:'}</h4>
+                <div class="decisions-grid">
+                    ${project.architecture.keyDecisions[lang].map((d) => `
+                        <div class="decision-card">
+                            <div class="decision-title">⚡ ${d.title}</div>
+                            <div class="decision-reason">${d.reason}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </section>
+
+            <!-- 04. Technical Capabilities / Features -->
+            <section class="detail-content-card">
+                <h2 class="detail-section-title">
+                    <span class="section-num">04.</span>
+                    ${lang === 'es' ? 'Capacidades y Características Principales' : 'Key Technical Capabilities & Features'}
+                </h2>
+                <div class="features-grid">
+                    ${project.features[lang].map((feat) => `
+                        <div class="feature-item">
+                            <h4 class="feature-item-title">✔ ${feat.title}</h4>
+                            <p class="feature-item-desc">${feat.desc}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            </section>
+
+            <!-- 05. Tech Stack -->
+            <section class="detail-content-card">
+                <h2 class="detail-section-title">
+                    <span class="section-num">05.</span>
+                    ${lang === 'es' ? 'Tecnologías y Herramientas' : 'Technologies & Tooling'}
+                </h2>
+                <div class="tech-tags-list">
+                    ${project.tags.map((t) => `<span class="tech-tag">${t}</span>`).join('')}
+                </div>
+            </section>
+
+            <!-- 06. Challenges & Solutions -->
+            <section class="detail-content-card">
+                <h2 class="detail-section-title">
+                    <span class="section-num">06.</span>
+                    ${lang === 'es' ? 'Desafíos de Ingeniería y Soluciones' : 'Engineering Challenges & Applied Solutions'}
+                </h2>
+                <div class="challenges-list">
+                    ${project.challenges[lang].map((c, idx) => `
+                        <div class="challenge-box">
+                            <div class="challenge-header">
+                                <span class="challenge-num">${idx + 1}</span>
+                                <h4 class="challenge-title">${c.title}</h4>
+                            </div>
+                            <div class="challenge-body">
+                                <div class="challenge-block">
+                                    <span class="challenge-tag tag-challenge">${lang === 'es' ? 'Desafío Técnico' : 'Technical Challenge'}</span>
+                                    <p>${c.challenge}</p>
+                                </div>
+                                <div class="challenge-block">
+                                    <span class="challenge-tag tag-solution">${lang === 'es' ? 'Solución Implementada' : 'Engineered Solution'}</span>
+                                    <p>${c.solution}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </section>
+
+            <!-- Impact Banner -->
+            <div class="impact-card">
+                <div class="impact-icon" aria-hidden="true">🚀</div>
+                <div class="impact-content">
+                    <h4>${lang === 'es' ? 'Impacto y Conclusión' : 'Impact & Takeaways'}</h4>
+                    <p>${project.impact[lang]}</p>
+                </div>
+            </div>
+
+            <!-- Bottom Project Navigation -->
+            <nav class="project-bottom-nav" aria-label="Project pagination">
+                ${prevProject ? `
+                    <a href="#/proyecto/${prevProject.id}" class="nav-project-btn prev-btn">
+                        <span class="nav-dir">← ${dict.projects.prevProject}</span>
+                        <span class="nav-title">${prevProject.title[lang]}</span>
+                    </a>
+                ` : `<div></div>`}
+                
+                <a href="#PersonalProjects" class="nav-project-btn gallery-btn">
+                    <span>⊞ ${dict.projects.allProjects}</span>
+                </a>
+
+                ${nextProject ? `
+                    <a href="#/proyecto/${nextProject.id}" class="nav-project-btn next-btn">
+                        <span class="nav-dir">${dict.projects.nextProject} →</span>
+                        <span class="nav-title">${nextProject.title[lang]}</span>
+                    </a>
+                ` : `<div></div>`}
+            </nav>
+        </div>
+    `;
+}
+
+function handleRouting() {
+    const hash = window.location.hash || '';
+    const route = parseHash(hash);
+    currentRoute = route;
+
+    const homeView = document.getElementById('homeView');
+    const projectDetailView = document.getElementById('projectDetailView');
+
+    if (!homeView || !projectDetailView) return;
+
+    if (route.view === 'project') {
+        homeView.setAttribute('hidden', '');
+        projectDetailView.removeAttribute('hidden');
+        renderProjectDetail(route.projectId);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        projectDetailView.setAttribute('hidden', '');
+        homeView.removeAttribute('hidden');
+        document.title = TRANSLATIONS[currentLang].meta.title;
+
+        if (route.section) {
+            const targetEl = document.getElementById(route.section);
+            if (targetEl) {
+                setTimeout(() => {
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 50);
+            }
+        }
+    }
+}
+
+function initSpaRouter() {
+    window.addEventListener('hashchange', handleRouting);
+    handleRouting();
+}
+
+/* ==========================================================================
    Bootstrap
    ========================================================================== */
 function bootstrapPortfolio() {
@@ -466,6 +782,7 @@ function bootstrapPortfolio() {
     initNavigation();
     initPortraitTilt();
     initAntigravityStars();
+    initSpaRouter();
 }
 
 if (document.readyState === 'loading') {
