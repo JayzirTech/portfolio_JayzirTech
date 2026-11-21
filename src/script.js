@@ -41,9 +41,15 @@ const TRANSLATIONS = {
                 suiteOverview: 'Visión General de la Suite',
                 module1: 'Módulo 1: Ocularis (Refracción)',
                 module2: 'Módulo 2: Simulador de Filtros',
+                tocTitle: 'En esta página',
                 secOverview: '01. Visión General & Propósito',
                 secProblem: '02. El Problema & Dolor de Negocio',
                 secModules: '03. Módulos Integrados en la Suite',
+                secSuiteSpecs: '04. Especificaciones Técnicas',
+                secSuiteArch: '05. Arquitectura Global de la Suite',
+                secSuiteDecisions: '06. Decisiones de Diseño & Trade-offs',
+                secSuiteChallenges: '07. Retos Técnicos & Solución',
+                secSuiteImpact: '08. Impacto & Conclusiones',
                 secSpecs: '03. Especificaciones Técnicas',
                 secCode: '04. Implementación & Código Clave',
                 secArch: '05. Arquitectura & Flujo de Datos',
@@ -131,9 +137,15 @@ const TRANSLATIONS = {
                 suiteOverview: 'Suite Overview',
                 module1: 'Module 1: Ocularis (Refraction)',
                 module2: 'Module 2: Filters Simulator',
+                tocTitle: 'On this page',
                 secOverview: '01. Overview & Purpose',
                 secProblem: '02. Problem & Business Impact',
                 secModules: '03. Integrated Suite Modules',
+                secSuiteSpecs: '04. Technical Specifications',
+                secSuiteArch: '05. Global Suite Architecture',
+                secSuiteDecisions: '06. Design Decisions & Trade-offs',
+                secSuiteChallenges: '07. Technical Challenges & Fixes',
+                secSuiteImpact: '08. Impact & Takeaways',
                 secSpecs: '03. Technical Specifications',
                 secCode: '04. Implementation & Key Code',
                 secArch: '05. Architecture & Data Flow',
@@ -672,6 +684,68 @@ function renderProjectDetail(projectId, subProjectId) {
         }
     }
 
+    // Build dynamic sequential sections list
+    const isSuiteOverview = !activeSubId && !!(project && project.suiteModules);
+    const docSections = [
+        { id: 'doc-overview', title: lang === 'es' ? 'Visión General & Propósito' : 'Overview & Purpose' },
+        { id: 'doc-problem', title: lang === 'es' ? 'El Problema & Dolor de Negocio' : 'Problem & Business Impact' }
+    ];
+
+    if (project.suiteModules) {
+        docSections.push({
+            id: 'doc-modules',
+            title: lang === 'es' ? 'Módulos Integrados en la Suite' : 'Integrated Suite Modules'
+        });
+    }
+
+    if (project.specs) {
+        docSections.push({
+            id: 'doc-specs',
+            title: lang === 'es' ? 'Especificaciones Técnicas' : 'Technical Specifications'
+        });
+    }
+
+    if (project.codeSnippet) {
+        docSections.push({
+            id: 'doc-code',
+            title: lang === 'es' ? 'Implementación & Código Clave' : 'Implementation & Key Code'
+        });
+    }
+
+    docSections.push({
+        id: 'doc-architecture',
+        title: isSuiteOverview
+            ? (lang === 'es' ? 'Arquitectura Global de la Suite' : 'Global Suite Architecture')
+            : (lang === 'es' ? 'Arquitectura & Flujo de Datos' : 'Architecture & Data Flow')
+    });
+
+    docSections.push({
+        id: 'doc-decisions',
+        title: lang === 'es' ? 'Decisiones de Diseño & Trade-offs' : 'Design Decisions & Trade-offs'
+    });
+
+    docSections.push({
+        id: 'doc-challenges',
+        title: lang === 'es' ? 'Retos Técnicos & Solución' : 'Technical Challenges & Fixes'
+    });
+
+    docSections.push({
+        id: 'doc-impact',
+        title: lang === 'es' ? 'Impacto & Conclusiones' : 'Impact & Takeaways'
+    });
+
+    docSections.forEach((sec, idx) => {
+        const num = String(idx + 1).padStart(2, '0');
+        sec.fullTitle = `${num}. ${sec.title}`;
+    });
+
+    const getSecTitle = (id) => {
+        const s = docSections.find((x) => x.id === id);
+        return s ? s.fullTitle : '';
+    };
+
+    const tocListHtml = docSections.map((s) => `<li><a href="#${s.id}">${s.fullTitle}</a></li>`).join('');
+
     detailContainer.innerHTML = `
         <div class="doc-wrapper">
             <!-- Top Back Navigation & Controls -->
@@ -768,15 +842,7 @@ function renderProjectDetail(projectId, subProjectId) {
                         <button type="button" class="doc-mobile-toc-close" id="docMobileTocClose" aria-label="Cerrar índice">✕</button>
                     </div>
                     <ul class="doc-mobile-toc-links">
-                        <li><a href="#doc-overview">${docsDict.secOverview}</a></li>
-                        <li><a href="#doc-problem">${docsDict.secProblem}</a></li>
-                        ${project.suiteModules ? `<li><a href="#doc-modules">${docsDict.secModules || '03. Módulos de la Suite'}</a></li>` : ''}
-                        ${project.specs ? `<li><a href="#doc-specs">${docsDict.secSpecs}</a></li>` : ''}
-                        ${project.codeSnippet ? `<li><a href="#doc-code">${docsDict.secCode}</a></li>` : ''}
-                        <li><a href="#doc-architecture">${docsDict.secArch}</a></li>
-                        <li><a href="#doc-decisions">${docsDict.secDecisions}</a></li>
-                        <li><a href="#doc-challenges">${docsDict.secChallenges}</a></li>
-                        <li><a href="#doc-impact">${docsDict.secImpact}</a></li>
+                        ${tocListHtml}
                     </ul>
                 </div>
             </div>
@@ -784,20 +850,20 @@ function renderProjectDetail(projectId, subProjectId) {
             <!-- Documentation Grid: Content + Desktop Sidebar -->
             <div class="doc-grid">
                 <!-- Main Documentation Area -->
-                <main class="doc-main">
+                <div class="doc-main">
                     
-                    <!-- 01. Overview Section -->
+                    <!-- Overview Section -->
                     <section id="doc-overview" class="doc-section">
                         <h2 class="doc-section-h2">
-                            <span class="doc-anchor-hash">#</span> ${docsDict.secOverview}
+                            <span class="doc-anchor-hash">#</span> ${getSecTitle('doc-overview')}
                         </h2>
                         <p class="doc-p">${project.overview[lang]}</p>
                     </section>
 
-                    <!-- 02. Problem & Pain Points -->
+                    <!-- Problem & Pain Points -->
                     <section id="doc-problem" class="doc-section">
                         <h2 class="doc-section-h2">
-                            <span class="doc-anchor-hash">#</span> ${docsDict.secProblem}
+                            <span class="doc-anchor-hash">#</span> ${getSecTitle('doc-problem')}
                         </h2>
                         <p class="doc-p">${project.problem.description[lang]}</p>
 
@@ -817,7 +883,7 @@ function renderProjectDetail(projectId, subProjectId) {
                     ${project.suiteModules ? `
                     <section id="doc-modules" class="doc-section">
                         <h2 class="doc-section-h2">
-                            <span class="doc-anchor-hash">#</span> ${docsDict.secModules || '03. Módulos de la Suite'}
+                            <span class="doc-anchor-hash">#</span> ${getSecTitle('doc-modules')}
                         </h2>
                         <div class="doc-suite-modules-grid">
                             ${project.suiteModules.map((mod) => `
@@ -846,11 +912,11 @@ function renderProjectDetail(projectId, subProjectId) {
                         </div>
                     </section>` : ''}
 
-                    <!-- 03. Technical Specifications Table -->
+                    <!-- Technical Specifications Table -->
                     ${project.specs ? `
                     <section id="doc-specs" class="doc-section">
                         <h2 class="doc-section-h2">
-                            <span class="doc-anchor-hash">#</span> ${docsDict.secSpecs}
+                            <span class="doc-anchor-hash">#</span> ${getSecTitle('doc-specs')}
                         </h2>
                         <div class="doc-table-wrapper">
                             <table class="doc-table">
@@ -872,11 +938,11 @@ function renderProjectDetail(projectId, subProjectId) {
                         </div>
                     </section>` : ''}
 
-                    <!-- 04. Core Implementation & Code -->
+                    <!-- Core Implementation & Code -->
                     ${project.codeSnippet ? `
                     <section id="doc-code" class="doc-section">
                         <h2 class="doc-section-h2">
-                            <span class="doc-anchor-hash">#</span> ${docsDict.secCode}
+                            <span class="doc-anchor-hash">#</span> ${getSecTitle('doc-code')}
                         </h2>
                         <div class="doc-code-window">
                             <div class="doc-code-topbar">
@@ -894,10 +960,10 @@ function renderProjectDetail(projectId, subProjectId) {
                         </div>
                     </section>` : ''}
 
-                    <!-- 05. Architecture & Data Pipeline -->
+                    <!-- Architecture & Data Pipeline -->
                     <section id="doc-architecture" class="doc-section">
                         <h2 class="doc-section-h2">
-                            <span class="doc-anchor-hash">#</span> ${docsDict.secArch}
+                            <span class="doc-anchor-hash">#</span> ${getSecTitle('doc-architecture')}
                         </h2>
                         <p class="doc-p">${project.architecture.description[lang]}</p>
 
@@ -911,10 +977,10 @@ function renderProjectDetail(projectId, subProjectId) {
                         </div>
                     </section>
 
-                    <!-- 06. Engineering Decisions & Trade-offs -->
+                    <!-- Engineering Decisions & Trade-offs -->
                     <section id="doc-decisions" class="doc-section">
                         <h2 class="doc-section-h2">
-                            <span class="doc-anchor-hash">#</span> ${docsDict.secDecisions}
+                            <span class="doc-anchor-hash">#</span> ${getSecTitle('doc-decisions')}
                         </h2>
                         <div class="doc-decisions-grid">
                             ${project.architecture.keyDecisions.map((item) => `
@@ -926,10 +992,10 @@ function renderProjectDetail(projectId, subProjectId) {
                         </div>
                     </section>
 
-                    <!-- 07. Troubleshooting & Challenges -->
+                    <!-- Troubleshooting & Challenges -->
                     <section id="doc-challenges" class="doc-section">
                         <h2 class="doc-section-h2">
-                            <span class="doc-anchor-hash">#</span> ${docsDict.secChallenges}
+                            <span class="doc-anchor-hash">#</span> ${getSecTitle('doc-challenges')}
                         </h2>
                         <div class="doc-troubleshoot-list">
                             ${project.challenges.map((c, idx) => `
@@ -953,11 +1019,11 @@ function renderProjectDetail(projectId, subProjectId) {
                         </div>
                     </section>
 
-                    <!-- 08. Impact & Conclusion -->
+                    <!-- Impact & Conclusion -->
                     <section id="doc-impact" class="doc-impact-box">
                         <div class="doc-impact-icon" aria-hidden="true">🚀</div>
                         <div>
-                            <h4>${docsDict.secImpact}</h4>
+                            <h4>${getSecTitle('doc-impact')}</h4>
                             <p>${project.impact[lang]}</p>
                         </div>
                     </section>
@@ -983,21 +1049,13 @@ function renderProjectDetail(projectId, subProjectId) {
                         ` : `<div></div>`}
                     </nav>
 
-                </main>
+                </div>
 
                 <!-- Sticky Table of Contents (TOC) Desktop Only -->
                 <aside class="doc-toc-sidebar" aria-label="Table of Contents">
                     <div class="doc-toc-title">${docsDict.tocTitle}</div>
                     <ul class="doc-toc-links">
-                        <li><a href="#doc-overview">${docsDict.secOverview}</a></li>
-                        <li><a href="#doc-problem">${docsDict.secProblem}</a></li>
-                        ${project.suiteModules ? `<li><a href="#doc-modules">${docsDict.secModules || '03. Módulos de la Suite'}</a></li>` : ''}
-                        ${project.specs ? `<li><a href="#doc-specs">${docsDict.secSpecs}</a></li>` : ''}
-                        ${project.codeSnippet ? `<li><a href="#doc-code">${docsDict.secCode}</a></li>` : ''}
-                        <li><a href="#doc-architecture">${docsDict.secArch}</a></li>
-                        <li><a href="#doc-decisions">${docsDict.secDecisions}</a></li>
-                        <li><a href="#doc-challenges">${docsDict.secChallenges}</a></li>
-                        <li><a href="#doc-impact">${docsDict.secImpact}</a></li>
+                        ${tocListHtml}
                     </ul>
                 </aside>
             </div>
