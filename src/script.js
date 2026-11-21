@@ -311,6 +311,8 @@ function initNavigation() {
             // If on project detail view, route to home and let hash handle section
             if (typeof currentRoute !== 'undefined' && currentRoute.view === 'project') {
                 e.preventDefault();
+                document.documentElement.classList.add('no-smooth-scroll');
+                document.documentElement.style.scrollBehavior = 'auto';
                 window.location.hash = targetId;
                 return;
             }
@@ -624,12 +626,8 @@ function renderProjectDetail(projectId) {
 
             <!-- Technical Document Header -->
             <header class="doc-header">
-                <div class="doc-meta-row">
-                    <div class="doc-badges">
-                        <span class="doc-badge-pill">${docsDict.badge}</span>
-                        <span class="doc-version-pill">${project.version || 'v1.0.0'}</span>
-                        <span class="doc-badge-pill">${project.badge[lang]}</span>
-                    </div>
+                <div class="doc-header-top">
+                    <h1 class="doc-main-title">${project.title[lang]}</h1>
                     <div class="doc-header-actions">
                         ${project.github ? `
                         <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="doc-btn doc-btn-secondary" title="GitHub Repository">
@@ -644,12 +642,41 @@ function renderProjectDetail(projectId) {
                         </a>` : ''}
                     </div>
                 </div>
-
-                <h1 class="doc-main-title">${project.title[lang]}</h1>
                 <p class="doc-lead-desc">${project.painSummary[lang]}</p>
             </header>
 
-            <!-- Two-Column Documentation Grid -->
+            <!-- Mobile Table of Contents Hamburger Trigger -->
+            <div class="doc-mobile-toc-bar">
+                <button type="button" class="doc-mobile-toc-trigger" id="docMobileTocTrigger" aria-label="Abrir menú de índice">
+                    <span class="toc-hamburger-icon" aria-hidden="true">☰</span>
+                    <span>${docsDict.tocTitle}</span>
+                </button>
+            </div>
+
+            <!-- Mobile Table of Contents Drawer / Overlay -->
+            <div class="doc-mobile-toc-drawer" id="docMobileTocDrawer" hidden>
+                <div class="doc-mobile-toc-backdrop" id="docMobileTocBackdrop"></div>
+                <div class="doc-mobile-toc-panel">
+                    <div class="doc-mobile-toc-header">
+                        <span class="doc-mobile-toc-header-title">
+                            <span class="toc-hamburger-icon" aria-hidden="true">☰</span> ${docsDict.tocTitle}
+                        </span>
+                        <button type="button" class="doc-mobile-toc-close" id="docMobileTocClose" aria-label="Cerrar índice">✕</button>
+                    </div>
+                    <ul class="doc-mobile-toc-links">
+                        <li><a href="#doc-overview">${docsDict.secOverview}</a></li>
+                        <li><a href="#doc-problem">${docsDict.secProblem}</a></li>
+                        ${project.specs ? `<li><a href="#doc-specs">${docsDict.secSpecs}</a></li>` : ''}
+                        ${project.codeSnippet ? `<li><a href="#doc-code">${docsDict.secCode}</a></li>` : ''}
+                        <li><a href="#doc-architecture">${docsDict.secArch}</a></li>
+                        <li><a href="#doc-decisions">${docsDict.secDecisions}</a></li>
+                        <li><a href="#doc-challenges">${docsDict.secChallenges}</a></li>
+                        <li><a href="#doc-impact">${docsDict.secImpact}</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Documentation Grid: Content + Desktop Sidebar -->
             <div class="doc-grid">
                 <!-- Main Documentation Area -->
                 <main class="doc-main">
@@ -820,7 +847,7 @@ function renderProjectDetail(projectId) {
 
                 </main>
 
-                <!-- Sticky Table of Contents (TOC) -->
+                <!-- Sticky Table of Contents (TOC) Desktop Only -->
                 <aside class="doc-toc-sidebar" aria-label="Table of Contents">
                     <div class="doc-toc-title">${docsDict.tocTitle}</div>
                     <ul class="doc-toc-links">
@@ -853,7 +880,47 @@ function renderProjectDetail(projectId) {
         });
     });
 
-    // Initialize internal TOC links smooth scrolling
+    // Mobile Hamburger TOC Drawer controls
+    const mobileTocTrigger = detailContainer.querySelector('#docMobileTocTrigger');
+    const mobileTocDrawer = detailContainer.querySelector('#docMobileTocDrawer');
+    const mobileTocClose = detailContainer.querySelector('#docMobileTocClose');
+    const mobileTocBackdrop = detailContainer.querySelector('#docMobileTocBackdrop');
+
+    function openMobileToc() {
+        if (mobileTocDrawer) {
+            mobileTocDrawer.removeAttribute('hidden');
+            document.body.classList.add('mobile-toc-open');
+        }
+    }
+
+    function closeMobileToc() {
+        if (mobileTocDrawer) {
+            mobileTocDrawer.setAttribute('hidden', '');
+            document.body.classList.remove('mobile-toc-open');
+        }
+    }
+
+    if (mobileTocTrigger) mobileTocTrigger.addEventListener('click', openMobileToc);
+    if (mobileTocClose) mobileTocClose.addEventListener('click', closeMobileToc);
+    if (mobileTocBackdrop) mobileTocBackdrop.addEventListener('click', closeMobileToc);
+
+    // When tapping a link in the mobile TOC: closes drawer immediately and smoothly scrolls
+    detailContainer.querySelectorAll('.doc-mobile-toc-links a').forEach((link) => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            closeMobileToc();
+            if (!targetId) return;
+            const targetEl = detailContainer.querySelector(targetId);
+            if (targetEl) {
+                setTimeout(() => {
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        });
+    });
+
+    // Desktop TOC smooth scrolling
     detailContainer.querySelectorAll('.doc-toc-links a').forEach((link) => {
         link.addEventListener('click', function (e) {
             e.preventDefault();
@@ -878,8 +945,11 @@ function handleRouting() {
 
     if (!homeView || !projectDetailView) return;
 
+    // Suppress global smooth scrolling during view transitions to eliminate slow animations
+    document.documentElement.classList.add('no-smooth-scroll');
+    document.documentElement.style.scrollBehavior = 'auto';
+
     if (route.view === 'project') {
-        // Save current scroll position on home before switching
         if (prevRoute.view === 'home') {
             lastHomeScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
         }
@@ -888,14 +958,18 @@ function handleRouting() {
         projectDetailView.removeAttribute('hidden');
         renderProjectDetail(route.projectId);
 
-        // Instant reset to top without animated scrolling
+        // Instant jump to top
         window.scrollTo(0, 0);
+
+        setTimeout(() => {
+            document.documentElement.classList.remove('no-smooth-scroll');
+            document.documentElement.style.scrollBehavior = '';
+        }, 60);
     } else {
         projectDetailView.setAttribute('hidden', '');
         homeView.removeAttribute('hidden');
         document.title = TRANSLATIONS[currentLang].meta.title;
 
-        // If returning from project view, immediately restore the home position without smooth scrolling
         if (prevRoute.view === 'project') {
             if (route.section) {
                 const targetEl = document.getElementById(route.section);
@@ -903,23 +977,52 @@ function handleRouting() {
                     const top = targetEl.getBoundingClientRect().top + window.pageYOffset - 72;
                     window.scrollTo(0, top);
                 } else {
-                    window.scrollTo(0, lastHomeScrollY);
+                    window.scrollTo(0, lastHomeScrollY || 0);
                 }
             } else {
-                window.scrollTo(0, lastHomeScrollY);
+                window.scrollTo(0, lastHomeScrollY || 0);
             }
         } else if (route.section) {
-            // In-page navigation on home
             const targetEl = document.getElementById(route.section);
             if (targetEl) {
                 targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
+
+        setTimeout(() => {
+            document.documentElement.classList.remove('no-smooth-scroll');
+            document.documentElement.style.scrollBehavior = '';
+        }, 60);
     }
 }
 
 function initSpaRouter() {
     window.addEventListener('hashchange', handleRouting);
+
+    // Global click interceptor to ensure instant transitions without browser native smooth scroll interference
+    document.addEventListener('click', (e) => {
+        const detailBtn = e.target.closest('a[href^="#/proyecto/"], a[href^="#/project/"]');
+        if (detailBtn) {
+            e.preventDefault();
+            if (currentRoute.view === 'home') {
+                lastHomeScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+            }
+            document.documentElement.classList.add('no-smooth-scroll');
+            document.documentElement.style.scrollBehavior = 'auto';
+            window.location.hash = detailBtn.getAttribute('href');
+            return;
+        }
+
+        const backBtn = e.target.closest('.doc-back-link, .card-index');
+        if (backBtn) {
+            e.preventDefault();
+            document.documentElement.classList.add('no-smooth-scroll');
+            document.documentElement.style.scrollBehavior = 'auto';
+            window.location.hash = '#PersonalProjects';
+            return;
+        }
+    });
+
     handleRouting();
 }
 

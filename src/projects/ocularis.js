@@ -1,0 +1,154 @@
+/**
+ * ==========================================================================
+ * Project: Ocularis — Simulación Óptica
+ * ==========================================================================
+ */
+(function () {
+    const project = {
+        id: 'ocularis',
+        version: 'v1.1.0-sim',
+        title: {
+            es: 'Ocularis — Simulación Óptica',
+            en: 'Ocularis — Optical Simulation'
+        },
+        category: {
+            es: 'Simulación Física / Mecatrónica Visual',
+            en: 'Physics Simulation / Visual Mechatronics'
+        },
+        badge: {
+            es: 'Modelado Físico en Vivo',
+            en: 'Live Physics Modeling'
+        },
+        painSummary: {
+            es: 'Elimina la barrera de comunicación entre el optómetra y el paciente, permitiendo visualizar de forma interactiva y comprensible por qué ven borroso y cómo sus lentes corregirán su visión.',
+            en: 'Bridges the communication gap between eye-care specialists and patients by interactively showing why vision is blurred and exactly how corrective lenses restore sharp focus.'
+        },
+        github: 'https://github.com/JayzirTech/ocularis',
+        demo: 'https://jayzirtech.github.io/ocularis/',
+        specs: [
+            { key: { es: 'Modelo Físico', en: 'Physics Model' }, value: 'Snell Ray-Tracing & Paraxial Optics' },
+            { key: { es: 'Patologías Modeladas', en: 'Modeled Conditions' }, value: 'Miopía, Hipermetropía, Astigmatismo' },
+            { key: { es: 'Lentes Correctivos', en: 'Corrective Lenses' }, value: 'Convergentes (+), Divergentes (-), Cilíndricos' },
+            { key: { es: 'Rendimiento Gráfico', en: 'Performance' }, value: '60 FPS requestAnimationFrame' },
+            { key: { es: 'Diseño Visual', en: 'UI Aesthetics' }, value: 'Cyberpunk / Clinical Dark Mode' },
+            { key: { es: 'Dependencias', en: 'Dependencies' }, value: 'Zero Dependencies (Pure Vanilla JS)' }
+        ],
+        stats: [
+            { label: { es: 'Frecuencia de Cuadros', en: 'Framerate' }, value: '60 FPS' },
+            { label: { es: 'Haces de Luz', en: 'Light Rays' }, value: 'Trazado Dinámico' },
+            { label: { es: 'Entrada Interactiva', en: 'Real-time Inputs' }, value: 'Sliders Dioptrías' },
+            { label: { es: 'Resolución Anatómica', en: 'Accuracy' }, value: 'Paraxial Óptica' }
+        ],
+        tags: ['JavaScript ES6+', 'HTML5 Canvas', 'Ray Tracing', 'Optics Physics', 'Mathematical Modeling', 'UI/UX', 'Glassmorphism'],
+        overview: {
+            es: 'Ocularis es una aplicación de física médica que modela el ojo humano como un sistema óptico mecatrónico de lentes convergentes. Resuelve el desafío educativo en consultorios al calcular el trazado trigonométrico de rayos de luz en tiempo real y demostrar exactamente cómo los lentes desvían el punto focal hacia la fóvea retiniana.',
+            en: 'Ocularis is a visual physics platform modeling the human eye as an optical system of converging lenses. It bridges technical mechatronics principles with patient communication by computing Snell-based ray tracing in real time to show how corrective lenses refocus light onto the retinal plane.'
+        },
+        problem: {
+            title: {
+                es: 'Problema & Dolor de Negocio',
+                en: 'Problem & Business Impact'
+            },
+            description: {
+                es: 'Los pacientes reciben prescripciones con términos abstractos como "+2.50 dioptrías" o "astigmatismo", pero no comprenden por qué no ven bien ni por qué necesitan usar lentes con cierta curvatura. Los diagramas en papel son estáticos y no generan la convicción necesaria en el cuidado visual preventivo.',
+                en: 'Patients receive prescriptions packed with abstract terms like "+2.50 diopters" or "axis cylinder", leaving them confused about why their vision is defective and why specific lens curvatures are needed. Static pamphlets fail to build trust or motivate compliance with vision care.'
+            },
+            painPoints: {
+                es: [
+                    'Incomprensión de por qué la visión lejana o cercana es borrosa según la longitud del globo ocular.',
+                    'Falta de interactividad: el paciente no puede experimentar qué ocurre al modificar la graduación.',
+                    'Software de laboratorio existente excesivamente técnico, costoso y no apto para mostradores de consulta.',
+                    'Necesidad de una herramienta visual que refuerce el valor de la consulta profesional.'
+                ],
+                en: [
+                    'Patients fail to grasp how ocular axial length causes focal misalignment before or behind the retina.',
+                    'Zero interactivity: patients cannot visualize what happens as diopter values change.',
+                    'Commercial laboratory simulation packages are bloated, slow, and unsuitable for consultation desks.',
+                    'Need for an engaging visual asset that reinforces the perceived value of clinical consultations.'
+                ]
+            }
+        },
+        codeSnippet: {
+            filename: 'src/physics/ray_tracer.js',
+            lang: 'javascript',
+            code: `// Snell's Law & Thin Lens Ray Deviation
+export function traceLightRay(originY, refractivePower, lensPositionX, retinaPositionX) {
+    const focalLength = 1000 / refractivePower;
+    const intersectionLensX = lensPositionX;
+    const intersectionLensY = originY;
+
+    const slope = -intersectionLensY / focalLength;
+    const focalPointX = lensPositionX + focalLength;
+
+    const rayAtRetinaY = intersectionLensY + slope * (retinaPositionX - lensPositionX);
+    const blurCircleRadius = Math.abs(rayAtRetinaY);
+
+    return {
+        path: [
+            { x: 0, y: originY },
+            { x: intersectionLensX, y: intersectionLensY },
+            { x: retinaPositionX, y: rayAtRetinaY }
+        ],
+        focalPointX,
+        blurCircleRadius,
+        inFocus: blurCircleRadius < 1.5
+    };
+}`
+        },
+        architecture: {
+            title: {
+                es: 'Arquitectura Matemática & Motor de Trazado',
+                en: 'Mathematical Architecture & Ray-Tracing Engine'
+            },
+            description: {
+                es: 'Cálculo analítico en tiempo real desacoplado del canvas de representación visual.',
+                en: 'Real-time analytical solver decoupled from the presentation canvas layer.'
+            },
+            flow: [
+                { step: '01. Entrada de Curvatura', desc: 'El usuario manipula parámetros anatómicos (longitud axial) y potencia de lente (+/- dioptrías).' },
+                { step: '02. Cálculo Trigonométrico', desc: 'Resolución de ecuaciones paraxiales para cada rayo paralelo entrante en microsegundos.' },
+                { step: '03. Determinación Focal', desc: 'Identificación de la convergencia: pre-retiniana (miopía) o post-retiniana (hipermetropía).' },
+                { step: '04. Cálculo del Desenfoque', desc: 'Medición del círculo de confusión resultante sobre la superficie sensible de la retina.' },
+                { step: '05. Renderizado a 60 FPS', desc: 'Dibujado estético de haces con brillo cyan y guías anatómicas en canvas 2D.' }
+            ],
+            keyDecisions: [
+                {
+                    title: 'Aproximación Paraxial en vez de Trazado No Lineal Completo',
+                    reason: 'Reduce la complejidad computacional en un 90% permitiendo 60 FPS sin comprometer la intuición física para el paciente.'
+                },
+                {
+                    title: 'Lienzo HTML5 Canvas con Path Batching',
+                    reason: 'Todos los haces luminosos se dibujan en una sola operación de trazado (ctx.stroke()), evitando caídas de fotogramas en móviles.'
+                },
+                {
+                    title: 'Interfaz Inspirada en HUD Médico / Cyberpunk',
+                    reason: 'Maximiza el contraste lumínico de los rayos sobre fondo oscuro, ideal para pantallas de consultorios.'
+                }
+            ]
+        },
+        challenges: [
+            {
+                title: 'Escala Anatómica Proporcional vs Legibilidad en Pantalla',
+                challenge: 'En proporciones reales, el ojo humano es milimétrico y los rayos apenas se diferencian en pantallas de smartphones.',
+                solution: 'Diseño de un factor de escala adaptativo que magnifica las desviaciones focales sin perder la proporcionalidad anatómica.'
+            },
+            {
+                title: 'Fluidez en Pantallas Táctiles con Retraso de Eventos',
+                challenge: 'El evento input de los sliders táctiles producía acumulaciones de redibujado en iPads antiguos.',
+                solution: 'Implementación de throttling mediante requestAnimationFrame garantizando un solo cálculo por cuadro de pantalla.'
+            }
+        ],
+        impact: {
+            es: 'Permite a optometristas y oftalmólogos explicar anomalías refractivas en menos de 60 segundos, mejorando la adherencia al tratamiento y la satisfacción del paciente.',
+            en: 'Enables clinicians to explain refractive disorders in under 60 seconds, elevating patient compliance, comprehension, and trust.'
+        }
+    };
+
+    if (typeof window !== 'undefined') {
+        window.PROJECTS_DATA = window.PROJECTS_DATA || [];
+        window.PROJECTS_DATA.push(project);
+    }
+    if (typeof module !== 'undefined') {
+        module.exports = project;
+    }
+})();
