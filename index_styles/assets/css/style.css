@@ -84,9 +84,18 @@ body.mobile-toc-open {
   overflow: hidden;
 }
 
+body.in-doc-view {
+  padding-bottom: 0 !important;
+}
+
 body.in-doc-view .site-navbar,
 body.in-doc-view #mobileNav {
   display: none !important;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
@@ -96,7 +105,6 @@ body {
   color: var(--text-secondary);
   font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
   line-height: 1.65;
-  overflow-x: hidden;
   transition: background-color 0.35s ease, color 0.35s ease;
 }
 
@@ -921,6 +929,10 @@ footer {
 }
 
 @media (max-width: 768px) {
+  body {
+    padding-bottom: 74px;
+  }
+
   .desktop-nav {
     display: none;
   }
@@ -1241,6 +1253,16 @@ footer {
   gap: 10px;
 }
 
+@media (max-width: 640px) {
+  .doc-suite-tabs {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
 .doc-suite-tab {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -1259,6 +1281,15 @@ footer {
   background: var(--bg-surface);
   border: 1px solid var(--accent-border);
   transition: all 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  .doc-suite-tab {
+    width: 100%;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+  }
 }
 
 .doc-suite-tab .tab-icon {
@@ -1280,6 +1311,8 @@ footer {
 }
 
 .doc-header {
+  display: block;
+  min-height: auto;
   background: var(--bg-surface);
   border: 1px solid var(--accent-border);
   border-radius: 14px;
@@ -1799,6 +1832,12 @@ footer {
   margin-top: 20px;
 }
 
+@media (max-width: 640px) {
+  .doc-suite-modules-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .doc-module-card {
   background: rgba(2, 12, 27, 0.25);
   border: 1px solid var(--accent-border);
@@ -1813,6 +1852,13 @@ footer {
   flex-direction: column;
   gap: 14px;
   transition: all 0.25s ease;
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .doc-module-card {
+    padding: 18px 14px;
+  }
 }
 
 .doc-module-card:hover {
@@ -1883,8 +1929,28 @@ footer {
   margin-top: 4px;
 }
 
+@media (max-width: 640px) {
+  .doc-module-actions {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .doc-module-actions .doc-btn {
+    width: 100%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
 .doc-table-wrapper {
   overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
   margin: 20px 0 10px;
   border-radius: 10px;
   border: 1px solid var(--accent-border);
@@ -1955,12 +2021,14 @@ footer {
   padding: 10px 16px;
   background: rgba(255, 255, 255, 0.04);
   border-bottom: 1px solid rgba(100, 255, 218, 0.15);
+  gap: 10px;
 }
 
 .doc-code-dots {
   display: flex;
   gap: 6px;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .doc-code-dots span {
@@ -1979,6 +2047,11 @@ footer {
   font-size: 0.76rem;
   color: #94a3b8;
   letter-spacing: 0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  flex: 1;
 }
 
 .doc-code-copy-btn {
@@ -1990,6 +2063,7 @@ footer {
   padding: 4px 10px;
   border-radius: 5px;
   cursor: pointer;
+  flex-shrink: 0;
   transition: all 0.2s ease;
 }
 
@@ -2024,6 +2098,15 @@ footer {
   align-items: flex-start;
   gap: 16px;
   transition: all 0.2s ease;
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .doc-pipeline-card {
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 16px;
+  }
 }
 
 .doc-pipeline-card:hover {
@@ -2049,6 +2132,8 @@ footer {
   color: var(--text-secondary);
   line-height: 1.6;
   margin: 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .doc-decisions-grid {
@@ -2056,6 +2141,12 @@ footer {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
   margin-top: 18px;
+}
+
+@media (max-width: 640px) {
+  .doc-decisions-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .doc-decision-card {
