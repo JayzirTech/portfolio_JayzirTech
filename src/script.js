@@ -39,7 +39,7 @@ const TRANSLATIONS = {
                 badge: 'DOCUMENTACIÓN TÉCNICA',
                 suiteBadge: 'SUITE MODULAR',
                 suiteOverview: 'Visión General de la Suite',
-                module1: 'Módulo 1: Simulador de Refracción (Ocularis)',
+                module1: 'Módulo 1: Simulador Visual de Patologías y Graduación de Lentes (Ocularis)',
                 module2: 'Módulo 2: Simulador de Filtros',
                 tocTitle: 'En esta página',
                 secOverview: '01. Visión General & Propósito',
@@ -74,7 +74,7 @@ const TRANSLATIONS = {
                 desc: 'Resuelve la pérdida de trazabilidad en ventas online cuando productos y precios cambian o las transacciones llegan con días de retraso, garantizando reportes financieros exactos e inmutables.'
             },
             p3: {
-                category: 'Simulación Física / Mecatrónica & Óptica',
+                category: 'Simulación Física / Óptica Visual',
                 title: 'Visiometric Labs — Suite de Simulación Óptica',
                 desc: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Ocularis) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros).'
             }
@@ -133,7 +133,7 @@ const TRANSLATIONS = {
                 badge: 'TECHNICAL DOCUMENTATION',
                 suiteBadge: 'MODULAR SUITE',
                 suiteOverview: 'Suite Overview',
-                module1: 'Module 1: Refraction Simulator (Ocularis)',
+                module1: 'Module 1: Visual Pathology & Lens Prescription Simulator (Ocularis)',
                 module2: 'Module 2: Filters Simulator',
                 tocTitle: 'On this page',
                 secOverview: '01. Overview & Purpose',
@@ -168,7 +168,7 @@ const TRANSLATIONS = {
                 desc: 'Eliminates metric corruption in e-commerce when product prices change or order data arrives late, guaranteeing 100% accurate, tamper-proof financial reporting.'
             },
             p3: {
-                category: 'Physics Simulation / Mechatronics & Optics',
+                category: 'Physics Simulation / Visual Optics',
                 title: 'Visiometric Labs — Optical Simulation Suite',
                 desc: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Ocularis) and demonstrating the true impact of ophthalmic lens coatings (Filters Simulator).'
             }

@@ -26,8 +26,8 @@
             en: 'Visiometric Labs (Suite)'
         },
         category: {
-            es: 'Simulación Física / Mecatrónica & Óptica',
-            en: 'Physics Simulation / Mechatronics & Optics'
+            es: 'Simulación Física / Óptica Visual',
+            en: 'Physics Simulation / Visual Optics'
         },
         badge: {
             es: 'Suite Médica & Óptica Integrada',
@@ -78,8 +78,8 @@
         ],
         tags: ['Vanilla JavaScript', 'HTML5 Canvas 2D', 'Snell Ray-Tracing', 'Spectral Filtering', 'Physical Simulation', 'Zero Dependencies', 'Clinical UI/UX'],
         overview: {
-            es: 'Visiometric Labs es una suite completa de simulación física y tecnología visual diseñada para transformar la experiencia en la consulta optométrica y oftálmica. Desarrollada uniendo los principios de la ingeniería mecatrónica (modelado de sistemas físicos, control y cálculo numérico) con interfaces visuales de alto rendimiento, la suite integra dos motores complementarios: Ocularis (dedicado al modelado anatómico y defectos refractivos) y el Simulador de Filtros (dedicado a la demostración de tratamientos de lentes y protección espectral).',
-            en: 'Visiometric Labs is an end-to-end physics simulation and vision tech suite engineered to redefine clinical ophthalmic consultations. Combining mechatronics engineering principles (physical modeling, real-time numerical solvers, and control) with high-performance web graphics, the suite brings together two complementary engines: Ocularis (anatomical refraction and dioptric lens modeling) and the Filters Simulator (spectral coatings and light transmission).'
+            es: 'Visiometric Labs es una suite completa de simulación física y tecnología visual diseñada para transformar la experiencia en la consulta optométrica y oftálmica. Desarrollada uniendo los principios del modelado de sistemas físicos, óptica geométrica y cálculo numérico con interfaces visuales de alto rendimiento, la suite integra dos motores complementarios: Ocularis (dedicado al modelado anatómico y defectos refractivos) y el Simulador de Filtros (dedicado a la demostración de tratamientos de lentes y protección espectral).',
+            en: 'Visiometric Labs is an end-to-end physics simulation and vision tech suite engineered to redefine clinical ophthalmic consultations. Combining physical systems modeling, geometric optics, and real-time numerical solvers with high-performance web graphics, the suite brings together two complementary engines: Ocularis (anatomical refraction and dioptric lens modeling) and the Filters Simulator (spectral coatings and light transmission).'
         },
         problem: {
             title: {
@@ -110,12 +110,12 @@
                 id: 'ocularis',
                 route: '#/proyecto/visiometric-suite/ocularis',
                 title: {
-                    es: 'Módulo 1: Simulador de Refracción (Ocularis) — Anatomía y Patologías',
-                    en: 'Module 1: Refraction Simulator (Ocularis) — Anatomy & Eye Conditions'
+                    es: 'Módulo 1: Simulador Visual de Patologías y Graduación de Lentes (Ocularis)',
+                    en: 'Module 1: Visual Pathology & Lens Prescription Simulator (Ocularis)'
                 },
                 shortTitle: {
-                    es: 'Simulador de Refracción (Ocularis)',
-                    en: 'Refraction Simulator (Ocularis)'
+                    es: 'Simulador Visual de Patologías y Graduación de Lentes',
+                    en: 'Visual Pathology & Lens Prescription Simulator'
                 },
                 desc: {
                     es: 'Simula el ojo humano como un sistema óptico convergente, calculando el trazado de rayos de Snell para demostrar anomalías refractivas (miopía, hipermetropía, astigmatismo) y su corrección con lentes diótricos en tiempo real a 60 FPS.',
