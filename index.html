@@ -308,11 +308,75 @@
 
     <section id="ContactMe">
         <h3 data-i18n="contact.title">Contacto</h3>
-        <ul>
-            <li><a href="https://www.linkedin.com/in/jayzir-martinez/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            <li><a href="https://github.com/JayzirTech" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><a href="mailto:jayzirslaider18@gmail.com"><span data-i18n="contact.emailLabel">Correo</span></a></li>
-        </ul>
+        <p class="contact-subtitle" data-i18n="contact.subtitle">¿Tienes un proyecto en mente, una vacante o deseas conversar sobre ingeniería de datos y backend? Envíame un mensaje directo.</p>
+
+        <div class="contact-container">
+            <!-- Contact Form Card -->
+            <div class="contact-form-card">
+                <form id="contactForm" class="contact-form" novalidate>
+                    <!-- Web3Forms Config -->
+                    <input type="hidden" name="access_key" value="09ac978c-3deb-412a-a330-2d58f924f6cc">
+                    <input type="hidden" name="from_name" value="JayzirTech Portfolio">
+                    <!-- Honeypot anti-spam -->
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off">
+
+                    <div class="form-row-two">
+                        <div class="form-group">
+                            <label for="contactName" data-i18n="contact.nameLabel">Nombre</label>
+                            <input type="text" id="contactName" name="name" required placeholder="Tu nombre completo" data-i18n-placeholder="contact.namePlaceholder" autocomplete="name">
+                            <span class="field-error" id="nameError" aria-live="polite"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail" data-i18n="contact.emailInputLabel">Correo Electrónico</label>
+                            <input type="email" id="contactEmail" name="email" required placeholder="tu@correo.com" data-i18n-placeholder="contact.emailPlaceholder" autocomplete="email">
+                            <span class="field-error" id="emailError" aria-live="polite"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactSubject" data-i18n="contact.subjectLabel">Asunto</label>
+                        <input type="text" id="contactSubject" name="subject" required placeholder="Motivo del contacto" data-i18n-placeholder="contact.subjectPlaceholder">
+                        <span class="field-error" id="subjectError" aria-live="polite"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactMessage" data-i18n="contact.messageLabel">Mensaje</label>
+                        <textarea id="contactMessage" name="message" rows="5" required placeholder="Escribe tu mensaje aquí..." data-i18n-placeholder="contact.messagePlaceholder"></textarea>
+                        <span class="field-error" id="messageError" aria-live="polite"></span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="contactSubmitBtn" class="btn btn-primary contact-submit-btn">
+                            <span class="btn-text" data-i18n="contact.submitBtn">Enviar Mensaje</span>
+                            <span class="btn-icon" aria-hidden="true">✉</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Direct Professional Channels -->
+            <div class="contact-channels">
+                <span class="channels-title" data-i18n="contact.connectDirectly">O contáctame directamente en:</span>
+                <div class="channels-list">
+                    <a href="https://www.linkedin.com/in/jayzir-martinez/" target="_blank" rel="noopener noreferrer" class="channel-card" title="LinkedIn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        <div class="channel-info">
+                            <span class="channel-name">LinkedIn</span>
+                            <span class="channel-handle">jayzir-martinez</span>
+                        </div>
+                        <span class="channel-arrow" aria-hidden="true">↗</span>
+                    </a>
+                    <a href="https://github.com/JayzirTech" target="_blank" rel="noopener noreferrer" class="channel-card" title="GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                        <div class="channel-info">
+                            <span class="channel-name">GitHub</span>
+                            <span class="channel-handle">@JayzirTech</span>
+                        </div>
+                        <span class="channel-arrow" aria-hidden="true">↗</span>
+                    </a>
+                </div>
+            </div>
+        </div>
     </section>
     </div> <!-- end #homeView -->
 
@@ -333,13 +397,16 @@
         <p data-i18n="footer.credit">&lt; Construido por Jayzir Martinez / <span id="currentYear"></span> &gt;</p>
     </footer>
 
+    <!-- Vendor Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Modular Project Documentation Modules -->
     <script src="./src/projects/datamart-pipeline.js"></script>
     <script src="./src/projects/mercado-nube.js"></script>
     <script src="./src/projects/visiometric/ocularis.js"></script>
     <script src="./src/projects/visiometric/filters-simulator.js"></script>
     <script src="./src/projects/visiometric/index.js"></script>
-    <script src="./src/script.js?v=8"></script>
+    <script src="./src/script.js?v=9"></script>
 </body>
 
 </html>

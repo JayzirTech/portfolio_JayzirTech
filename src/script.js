@@ -85,7 +85,27 @@ const TRANSLATIONS = {
         },
         contact: {
             title: 'Contacto',
-            emailLabel: 'Correo'
+            subtitle: '¿Tienes un proyecto en mente, una vacante o deseas conversar sobre ingeniería de datos y backend? Envíame un mensaje directo.',
+            nameLabel: 'Nombre',
+            namePlaceholder: 'Tu nombre completo',
+            emailInputLabel: 'Correo Electrónico',
+            emailPlaceholder: 'tu@correo.com',
+            subjectLabel: 'Asunto',
+            subjectPlaceholder: 'Motivo del contacto',
+            messageLabel: 'Mensaje',
+            messagePlaceholder: 'Escribe tu mensaje aquí...',
+            submitBtn: 'Enviar Mensaje',
+            sendingBtn: 'Enviando mensaje...',
+            connectDirectly: 'O contáctame directamente en:',
+            validationName: 'Por favor ingresa tu nombre.',
+            validationEmail: 'Por favor ingresa un correo electrónico válido.',
+            validationSubject: 'Por favor ingresa el asunto del mensaje.',
+            validationMessage: 'El mensaje debe tener al menos 10 caracteres.',
+            successTitle: '¡Mensaje Enviado!',
+            successText: 'Gracias por ponerte en contacto. Tu mensaje ha sido enviado con éxito y te responderé lo antes posible.',
+            errorTitle: 'Error al enviar',
+            errorText: 'Hubo un inconveniente al enviar tu mensaje. Por favor intenta nuevamente o escríbeme por LinkedIn.',
+            acceptBtn: 'Aceptar'
         },
         ui: {
             backToTop: 'Volver arriba',
@@ -179,7 +199,27 @@ const TRANSLATIONS = {
         },
         contact: {
             title: 'Contact',
-            emailLabel: 'Email'
+            subtitle: 'Have a project in mind, a job opportunity, or want to talk data engineering & backend architecture? Send me a direct message.',
+            nameLabel: 'Name',
+            namePlaceholder: 'Your full name',
+            emailInputLabel: 'Email Address',
+            emailPlaceholder: 'you@email.com',
+            subjectLabel: 'Subject',
+            subjectPlaceholder: 'Purpose of contact',
+            messageLabel: 'Message',
+            messagePlaceholder: 'Write your message here...',
+            submitBtn: 'Send Message',
+            sendingBtn: 'Sending message...',
+            connectDirectly: 'Or connect directly via:',
+            validationName: 'Please enter your name.',
+            validationEmail: 'Please enter a valid email address.',
+            validationSubject: 'Please enter a subject.',
+            validationMessage: 'Message must be at least 10 characters long.',
+            successTitle: 'Message Sent!',
+            successText: 'Thank you for reaching out. Your message has been sent successfully and I will get back to you shortly.',
+            errorTitle: 'Delivery Error',
+            errorText: 'Something went wrong while sending your message. Please try again or reach out on LinkedIn.',
+            acceptBtn: 'OK'
         },
         ui: {
             backToTop: 'Back to top',
@@ -234,6 +274,13 @@ function applyLanguage(lang) {
         if (value !== null) {
             el.setAttribute('title', value);
             el.setAttribute('aria-label', value);
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+        const value = getNestedValue(dict, el.getAttribute('data-i18n-placeholder'));
+        if (value !== null) {
+            el.setAttribute('placeholder', value);
         }
     });
 
@@ -1304,6 +1351,179 @@ function initSpaRouter() {
 }
 
 /* ==========================================================================
+   Contact Form with Web3Forms & SweetAlert2
+   ========================================================================== */
+function initContactForm() {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+
+    const nameInput = document.getElementById('contactName');
+    const emailInput = document.getElementById('contactEmail');
+    const subjectInput = document.getElementById('contactSubject');
+    const messageInput = document.getElementById('contactMessage');
+    const submitBtn = document.getElementById('contactSubmitBtn');
+    const botcheckInput = form.querySelector('input[name="botcheck"]');
+
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const subjectError = document.getElementById('subjectError');
+    const messageError = document.getElementById('messageError');
+
+    const clearError = (input, errorEl) => {
+        if (!input) return;
+        input.classList.remove('input-error');
+        if (errorEl) {
+            errorEl.textContent = '';
+            errorEl.classList.remove('visible');
+        }
+    };
+
+    const setError = (input, errorEl, message) => {
+        if (!input) return;
+        input.classList.add('input-error');
+        if (errorEl) {
+            errorEl.textContent = message;
+            errorEl.classList.add('visible');
+        }
+    };
+
+    [nameInput, emailInput, subjectInput, messageInput].forEach((input) => {
+        if (!input) return;
+        input.addEventListener('input', () => {
+            if (input === nameInput) clearError(nameInput, nameError);
+            if (input === emailInput) clearError(emailInput, emailError);
+            if (input === subjectInput) clearError(subjectInput, subjectError);
+            if (input === messageInput) clearError(messageInput, messageError);
+        });
+    });
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.es;
+
+        clearError(nameInput, nameError);
+        clearError(emailInput, emailError);
+        clearError(subjectInput, subjectError);
+        clearError(messageInput, messageError);
+
+        let isValid = true;
+        let firstInvalid = null;
+
+        const nameVal = nameInput ? nameInput.value.trim() : '';
+        const emailVal = emailInput ? emailInput.value.trim() : '';
+        const subjectVal = subjectInput ? subjectInput.value.trim() : '';
+        const messageVal = messageInput ? messageInput.value.trim() : '';
+
+        if (!nameVal) {
+            setError(nameInput, nameError, dict.contact.validationName);
+            isValid = false;
+            if (!firstInvalid) firstInvalid = nameInput;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailVal || !emailRegex.test(emailVal)) {
+            setError(emailInput, emailError, dict.contact.validationEmail);
+            isValid = false;
+            if (!firstInvalid) firstInvalid = emailInput;
+        }
+
+        if (!subjectVal) {
+            setError(subjectInput, subjectError, dict.contact.validationSubject);
+            isValid = false;
+            if (!firstInvalid) firstInvalid = subjectInput;
+        }
+
+        if (!messageVal || messageVal.length < 10) {
+            setError(messageInput, messageError, dict.contact.validationMessage);
+            isValid = false;
+            if (!firstInvalid) firstInvalid = messageInput;
+        }
+
+        if (!isValid) {
+            if (firstInvalid) firstInvalid.focus();
+            return;
+        }
+
+        // Honeypot check
+        if (botcheckInput && botcheckInput.checked) {
+            return;
+        }
+
+        // Disable submit button and show loading state
+        submitBtn.disabled = true;
+        const originalBtnHtml = submitBtn.innerHTML;
+        submitBtn.innerHTML = `<span>${dict.contact.sendingBtn}</span> <span class="spinner-icon" aria-hidden="true">⏳</span>`;
+
+        const payload = {
+            access_key: '09ac978c-3deb-412a-a330-2d58f924f6cc',
+            from_name: 'JayzirTech Portfolio',
+            subject: `[JayzirTech Portfolio] ${subjectVal}`,
+            name: nameVal,
+            email: emailVal,
+            message: messageVal
+        };
+
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+
+            if (response.status === 200 && result.success) {
+                form.reset();
+                if (typeof Swal !== 'undefined') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: dict.contact.successTitle,
+                        text: dict.contact.successText,
+                        confirmButtonText: dict.contact.acceptBtn,
+                        buttonsStyling: false,
+                        customClass: {
+                            popup: 'portfolio-swal-popup',
+                            title: 'portfolio-swal-title',
+                            htmlContainer: 'portfolio-swal-html',
+                            confirmButton: 'portfolio-swal-btn'
+                        }
+                    });
+                } else {
+                    alert(dict.contact.successText);
+                }
+            } else {
+                throw new Error(result.message || 'Submission failed');
+            }
+        } catch (error) {
+            console.error('Contact form submission error:', error);
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    icon: 'error',
+                    title: dict.contact.errorTitle,
+                    text: dict.contact.errorText,
+                    confirmButtonText: dict.contact.acceptBtn,
+                    buttonsStyling: false,
+                    customClass: {
+                        popup: 'portfolio-swal-popup',
+                        title: 'portfolio-swal-title',
+                        htmlContainer: 'portfolio-swal-html',
+                        confirmButton: 'portfolio-swal-btn'
+                    }
+                });
+            } else {
+                alert(dict.contact.errorText);
+            }
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnHtml;
+        }
+    });
+}
+
+/* ==========================================================================
    Bootstrap
    ========================================================================== */
 function bootstrapPortfolio() {
@@ -1312,6 +1532,7 @@ function bootstrapPortfolio() {
     initPortraitTilt();
     initAntigravityStars();
     initSpaRouter();
+    initContactForm();
 }
 
 if (document.readyState === 'loading') {
