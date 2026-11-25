@@ -41,7 +41,7 @@ const TRANSLATIONS = {
                 badge: 'DOCUMENTACIÓN TÉCNICA',
                 suiteBadge: 'SUITE EN DESARROLLO',
                 suiteOverview: 'Visión General de la Suite',
-                module1: 'Módulo 1: Simulador Visual de Patologías y Graduación de Lentes',
+                module1: 'Módulo 1: Simulador Visual de Patologías',
                 module2: 'Módulo 2: Simulador de Filtros Ópticos',
                 tocTitle: 'En esta página',
                 secOverview: '01. Visión General & Propósito',
@@ -70,7 +70,7 @@ const TRANSLATIONS = {
             p1: {
                 category: 'Simulación Física / Óptica Visual',
                 title: 'Visiometric Labs — Suite de Simulación Óptica',
-                desc: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Simulador de Patologías y Graduación) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros).'
+                desc: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Simulador Visual de Patologías) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros Ópticos).'
             },
             p2: {
                 category: 'Ingeniería de Datos / Orquestación',
@@ -159,7 +159,7 @@ const TRANSLATIONS = {
                 badge: 'TECHNICAL DOCUMENTATION',
                 suiteBadge: 'SUITE IN DEVELOPMENT',
                 suiteOverview: 'Suite Overview',
-                module1: 'Module 1: Visual Pathology & Lens Prescription Simulator',
+                module1: 'Module 1: Visual Pathology Simulator',
                 module2: 'Module 2: Optical Filters Simulator',
                 tocTitle: 'On this page',
                 secOverview: '01. Overview & Purpose',
@@ -188,7 +188,7 @@ const TRANSLATIONS = {
             p1: {
                 category: 'Physics Simulation / Visual Optics',
                 title: 'Visiometric Labs — Optical Simulation Suite',
-                desc: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Visual Pathology & Prescription Simulator) and demonstrating the true impact of ophthalmic lens coatings (Filters Simulator).'
+                desc: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Visual Pathology Simulator) and demonstrating the true impact of ophthalmic lens coatings (Optical Filters Simulator).'
             },
             p2: {
                 category: 'Data Engineering / Orchestration',
@@ -892,7 +892,7 @@ function renderProjectDetail(projectId, subProjectId) {
                     </a>
                     <a href="#/proyecto/${parentSuite.id}/refraction-simulator" class="doc-suite-tab ${activeSubId === 'refraction-simulator' || activeSubId === 'ocularis' ? 'active' : ''}">
                         <span class="tab-icon">👁️</span>
-                        <span>${docsDict.module1 || 'Módulo 1: Simulador Visual de Patologías y Graduación de Lentes'}</span>
+                        <span>${docsDict.module1 || 'Módulo 1: Simulador Visual de Patologías'}</span>
                     </a>
                     <a href="#/proyecto/${parentSuite.id}/filters-simulator" class="doc-suite-tab ${activeSubId === 'filters-simulator' ? 'active' : ''}">
                         <span class="tab-icon">🔬</span>

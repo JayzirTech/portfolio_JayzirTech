@@ -42,8 +42,8 @@
             accentBorder: 'rgba(45, 212, 191, 0.3)'
         },
         painSummary: {
-            es: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Simulador de Patologías y Graduación) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros).',
-            en: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Visual Pathology & Prescription Simulator) and demonstrating the true impact of ophthalmic lens coatings (Filters Simulator).'
+            es: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Simulador Visual de Patologías) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros Ópticos).',
+            en: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Visual Pathology Simulator) and demonstrating the true impact of ophthalmic lens coatings (Optical Filters Simulator).'
         },
         github: 'https://github.com/visiometric-labs',
         demo: null,
@@ -68,7 +68,7 @@
             { key: { es: 'Motor de Renderizado', en: 'Rendering Engine' }, value: 'HTML5 Canvas 2D con aceleración gráfica por hardware' },
             { key: { es: 'Rendimiento en Vivo', en: 'Live Framerate' }, value: '60 FPS continuos en pantallas táctiles y escritorio' },
             { key: { es: 'Modelos Físicos', en: 'Physics Engines' }, value: 'Refracción paraxial de Snell + Transmitancia espectral fotónica' },
-            { key: { es: 'Módulos Integrados', en: 'Integrated Modules' }, value: '1. Simulador de Patologías y Graduación | 2. Simulador de Filtros' },
+            { key: { es: 'Módulos Integrados', en: 'Integrated Modules' }, value: '1. Simulador Visual de Patologías | 2. Simulador de Filtros Ópticos' },
             { key: { es: 'Compatibilidad Clínica', en: 'Clinical Compatibility' }, value: 'Tablets de mostrador, iPads, Monitores de gabinete' }
         ],
         stats: [
@@ -79,8 +79,8 @@
         ],
         tags: ['Vanilla JavaScript', 'HTML5 Canvas 2D', 'Snell Ray-Tracing', 'Spectral Filtering', 'Physical Simulation', 'Zero Dependencies', 'Clinical UI/UX'],
         overview: {
-            es: 'Visiometric Labs es una suite completa de simulación física y tecnología visual diseñada para transformar la experiencia en la consulta optométrica y oftálmica. Desarrollada uniendo los principios del modelado de sistemas físicos, óptica geométrica y cálculo numérico con interfaces visuales de alto rendimiento, la suite integra dos motores complementarios: el Simulador Visual de Patologías y Graduación (dedicado al modelado anatómico y defectos refractivos) y el Simulador de Filtros (dedicado a la demostración de tratamientos de lentes y protección espectral).',
-            en: 'Visiometric Labs is an end-to-end physics simulation and vision tech suite engineered to redefine clinical ophthalmic consultations. Combining physical systems modeling, geometric optics, and real-time numerical solvers with high-performance web graphics, the suite brings together two complementary engines: the Visual Pathology & Lens Prescription Simulator (anatomical refraction and dioptric lens modeling) and the Filters Simulator (spectral coatings and light transmission).'
+            es: 'Visiometric Labs es una suite completa de simulación física y tecnología visual diseñada para transformar la experiencia en la consulta optométrica y oftálmica. Desarrollada uniendo los principios del modelado de sistemas físicos, óptica geométrica y cálculo numérico con interfaces visuales de alto rendimiento, la suite integra dos motores complementarios: el Simulador Visual de Patologías (dedicado al modelado anatómico y defectos refractivos) y el Simulador de Filtros Ópticos (dedicado a la demostración de tratamientos de lentes y protección espectral).',
+            en: 'Visiometric Labs is an end-to-end physics simulation and vision tech suite engineered to redefine clinical ophthalmic consultations. Combining physical systems modeling, geometric optics, and real-time numerical solvers with high-performance web graphics, the suite brings together two complementary engines: the Visual Pathology Simulator (anatomical refraction and dioptric lens modeling) and the Optical Filters Simulator (spectral coatings and light transmission).'
         },
         problem: {
             title: {
@@ -112,12 +112,12 @@
                 route: '#/proyecto/visiometric-suite/refraction-simulator',
                 status: 'in-development',
                 title: {
-                    es: 'Módulo 1: Simulador Visual de Patologías y Graduación de Lentes',
-                    en: 'Module 1: Visual Pathology & Lens Prescription Simulator'
+                    es: 'Módulo 1: Simulador Visual de Patologías',
+                    en: 'Module 1: Visual Pathology Simulator'
                 },
                 shortTitle: {
-                    es: 'Simulador Visual de Patologías y Graduación de Lentes',
-                    en: 'Visual Pathology & Lens Prescription Simulator'
+                    es: 'Simulador Visual de Patologías',
+                    en: 'Visual Pathology Simulator'
                 },
                 desc: {
                     es: 'Simula el ojo humano como un sistema óptico convergente, calculando el trazado de rayos de Snell para demostrar anomalías refractivas (miopía, hipermetropía, astigmatismo) y su corrección con lentes diótricos en tiempo real a 60 FPS.',
@@ -200,7 +200,7 @@ export class VisiometricSuite {
                 en: 'Decoupled simulation ecosystem consisting of two independent physics engines bound by a unified UI controller layer.'
             },
             flow: [
-                { step: '01. Diagnóstico Refractivo', desc: 'Módulo de Patologías y Graduación: Selección de patología (miopía/hipermetropía/astigmatismo) y ajuste de potencia diótrica en tiempo real.' },
+                { step: '01. Diagnóstico Refractivo', desc: 'Módulo de Patologías Visuales: Selección de patología (miopía/hipermetropía/astigmatismo) y ajuste de potencia diótrica en tiempo real.' },
                 { step: '02. Trazado Paraxial de Rayos', desc: 'Resolución trigonométrica analítica que muestra cómo el haz de luz converge exactamente en el plano retiniano.' },
                 { step: '03. Evaluación de Tratamientos', desc: 'Módulo Filtros: Simulación interactiva de recubrimientos (filtro azul para pantallas, antirreflejo para noche, fotocromático para sol).' },
                 { step: '04. Renderizado Canvas 60 FPS', desc: 'Composición gráfica acelerada por GPU en navegadores móviles y desktop sin instalación de software.' },
@@ -213,7 +213,7 @@ export class VisiometricSuite {
                 },
                 {
                     title: 'Modularidad Estricta entre Refracción y Recubrimientos',
-                    reason: 'Permite utilizar el Simulador de Patologías de forma autónoma durante el examen médico o activar el Simulador de Filtros durante la asesoría comercial.'
+                    reason: 'Permite utilizar el Simulador Visual de Patologías de forma autónoma durante el examen médico o activar el Simulador de Filtros durante la asesoría comercial.'
                 },
                 {
                     title: 'Aceleración por Hardware en Canvas 2D',
