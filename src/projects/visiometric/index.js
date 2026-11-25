@@ -1,13 +1,13 @@
 /**
  * ==========================================================================
  * Project: Visiometric Labs — Suite de Simulación Óptica
- * Integrador de módulos: Ocularis + Simulador de Filtros
+ * Integrador de módulos: Simulador de Refracción + Simulador de Filtros
  * ==========================================================================
  */
 (function () {
-    const ocularisRef = (typeof window !== 'undefined' && window.OCULARIS_MODULE) 
-        ? window.OCULARIS_MODULE 
-        : (typeof require !== 'undefined' ? require('./ocularis.js') : null);
+    const refractionRef = (typeof window !== 'undefined' && (window.REFRACTION_SIMULATOR_MODULE || window.OCULARIS_MODULE)) 
+        ? (window.REFRACTION_SIMULATOR_MODULE || window.OCULARIS_MODULE) 
+        : (typeof require !== 'undefined' ? (require('./refraction-simulator.js') || require('./ocularis.js')) : null);
 
     const filtersRef = (typeof window !== 'undefined' && window.FILTERS_SIMULATOR_MODULE) 
         ? window.FILTERS_SIMULATOR_MODULE 
@@ -16,7 +16,8 @@
     const visiometricSuite = {
         id: 'visiometric-suite',
         isSuite: true,
-        version: 'v2.0-suite',
+        version: 'v2.0-suite-wip',
+        status: 'in-development',
         title: {
             es: 'Visiometric Labs — Suite de Simulación Óptica',
             en: 'Visiometric Labs — Optical Simulation Suite'
@@ -30,8 +31,8 @@
             en: 'Physics Simulation / Visual Optics'
         },
         badge: {
-            es: 'Suite Médica & Óptica Integrada',
-            en: 'Integrated Vision Tech Suite'
+            es: 'Suite en Desarrollo / WIP',
+            en: 'Suite in Active Development'
         },
         theme: {
             accent: '#2dd4bf',
@@ -41,11 +42,11 @@
             accentBorder: 'rgba(45, 212, 191, 0.3)'
         },
         painSummary: {
-            es: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Ocularis) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros).',
-            en: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Ocularis) and demonstrating the true impact of ophthalmic lens coatings (Filters Simulator).'
+            es: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Simulador de Refracción) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros).',
+            en: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Refraction Simulator) and demonstrating the true impact of ophthalmic lens coatings (Filters Simulator).'
         },
-        github: 'https://github.com/visiometric-labs/filters-simulator.git',
-        demo: 'https://visiometric-labs.github.io/filters-simulator/',
+        github: 'https://github.com/visiometric-labs',
+        demo: 'https://visiometric-labs.github.io/refraction-simulator/',
         gallery: [
             {
                 src: './index_styles/assets/imgs/projects/ocularis-simulation.png',
@@ -107,34 +108,36 @@
         },
         suiteModules: [
             {
-                id: 'ocularis',
-                route: '#/proyecto/visiometric-suite/ocularis',
+                id: 'refraction-simulator',
+                route: '#/proyecto/visiometric-suite/refraction-simulator',
+                status: 'in-development',
                 title: {
-                    es: 'Módulo 1: Simulador Visual de Patologías y Graduación de Lentes (Ocularis)',
-                    en: 'Module 1: Visual Pathology & Lens Prescription Simulator (Ocularis)'
+                    es: 'Módulo 1: Simulador de Refracción y Graduación de Lentes (Refraction Simulator)',
+                    en: 'Module 1: Refraction & Lens Prescription Simulator (Refraction Simulator)'
                 },
                 shortTitle: {
-                    es: 'Simulador Visual de Patologías y Graduación de Lentes',
-                    en: 'Visual Pathology & Lens Prescription Simulator'
+                    es: 'Simulador de Refracción (Refraction Simulator)',
+                    en: 'Refraction Simulator'
                 },
                 desc: {
                     es: 'Simula el ojo humano como un sistema óptico convergente, calculando el trazado de rayos de Snell para demostrar anomalías refractivas (miopía, hipermetropía, astigmatismo) y su corrección con lentes diótricos en tiempo real a 60 FPS.',
                     en: 'Simulates the human eye as a convergent optical system, solving Snell paraxial ray tracing to demonstrate refractive errors (myopia, hyperopia, astigmatism) and corrective lenses in real time at 60 FPS.'
                 },
                 tags: ['Snell Ray-Tracing', 'Paraxial Optics', 'Sliders Dioptrías', 'HTML5 Canvas', '60 FPS'],
-                demo: 'https://jayzirtech.github.io/ocularis/',
-                github: 'https://github.com/JayzirTech/ocularis'
+                demo: 'https://visiometric-labs.github.io/refraction-simulator/',
+                github: 'https://github.com/visiometric-labs/refraction-simulator'
             },
             {
                 id: 'filters-simulator',
                 route: '#/proyecto/visiometric-suite/filters-simulator',
+                status: 'in-development',
                 title: {
-                    es: 'Módulo 2: Simulador de Filtros Ópticos — Recubrimientos & Tratamientos',
-                    en: 'Module 2: Optical Filters Simulator — Lens Coatings & Treatments'
+                    es: 'Módulo 2: Simulador de Filtros Ópticos — Recubrimientos & Tratamientos (Filters Simulator)',
+                    en: 'Module 2: Optical Filters Simulator — Lens Coatings & Treatments (Filters Simulator)'
                 },
                 shortTitle: {
-                    es: 'Simulador de Filtros (Recubrimientos)',
-                    en: 'Filters Simulator (Coatings)'
+                    es: 'Simulador de Filtros (Filters Simulator)',
+                    en: 'Filters Simulator'
                 },
                 desc: {
                     es: 'Simulador clínico interactivo que modela la transmitancia espectral de recubrimientos oftálmicos (corte de luz azul 415nm, antirreflejo con supresión de destellos parásitos, oscurecimiento fotocromático UV y polarizado anti-reflejo de agua/asfalto).',
@@ -142,7 +145,7 @@
                 },
                 tags: ['Spectral Filtering', 'Canvas 2D', 'Anti-Glare Suppression', 'Photochromic LERP', 'Zero Dependencies'],
                 demo: 'https://visiometric-labs.github.io/filters-simulator/',
-                github: 'https://github.com/visiometric-labs/filters-simulator.git'
+                github: 'https://github.com/visiometric-labs/filters-simulator'
             }
         ],
         codeSnippet: {
@@ -235,14 +238,15 @@ export class VisiometricSuite {
             en: 'Visiometric Labs brings optical physics and visual technology to healthcare practices, turning complex medical jargon into intuitive live simulations that elevate patient trust and drive optical prescription success.'
         },
         subModules: {
-            'ocularis': ocularisRef,
+            'refraction-simulator': refractionRef,
+            'ocularis': refractionRef, // alias for backwards compatibility
             'filters-simulator': filtersRef
         }
     };
 
     if (typeof window !== 'undefined') {
         window.PROJECTS_DATA = window.PROJECTS_DATA || [];
-        // Insert as 3rd project
+        // Insert suite into projects data array
         window.PROJECTS_DATA.push(visiometricSuite);
     }
     if (typeof module !== 'undefined') {

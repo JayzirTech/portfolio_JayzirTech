@@ -7,6 +7,7 @@
     const project = {
         id: 'datamart-pipeline',
         version: 'v2.1.0-prod',
+        status: 'completed',
         title: {
             es: 'DataMart Analytical ETL Pipeline',
             en: 'DataMart Analytical ETL Pipeline'

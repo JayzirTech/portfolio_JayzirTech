@@ -35,12 +35,14 @@ const TRANSLATIONS = {
             prevProject: 'Anterior',
             nextProject: 'Siguiente',
             allProjects: 'Índice de Proyectos',
+            statusWip: 'En desarrollo',
+            statusCompleted: 'Concluido',
             docs: {
                 badge: 'DOCUMENTACIÓN TÉCNICA',
-                suiteBadge: 'SUITE MODULAR',
+                suiteBadge: 'SUITE EN DESARROLLO',
                 suiteOverview: 'Visión General de la Suite',
-                module1: 'Módulo 1: Simulador Visual de Patologías y Graduación de Lentes (Ocularis)',
-                module2: 'Módulo 2: Simulador de Filtros',
+                module1: 'Módulo 1: Simulador de Refracción (Refraction Simulator)',
+                module2: 'Módulo 2: Simulador de Filtros (Filters Simulator)',
                 tocTitle: 'En esta página',
                 secOverview: '01. Visión General & Propósito',
                 secProblem: '02. El Problema & Dolor de Negocio',
@@ -66,17 +68,19 @@ const TRANSLATIONS = {
                 exploreDoc: 'Ver documentación técnica del módulo'
             },
             p1: {
-                category: 'Ingeniería de Datos / Orquestación',
-                desc: 'Evita el colapso de bases de datos operacionales cuando finanzas y analistas saturan el sistema con reportes pesados. Centraliza y procesa ventas automáticamente sin interrumpir la operación del negocio.'
-            },
-            p2: {
-                category: 'Arquitectura de Datos / BI',
-                desc: 'Resuelve la pérdida de trazabilidad en ventas online cuando productos y precios cambian o las transacciones llegan con días de retraso, garantizando reportes financieros exactos e inmutables.'
-            },
-            p3: {
                 category: 'Simulación Física / Óptica Visual',
                 title: 'Visiometric Labs — Suite de Simulación Óptica',
-                desc: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Ocularis) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros).'
+                desc: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Simulador de Refracción) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros).'
+            },
+            p2: {
+                category: 'Ingeniería de Datos / Orquestación',
+                title: 'DataMart Analytical ETL Pipeline',
+                desc: 'Evita el colapso de bases de datos operacionales cuando finanzas y analistas saturan el sistema con reportes pesados. Centraliza y procesa ventas automáticamente sin interrumpir la operación del negocio.'
+            },
+            p3: {
+                category: 'Arquitectura de Datos / BI',
+                title: 'Mercado Nube Analytics Engine',
+                desc: 'Resuelve la pérdida de trazabilidad en ventas online cuando productos y precios cambian o las transacciones llegan con días de retraso, garantizando reportes financieros exactos e inmutables.'
             }
         },
         tech: {
@@ -149,12 +153,14 @@ const TRANSLATIONS = {
             prevProject: 'Previous',
             nextProject: 'Next',
             allProjects: 'All Projects Index',
+            statusWip: 'In Development',
+            statusCompleted: 'Completed',
             docs: {
                 badge: 'TECHNICAL DOCUMENTATION',
-                suiteBadge: 'MODULAR SUITE',
+                suiteBadge: 'SUITE IN DEVELOPMENT',
                 suiteOverview: 'Suite Overview',
-                module1: 'Module 1: Visual Pathology & Lens Prescription Simulator (Ocularis)',
-                module2: 'Module 2: Filters Simulator',
+                module1: 'Module 1: Refraction & Lens Prescription Simulator (Refraction Simulator)',
+                module2: 'Module 2: Optical Filters Simulator (Filters Simulator)',
                 tocTitle: 'On this page',
                 secOverview: '01. Overview & Purpose',
                 secProblem: '02. Problem & Business Impact',
@@ -180,17 +186,19 @@ const TRANSLATIONS = {
                 exploreDoc: 'View module technical documentation'
             },
             p1: {
-                category: 'Data Engineering / Orchestration',
-                desc: 'Prevents operational database crashes when finance and analytics teams run heavy reports on production systems. Automatically centralizes and transforms sales data without business disruption.'
-            },
-            p2: {
-                category: 'Data Architecture / BI',
-                desc: 'Eliminates metric corruption in e-commerce when product prices change or order data arrives late, guaranteeing 100% accurate, tamper-proof financial reporting.'
-            },
-            p3: {
                 category: 'Physics Simulation / Visual Optics',
                 title: 'Visiometric Labs — Optical Simulation Suite',
-                desc: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Ocularis) and demonstrating the true impact of ophthalmic lens coatings (Filters Simulator).'
+                desc: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Refraction Simulator) and demonstrating the true impact of ophthalmic lens coatings (Filters Simulator).'
+            },
+            p2: {
+                category: 'Data Engineering / Orchestration',
+                title: 'DataMart Analytical ETL Pipeline',
+                desc: 'Prevents operational database crashes when finance and analytics teams run heavy reports on production systems. Automatically centralizes and transforms sales data without business disruption.'
+            },
+            p3: {
+                category: 'Data Architecture / BI',
+                title: 'Mercado Nube Analytics Engine',
+                desc: 'Eliminates metric corruption in e-commerce when product prices change or order data arrives late, guaranteeing 100% accurate, tamper-proof financial reporting.'
             }
         },
         tech: {
@@ -626,12 +634,16 @@ function parseHash(hash) {
         let subProjectId = projectMatch[2] || null;
 
         // Aliases for optical projects
-        if (projectId === 'ocularis') {
+        if (projectId === 'ocularis' || projectId === 'refraction-simulator') {
             projectId = 'visiometric-suite';
-            subProjectId = 'ocularis';
+            subProjectId = 'refraction-simulator';
         } else if (projectId === 'filters-simulator' || projectId === 'filtros' || projectId === 'filtros-simulator') {
             projectId = 'visiometric-suite';
             subProjectId = 'filters-simulator';
+        }
+
+        if (projectId === 'visiometric-suite' && subProjectId === 'ocularis') {
+            subProjectId = 'refraction-simulator';
         }
 
         return { view: 'project', projectId, subProjectId, section: null };
@@ -725,22 +737,25 @@ function renderProjectDetail(projectId, subProjectId) {
     let nextNav = null;
 
     if (parentSuite) {
+        const refractionMod = parentSuite.subModules && (parentSuite.subModules['refraction-simulator'] || parentSuite.subModules.ocularis);
+        const filtersMod = parentSuite.subModules && parentSuite.subModules['filters-simulator'];
+
         if (!activeSubId) {
             // Suite Overview
             if (projectIndex > 0) {
                 prevNav = { href: `#/proyecto/${projects[projectIndex - 1].id}`, name: projects[projectIndex - 1].title[lang] };
             }
-            if (parentSuite.subModules && parentSuite.subModules.ocularis) {
-                nextNav = { href: `#/proyecto/${parentSuite.id}/ocularis`, name: parentSuite.subModules.ocularis.title[lang] };
+            if (refractionMod) {
+                nextNav = { href: `#/proyecto/${parentSuite.id}/refraction-simulator`, name: refractionMod.title[lang] };
             }
-        } else if (activeSubId === 'ocularis') {
+        } else if (activeSubId === 'refraction-simulator' || activeSubId === 'ocularis') {
             prevNav = { href: `#/proyecto/${parentSuite.id}`, name: `${docsDict.suiteOverview || 'Visión General'} (${parentSuite.shortTitle ? parentSuite.shortTitle[lang] : parentSuite.title[lang]})` };
-            if (parentSuite.subModules && parentSuite.subModules['filters-simulator']) {
-                nextNav = { href: `#/proyecto/${parentSuite.id}/filters-simulator`, name: parentSuite.subModules['filters-simulator'].title[lang] };
+            if (filtersMod) {
+                nextNav = { href: `#/proyecto/${parentSuite.id}/filters-simulator`, name: filtersMod.title[lang] };
             }
         } else if (activeSubId === 'filters-simulator') {
-            if (parentSuite.subModules && parentSuite.subModules.ocularis) {
-                prevNav = { href: `#/proyecto/${parentSuite.id}/ocularis`, name: parentSuite.subModules.ocularis.title[lang] };
+            if (refractionMod) {
+                prevNav = { href: `#/proyecto/${parentSuite.id}/refraction-simulator`, name: refractionMod.title[lang] };
             }
             if (projectIndex < projects.length - 1) {
                 nextNav = { href: `#/proyecto/${projects[projectIndex + 1].id}`, name: projects[projectIndex + 1].title[lang] };
@@ -867,7 +882,7 @@ function renderProjectDetail(projectId, subProjectId) {
             ${parentSuite ? `
             <div class="doc-suite-nav">
                 <div class="doc-suite-nav-header">
-                    <span class="doc-suite-tag">${docsDict.suiteBadge || 'SUITE MODULAR'}</span>
+                    <span class="doc-suite-tag">${docsDict.suiteBadge || 'SUITE EN DESARROLLO'}</span>
                     <span class="doc-suite-title">${parentSuite.title[lang]}</span>
                 </div>
                 <nav class="doc-suite-tabs" aria-label="Navegación de módulos de la Suite">
@@ -875,9 +890,9 @@ function renderProjectDetail(projectId, subProjectId) {
                         <span class="tab-icon">⊞</span>
                         <span>${docsDict.suiteOverview || 'Visión General de la Suite'}</span>
                     </a>
-                    <a href="#/proyecto/${parentSuite.id}/ocularis" class="doc-suite-tab ${activeSubId === 'ocularis' ? 'active' : ''}">
+                    <a href="#/proyecto/${parentSuite.id}/refraction-simulator" class="doc-suite-tab ${activeSubId === 'refraction-simulator' || activeSubId === 'ocularis' ? 'active' : ''}">
                         <span class="tab-icon">👁️</span>
-                        <span>${docsDict.module1 || 'Módulo 1: Ocularis (Refracción)'}</span>
+                        <span>${docsDict.module1 || 'Módulo 1: Simulador de Refracción'}</span>
                     </a>
                     <a href="#/proyecto/${parentSuite.id}/filters-simulator" class="doc-suite-tab ${activeSubId === 'filters-simulator' ? 'active' : ''}">
                         <span class="tab-icon">🔬</span>
@@ -890,7 +905,16 @@ function renderProjectDetail(projectId, subProjectId) {
             <!-- Technical Document Header -->
             <header class="doc-header">
                 <div class="doc-header-top">
-                    <h1 class="doc-main-title">${project.title[lang]}</h1>
+                    <div class="doc-title-group">
+                        <div class="doc-status-row">
+                            <span class="doc-status-badge ${project.status === 'in-development' ? 'status-wip' : 'status-completed'}">
+                                <span class="status-dot ${project.status === 'in-development' ? 'pulse' : ''}" aria-hidden="true"></span>
+                                <span>${project.status === 'in-development' ? dict.projects.statusWip : dict.projects.statusCompleted}</span>
+                            </span>
+                            ${project.category ? `<span class="doc-category-badge">${project.category[lang]}</span>` : ''}
+                        </div>
+                        <h1 class="doc-main-title">${project.title[lang]}</h1>
+                    </div>
                     <div class="doc-header-actions">
                         ${project.github ? `
                         <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="doc-btn doc-btn-secondary" title="GitHub Repository">

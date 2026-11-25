@@ -7,22 +7,23 @@
     const filtersSimulatorModule = {
         id: 'filters-simulator',
         suiteId: 'visiometric-suite',
-        version: 'v1.0.0-live',
+        version: 'v1.1.0-wip',
+        status: 'in-development',
         title: {
             es: 'Módulo 2: Simulador de Filtros Ópticos — Recubrimientos & Tratamientos',
             en: 'Module 2: Optical Filters Simulator — Coatings & Treatments'
         },
         shortTitle: {
-            es: 'Simulador de Filtros (Recubrimientos)',
-            en: 'Filters Simulator (Coatings)'
+            es: 'Simulador de Filtros (Filters Simulator)',
+            en: 'Filters Simulator'
         },
         category: {
             es: 'Simulación Física / Óptica Visual',
             en: 'Physics Simulation / Visual Optics'
         },
         badge: {
-            es: 'Módulo de Tratamientos en Producción',
-            en: 'Production Coatings Engine'
+            es: 'En Desarrollo / WIP',
+            en: 'In Active Development'
         },
         theme: {
             accent: '#f59e0b',
@@ -35,7 +36,7 @@
             es: 'Resuelve la dificultad de explicar y comparar en consulta óptica cómo actúan los filtros de lentes (luz azul, antirreflejo, fotocromáticos, polarizados) frente a diferentes condiciones lumínicas reales.',
             en: 'Solves the clinical challenge of demonstrating and comparing ophthalmic lens coatings (blue cut, anti-reflective, photochromic, polarized) under real-world lighting conditions.'
         },
-        github: 'https://github.com/visiometric-labs/filters-simulator.git',
+        github: 'https://github.com/visiometric-labs/filters-simulator',
         demo: 'https://visiometric-labs.github.io/filters-simulator/',
         gallery: [
             {

@@ -7,6 +7,7 @@
     const project = {
         id: 'mercado-nube',
         version: 'v1.4.0-dw',
+        status: 'completed',
         title: {
             es: 'Mercado Nube Analytics Engine',
             en: 'Mercado Nube Analytics Engine'

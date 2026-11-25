@@ -1,28 +1,29 @@
 /**
  * ==========================================================================
- * Visiometric Labs — Módulo 1: Ocularis (Simulación Óptica & Refracción)
+ * Visiometric Labs — Módulo 1: Simulador de Refracción (Refraction Simulator)
  * ==========================================================================
  */
 (function () {
-    const ocularisModule = {
-        id: 'ocularis',
+    const refractionModule = {
+        id: 'refraction-simulator',
         suiteId: 'visiometric-suite',
-        version: 'v1.1.0-sim',
+        version: 'v1.2.0-wip',
+        status: 'in-development',
         title: {
-            es: 'Módulo 1: Simulador Visual de Patologías y Graduación de Lentes (Ocularis)',
-            en: 'Module 1: Visual Pathology & Lens Prescription Simulator (Ocularis)'
+            es: 'Módulo 1: Simulador de Refracción y Graduación de Lentes (Refraction Simulator)',
+            en: 'Module 1: Refraction & Lens Prescription Simulator (Refraction Simulator)'
         },
         shortTitle: {
-            es: 'Simulador Visual de Patologías y Graduación de Lentes',
-            en: 'Visual Pathology & Lens Prescription Simulator'
+            es: 'Simulador de Refracción (Refraction Simulator)',
+            en: 'Refraction Simulator'
         },
         category: {
             es: 'Simulación Física / Óptica Geométrica',
             en: 'Physics Simulation / Geometric Optics'
         },
         badge: {
-            es: 'Módulo de Refracción en Vivo',
-            en: 'Live Refraction Engine'
+            es: 'En Desarrollo / WIP',
+            en: 'In Active Development'
         },
         theme: {
             accent: '#2dd4bf',
@@ -35,8 +36,8 @@
             es: 'Elimina la barrera de comunicación entre el optómetra y el paciente, permitiendo visualizar de forma interactiva y comprensible por qué ven borroso y cómo sus lentes corregirán su visión.',
             en: 'Bridges the communication gap between eye-care specialists and patients by interactively showing why vision is blurred and exactly how corrective lenses restore sharp focus.'
         },
-        github: 'https://github.com/JayzirTech/ocularis',
-        demo: 'https://jayzirtech.github.io/ocularis/',
+        github: 'https://github.com/visiometric-labs/refraction-simulator',
+        demo: 'https://visiometric-labs.github.io/refraction-simulator/',
         gallery: [
             {
                 src: './index_styles/assets/imgs/projects/ocularis-simulation.png',
@@ -173,9 +174,10 @@ export function traceLightRay(originY, refractivePower, lensPositionX, retinaPos
     };
 
     if (typeof window !== 'undefined') {
-        window.OCULARIS_MODULE = ocularisModule;
+        window.REFRACTION_SIMULATOR_MODULE = refractionModule;
+        window.OCULARIS_MODULE = refractionModule;
     }
     if (typeof module !== 'undefined') {
-        module.exports = ocularisModule;
+        module.exports = refractionModule;
     }
 })();
