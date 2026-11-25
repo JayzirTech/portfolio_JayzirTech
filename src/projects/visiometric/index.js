@@ -246,6 +246,7 @@ export class VisiometricSuite {
 
     if (typeof window !== 'undefined') {
         window.PROJECTS_DATA = window.PROJECTS_DATA || [];
+        visiometricSuite.demo = null;
         // Insert suite into projects data array
         window.PROJECTS_DATA.push(visiometricSuite);
     }

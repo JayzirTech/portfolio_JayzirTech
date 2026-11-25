@@ -706,7 +706,11 @@ function renderProjectDetail(projectId, subProjectId) {
             activeSubId = subProjectId;
         } else {
             activeSubId = null;
+            project.demo = null; // Enforce no live demo button on suite overview
         }
+    }
+    if (project && (project.isSuite || project.id === 'visiometric-suite')) {
+        project.demo = null;
     }
 
     // Apply project theme palette dynamically
@@ -771,7 +775,7 @@ function renderProjectDetail(projectId, subProjectId) {
     }
 
     // Build dynamic sequential sections list
-    const isSuiteOverview = !activeSubId && !!(project && project.suiteModules);
+    const isSuiteOverview = !activeSubId && !!(project && (project.isSuite || project.suiteModules));
     const docSections = [
         { id: 'doc-overview', title: lang === 'es' ? 'Visión General & Propósito' : 'Overview & Purpose' },
         { id: 'doc-problem', title: lang === 'es' ? 'El Problema & Dolor de Negocio' : 'Problem & Business Impact' }
@@ -922,7 +926,7 @@ function renderProjectDetail(projectId, subProjectId) {
                             <span>${dict.projects.viewRepo}</span>
                             <span aria-hidden="true">↗</span>
                         </a>` : ''}
-                        ${project.demo ? `
+                        ${(!isSuiteOverview && !project.isSuite && project.demo) ? `
                         <a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="doc-btn doc-btn-primary" title="Live Demo Application">
                             <span>⚡ ${dict.projects.viewLive}</span>
                             <span aria-hidden="true">↗</span>
