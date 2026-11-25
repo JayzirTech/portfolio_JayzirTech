@@ -14,8 +14,8 @@
             en: 'Module 2: Optical Filters Simulator — Coatings & Treatments'
         },
         shortTitle: {
-            es: 'Simulador de Filtros (Filters Simulator)',
-            en: 'Filters Simulator'
+            es: 'Simulador de Filtros Ópticos',
+            en: 'Optical Filters Simulator'
         },
         category: {
             es: 'Simulación Física / Óptica Visual',

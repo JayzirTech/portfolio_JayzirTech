@@ -41,8 +41,8 @@ const TRANSLATIONS = {
                 badge: 'DOCUMENTACIÓN TÉCNICA',
                 suiteBadge: 'SUITE EN DESARROLLO',
                 suiteOverview: 'Visión General de la Suite',
-                module1: 'Módulo 1: Simulador de Refracción (Refraction Simulator)',
-                module2: 'Módulo 2: Simulador de Filtros (Filters Simulator)',
+                module1: 'Módulo 1: Simulador Visual de Patologías y Graduación de Lentes',
+                module2: 'Módulo 2: Simulador de Filtros Ópticos',
                 tocTitle: 'En esta página',
                 secOverview: '01. Visión General & Propósito',
                 secProblem: '02. El Problema & Dolor de Negocio',
@@ -70,7 +70,7 @@ const TRANSLATIONS = {
             p1: {
                 category: 'Simulación Física / Óptica Visual',
                 title: 'Visiometric Labs — Suite de Simulación Óptica',
-                desc: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Simulador de Refracción) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros).'
+                desc: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Simulador de Patologías y Graduación) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros).'
             },
             p2: {
                 category: 'Ingeniería de Datos / Orquestación',
@@ -159,8 +159,8 @@ const TRANSLATIONS = {
                 badge: 'TECHNICAL DOCUMENTATION',
                 suiteBadge: 'SUITE IN DEVELOPMENT',
                 suiteOverview: 'Suite Overview',
-                module1: 'Module 1: Refraction & Lens Prescription Simulator (Refraction Simulator)',
-                module2: 'Module 2: Optical Filters Simulator (Filters Simulator)',
+                module1: 'Module 1: Visual Pathology & Lens Prescription Simulator',
+                module2: 'Module 2: Optical Filters Simulator',
                 tocTitle: 'On this page',
                 secOverview: '01. Overview & Purpose',
                 secProblem: '02. Problem & Business Impact',
@@ -188,7 +188,7 @@ const TRANSLATIONS = {
             p1: {
                 category: 'Physics Simulation / Visual Optics',
                 title: 'Visiometric Labs — Optical Simulation Suite',
-                desc: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Refraction Simulator) and demonstrating the true impact of ophthalmic lens coatings (Filters Simulator).'
+                desc: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Visual Pathology & Prescription Simulator) and demonstrating the true impact of ophthalmic lens coatings (Filters Simulator).'
             },
             p2: {
                 category: 'Data Engineering / Orchestration',
@@ -892,11 +892,11 @@ function renderProjectDetail(projectId, subProjectId) {
                     </a>
                     <a href="#/proyecto/${parentSuite.id}/refraction-simulator" class="doc-suite-tab ${activeSubId === 'refraction-simulator' || activeSubId === 'ocularis' ? 'active' : ''}">
                         <span class="tab-icon">👁️</span>
-                        <span>${docsDict.module1 || 'Módulo 1: Simulador de Refracción'}</span>
+                        <span>${docsDict.module1 || 'Módulo 1: Simulador Visual de Patologías y Graduación de Lentes'}</span>
                     </a>
                     <a href="#/proyecto/${parentSuite.id}/filters-simulator" class="doc-suite-tab ${activeSubId === 'filters-simulator' ? 'active' : ''}">
                         <span class="tab-icon">🔬</span>
-                        <span>${docsDict.module2 || 'Módulo 2: Simulador de Filtros'}</span>
+                        <span>${docsDict.module2 || 'Módulo 2: Simulador de Filtros Ópticos'}</span>
                     </a>
                 </nav>
             </div>
