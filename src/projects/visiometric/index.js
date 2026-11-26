@@ -5,7 +5,7 @@
  * 1. Simulador Visual de Patologías (Ocularis) - Concluido
  * 2. Simulador de Filtros Ópticos (Chromatis) - Concluido
  * 3. Simulador de Lentes Fotosensibles Transitions® (Luminix 3D) - Concluido
- * 4. Simulador de Diseños y Distancias Focales (Focal Lengths) - En Desarrollo
+ * 4. Simulador de Diseños de Lente y Campos Visuales (Optix) - En Desarrollo
  * ==========================================================================
  */
 (function () {
@@ -21,8 +21,8 @@
         ? (window.TRANSITIONS_SIMULATOR_MODULE || window.LUMINIX_MODULE)
         : (typeof require !== 'undefined' ? (function () { try { return require('./transitions-simulator.js'); } catch (e) { return null; } })() : null);
 
-    const focalLengthsRef = (typeof window !== 'undefined' && window.FOCAL_LENGTHS_SIMULATOR_MODULE)
-        ? window.FOCAL_LENGTHS_SIMULATOR_MODULE
+    const focalLengthsRef = (typeof window !== 'undefined' && (window.FOCAL_LENGTHS_SIMULATOR_MODULE || window.OPTIX_MODULE))
+        ? (window.FOCAL_LENGTHS_SIMULATOR_MODULE || window.OPTIX_MODULE)
         : (typeof require !== 'undefined' ? (function () { try { return require('./focal-lengths-simulator.js'); } catch (e) { return null; } })() : null);
 
     const visiometricSuite = {
@@ -94,7 +94,7 @@
             { key: { es: 'Motores de Renderizado', en: 'Rendering Engines' }, value: 'HTML5 Canvas 2D acelerado + Three.js 3D Viewport con materiales PBR' },
             { key: { es: 'Rendimiento en Vivo', en: 'Live Framerate' }, value: '60 a 120 FPS continuos en pantallas táctiles y escritorio' },
             { key: { es: 'Modelos Físicos', en: 'Physics Engines' }, value: 'Refracción de Snell, transmitancia espectral, cinética LERP y teorema de Minkwitz' },
-            { key: { es: 'Módulos Integrados', en: 'Integrated Modules' }, value: '1. Patologías (Ocularis) | 2. Filtros (Chromatis) | 3. Fotosensibles (Luminix) | 4. Diseños Focales (WIP)' },
+            { key: { es: 'Módulos Integrados', en: 'Integrated Modules' }, value: '1. Ocularis | 2. Chromatis | 3. Luminix | 4. Optix' },
             { key: { es: 'Compatibilidad Clínica', en: 'Clinical Compatibility' }, value: 'Tablets de mostrador, iPads, Monitores de gabinete y smartphones' }
         ],
         stats: [
@@ -105,8 +105,8 @@
         ],
         tags: ['Vanilla JavaScript', 'HTML5 Canvas 2D', 'Three.js', 'WebGL 3D', 'Snell Ray-Tracing', 'Spectral Filtering', 'Photochromic LERP', 'Minkwitz Corridors', 'Clinical UI/UX'],
         overview: {
-            es: 'Visiometric Labs es una suite completa de simulación física y tecnología visual diseñada para transformar la experiencia en la consulta optométrica y oftálmica. Desarrollada uniendo los principios del modelado de sistemas físicos, óptica geométrica y cálculo numérico con interfaces visuales de alto rendimiento, la suite integra cuatro motores complementarios: el Simulador Visual de Patologías (dedicado al modelado anatómico y defectos refractivos), el Simulador de Filtros Ópticos (tratamientos y protección espectral), el Simulador de Lentes Fotosensibles Transitions® (probador facial 3D WebGL con extinción de deslumbramiento) y el Simulador de Diseños y Distancias Focales (geometría de monofocales, bifocales y progresivos, actualmente en desarrollo activo).',
-            en: 'Visiometric Labs is an end-to-end physics simulation and vision tech suite engineered to redefine clinical ophthalmic consultations. Combining physical systems modeling, geometric optics, and real-time numerical solvers with high-performance web graphics, the suite brings together four complementary engines: the Visual Pathology Simulator (anatomical refraction and dioptric lens modeling), the Optical Filters Simulator (coatings and spectral transmission), the Transitions® Photochromic Simulator (3D WebGL avatar try-on with solar glare extinction), and the Focal Lengths Simulator (monofocal, bifocal, and progressive corridor geometry, currently in active development).'
+            es: 'Visiometric Labs es una suite completa de simulación física y tecnología visual diseñada para transformar la experiencia en la consulta optométrica y oftálmica. Desarrollada uniendo los principios del modelado de sistemas físicos, óptica geométrica y cálculo numérico con interfaces visuales de alto rendimiento, la suite integra cuatro motores complementarios: el Simulador Visual de Patologías (Ocularis: dedicado al modelado anatómico y defectos refractivos), el Simulador de Filtros Ópticos (Chromatis: tratamientos y protección espectral), el Simulador de Lentes Fotosensibles Transitions® (Luminix: probador facial 3D WebGL con extinción de deslumbramiento) y el Simulador de Diseños de Lente y Campos Visuales (Optix: geometría de monofocales, bifocales y progresivos, actualmente en desarrollo activo).',
+            en: 'Visiometric Labs is an end-to-end physics simulation and vision tech suite engineered to redefine clinical ophthalmic consultations. Combining physical systems modeling, geometric optics, and real-time numerical solvers with high-performance web graphics, the suite brings together four complementary engines: the Visual Pathology Simulator (Ocularis: anatomical refraction and dioptric lens modeling), the Optical Filters Simulator (Chromatis: coatings and spectral transmission), the Transitions® Photochromic Simulator (Luminix: 3D WebGL avatar try-on with solar glare extinction), and the Lens Designs Simulator (Optix: monofocal, bifocal, and progressive corridor geometry, currently in active development).'
         },
         problem: {
             title: {
@@ -202,19 +202,19 @@
                 status: 'in-development',
                 icon: '📐',
                 title: {
-                    es: 'Módulo 4: Simulador de Diseños de Lente Oftálmica & Distancias Focales',
-                    en: 'Module 4: Focal Lengths & Ophthalmic Lens Designs Simulator'
+                    es: 'Módulo 4: Simulador de Diseños de Lente y Campos Visuales',
+                    en: 'Module 4: Lens Designs & Visual Fields Simulator'
                 },
                 shortTitle: {
-                    es: 'Diseños y Distancias Focales',
-                    en: 'Focal Lengths & Lens Designs'
+                    es: 'Diseños de Lente y Campos Visuales',
+                    en: 'Lens Designs & Visual Fields'
                 },
                 desc: {
-                    es: 'Simulador pedagógico interactivo de campos visuales para lentes Monofocales, Bifocales (Flat-Top con salto de imagen), Progresivos Multifocales (Free-Form digital) y Ocupacionales, demostrando profundidad de foco y aberración marginal lateral.',
-                    en: 'Interactive clinical simulator modeling visual field zones for Single Vision, Bifocals (image jump), Progressive Free-Form lenses, and Occupational designs, demonstrating depth of field and lateral marginal astigmatism.'
+                    es: 'Optix™: Simulador pedagógico interactivo de campos visuales para lentes Monofocales, Bifocales (Flat-Top con salto de imagen), Progresivos Multifocales (Free-Form digital) y Ocupacionales, demostrando profundidad de foco y aberración marginal lateral.',
+                    en: 'Optix™: Interactive clinical simulator modeling visual field zones for Single Vision, Bifocals (image jump), Progressive Free-Form lenses, and Occupational designs, demonstrating depth of field and lateral marginal astigmatism.'
                 },
                 tags: ['Optical Ray Physics', 'Minkwitz Corridors', 'Bifocals Image Jump', 'Progressive Free-Form', 'Occupational Optics'],
-                demo: null, // WIP / En desarrollo activo
+                demo: 'https://visiometric-labs.github.io/focal_lengths-simulator/',
                 github: 'https://github.com/visiometric-labs/focal_lengths-simulator'
             }
         ],
@@ -283,7 +283,7 @@ export class VisiometricSuite {
                 { step: '01. Diagnóstico Refractivo', desc: 'Módulo 1 (Ocularis): Selección de patología (miopía/hipermetropía/astigmatismo) y ajuste de potencia dióptrica en tiempo real.' },
                 { step: '02. Evaluación de Filtros y Recubrimientos', desc: 'Módulo 2 (Chromatis): Simulación interactiva de tratamientos (filtro azul, antirreflejo multicapa y polarizado).' },
                 { step: '03. Probador 3D & Lentes Fotosensibles', desc: 'Módulo 3 (Luminix): Visualización del avatar 3D en WebGL y modulación solar dinámica con tecnología Transitions®.' },
-                { step: '04. Campos Focales & Diseños de Lente', desc: 'Módulo 4 (Focal Lengths): Comparativa de campos de visión y aberración lateral entre monofocales, bifocales y progresivos (WIP).' },
+                { step: '04. Campos Focales & Diseños de Lente', desc: 'Módulo 4 (Optix): Comparativa de campos de visión y aberración lateral entre monofocales, bifocales y progresivos (WIP).' },
                 { step: '05. Convicción y Decisión Clínica', desc: 'El paciente experimenta de forma visual e inmediata la diferencia antes/después de sus nuevos lentes.' }
             ],
             keyDecisions: [
@@ -324,7 +324,8 @@ export class VisiometricSuite {
             'transitions-simulator': transitionsRef,
             'luminix': transitionsRef, // alias
             'focal_lengths-simulator': focalLengthsRef,
-            'focal-lengths-simulator': focalLengthsRef // alias
+            'focal-lengths-simulator': focalLengthsRef, // alias
+            'optix': focalLengthsRef // alias
         }
     };
 

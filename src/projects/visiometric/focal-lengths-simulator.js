@@ -12,12 +12,12 @@
         status: 'in-development',
         icon: '📐',
         title: {
-            es: 'Módulo 4: Simulador de Diseños de Lente Oftálmica & Distancias Focales',
-            en: 'Module 4: Focal Lengths & Ophthalmic Lens Designs Simulator'
+            es: 'Módulo 4: Simulador de Diseños de Lente y Campos Visuales',
+            en: 'Module 4: Lens Designs & Visual Fields Simulator'
         },
         shortTitle: {
-            es: 'Diseños y Distancias Focales',
-            en: 'Focal Lengths & Lens Designs'
+            es: 'Diseños de Lente y Campos Visuales',
+            en: 'Lens Designs & Visual Fields'
         },
         category: {
             es: 'Simulación Física / Óptica Oftálmica',
@@ -39,7 +39,7 @@
             en: 'Dismantles the greatest clinical hesitation in eyewear selection: progressive lens cost objections, lateral distortion fears, bifocal image jump disorientation, and single-vision depth limitations across digital screens and reading distances.'
         },
         github: 'https://github.com/visiometric-labs/focal_lengths-simulator',
-        demo: null, // Módulo en desarrollo activo (WIP)
+        demo: 'https://visiometric-labs.github.io/focal_lengths-simulator/',
         gallery: [
             {
                 src: './index_styles/assets/imgs/projects/ocularis-simulation.png',
@@ -72,8 +72,8 @@
         ],
         tags: ['Optical Ray Physics', 'Minkwitz Theorem', 'Progressive Free-Form', 'Bifocals Image Jump', 'Occupational Optics', 'Marginal Astigmatism', 'Zero Dependencies'],
         overview: {
-            es: 'Focal Lengths Simulator es el cuarto módulo de la suite Visiometric Labs, actualmente en desarrollo activo. Su objetivo es convertir el proceso de adaptación de lentes complejas (progresivos, bifocales y ocupacionales) en una experiencia gráfica intuitiva y pedagógica. El paciente puede experimentar en primera persona cómo cada diseño geométrico distribuye las zonas de enfoque y por qué invertir en tecnologías digitales Free-Form minimiza el astigmatismo periférico lateral y maximiza el confort en la oficina y la vida cotidiana.',
-            en: 'Focal Lengths Simulator is the fourth module in the Visiometric Labs suite, currently under active development. Its mission is to transform complex optical lens dispensing into an intuitive visual journey. Patients interactively experience how distinct lens surface geometries distribute dioptric power, directly discovering why upgrading to digital Free-Form corridor architectures minimizes peripheral distortion and maximizes screen and reading comfort.'
+            es: 'Optix™ (Simulador de Diseños de Lente y Campos Visuales) es el cuarto módulo de la suite Visiometric Labs, actualmente en desarrollo activo. Su objetivo es convertir el proceso de adaptación de lentes complejas (progresivos, bifocales y ocupacionales) en una experiencia gráfica intuitiva y pedagógica. El paciente puede experimentar en primera persona cómo cada diseño geométrico distribuye las zonas de enfoque y por qué invertir en tecnologías digitales Free-Form minimiza el astigmatismo periférico lateral y maximiza el confort en la oficina y la vida cotidiana.',
+            en: 'Optix™ (Lens Designs & Visual Fields Simulator) is the fourth module in the Visiometric Labs suite, currently under active development. Its mission is to transform complex optical lens dispensing into an intuitive visual journey. Patients interactively experience how distinct lens surface geometries distribute dioptric power, directly discovering why upgrading to digital Free-Form corridor architectures minimizes peripheral distortion and maximizes screen and reading comfort.'
         },
         problem: {
             title: {
@@ -193,6 +193,7 @@ export class ProgressiveCorridorSolver {
 
     if (typeof window !== 'undefined') {
         window.FOCAL_LENGTHS_SIMULATOR_MODULE = focalLengthsSimulatorModule;
+        window.OPTIX_MODULE = focalLengthsSimulatorModule;
     }
     if (typeof module !== 'undefined') {
         module.exports = focalLengthsSimulatorModule;

@@ -44,7 +44,7 @@ const TRANSLATIONS = {
                 module1: 'Módulo 1: Simulador Visual de Patologías',
                 module2: 'Módulo 2: Simulador de Filtros Ópticos',
                 module3: 'Módulo 3: Lentes Fotosensibles Transitions®',
-                module4: 'Módulo 4: Diseños y Distancias Focales (WIP)',
+                module4: 'Módulo 4: Simulador de Diseños de Lente y Campos Visuales (WIP)',
                 tocTitle: 'En esta página',
                 secOverview: '01. Visión General & Propósito',
                 secProblem: '02. El Problema & Dolor de Negocio',
@@ -164,7 +164,7 @@ const TRANSLATIONS = {
                 module1: 'Module 1: Visual Pathology Simulator',
                 module2: 'Module 2: Optical Filters Simulator',
                 module3: 'Module 3: Transitions® Photochromic Lenses',
-                module4: 'Module 4: Focal Lengths & Lens Designs (WIP)',
+                module4: 'Module 4: Lens Designs & Visual Fields Simulator (WIP)',
                 tocTitle: 'On this page',
                 secOverview: '01. Overview & Purpose',
                 secProblem: '02. Problem & Business Impact',
@@ -647,7 +647,7 @@ function parseHash(hash) {
         } else if (projectId === 'transitions-simulator' || projectId === 'transitions' || projectId === 'luminix') {
             projectId = 'visiometric-suite';
             subProjectId = 'transitions-simulator';
-        } else if (projectId === 'focal_lengths-simulator' || projectId === 'focal-lengths-simulator' || projectId === 'focal-lengths' || projectId === 'distancias-focales') {
+        } else if (projectId === 'focal_lengths-simulator' || projectId === 'focal-lengths-simulator' || projectId === 'focal-lengths' || projectId === 'distancias-focales' || projectId === 'optix') {
             projectId = 'visiometric-suite';
             subProjectId = 'focal_lengths-simulator';
         }
@@ -655,7 +655,7 @@ function parseHash(hash) {
         if (projectId === 'visiometric-suite') {
             if (subProjectId === 'ocularis') subProjectId = 'refraction-simulator';
             if (subProjectId === 'luminix' || subProjectId === 'transitions') subProjectId = 'transitions-simulator';
-            if (subProjectId === 'focal-lengths-simulator' || subProjectId === 'focal-lengths' || subProjectId === 'distancias-focales') subProjectId = 'focal_lengths-simulator';
+            if (subProjectId === 'focal-lengths-simulator' || subProjectId === 'focal-lengths' || subProjectId === 'distancias-focales' || subProjectId === 'optix') subProjectId = 'focal_lengths-simulator';
         }
 
         return { view: 'project', projectId, subProjectId, section: null };
