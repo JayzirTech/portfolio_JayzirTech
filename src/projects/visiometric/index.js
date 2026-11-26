@@ -1,7 +1,11 @@
 /**
  * ==========================================================================
  * Project: Visiometric Labs — Suite de Simulación Óptica
- * Integrador de módulos: Simulador de Refracción + Simulador de Filtros
+ * Integrador de 4 motores clínicos:
+ * 1. Simulador Visual de Patologías (Ocularis) - Concluido
+ * 2. Simulador de Filtros Ópticos (Chromatis) - Concluido
+ * 3. Simulador de Lentes Fotosensibles Transitions® (Luminix 3D) - Concluido
+ * 4. Simulador de Diseños y Distancias Focales (Focal Lengths) - En Desarrollo
  * ==========================================================================
  */
 (function () {
@@ -13,10 +17,18 @@
         ? window.FILTERS_SIMULATOR_MODULE 
         : (typeof require !== 'undefined' ? require('./filters-simulator.js') : null);
 
+    const transitionsRef = (typeof window !== 'undefined' && (window.TRANSITIONS_SIMULATOR_MODULE || window.LUMINIX_MODULE))
+        ? (window.TRANSITIONS_SIMULATOR_MODULE || window.LUMINIX_MODULE)
+        : (typeof require !== 'undefined' ? (function () { try { return require('./transitions-simulator.js'); } catch (e) { return null; } })() : null);
+
+    const focalLengthsRef = (typeof window !== 'undefined' && window.FOCAL_LENGTHS_SIMULATOR_MODULE)
+        ? window.FOCAL_LENGTHS_SIMULATOR_MODULE
+        : (typeof require !== 'undefined' ? (function () { try { return require('./focal-lengths-simulator.js'); } catch (e) { return null; } })() : null);
+
     const visiometricSuite = {
         id: 'visiometric-suite',
         isSuite: true,
-        version: 'v2.0-suite-wip',
+        version: 'v2.5-suite',
         status: 'in-development',
         title: {
             es: 'Visiometric Labs — Suite de Simulación Óptica',
@@ -27,8 +39,8 @@
             en: 'Visiometric Labs (Suite)'
         },
         category: {
-            es: 'Simulación Física / Óptica Visual',
-            en: 'Physics Simulation / Visual Optics'
+            es: 'Simulación Física / Óptica Visual & 3D',
+            en: 'Physics Simulation / Visual Optics & 3D'
         },
         badge: {
             es: 'Suite en Desarrollo / WIP',
@@ -42,8 +54,8 @@
             accentBorder: 'rgba(45, 212, 191, 0.3)'
         },
         painSummary: {
-            es: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Simulador Visual de Patologías) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros Ópticos).',
-            en: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Visual Pathology Simulator) and demonstrating the true impact of ophthalmic lens coatings (Optical Filters Simulator).'
+            es: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física y óptica que integra defectos refractivos (Módulo 1), recubrimientos de lentes (Módulo 2), probador 3D de lentes fotosensibles Transitions® (Módulo 3) y campos visuales según distancias focales (Módulo 4 - WIP).',
+            en: 'Bridges the vision health communication gap between specialists and patients: an interactive simulation suite integrating refractive errors (Module 1), optical coatings (Module 2), a 3D WebGL Transitions® photochromic try-on (Module 3), and progressive corridor depth physics (Module 4 - WIP).'
         },
         github: 'https://github.com/visiometric-labs',
         demo: null,
@@ -61,26 +73,40 @@
                     es: 'Módulo 2: Experiencia subjetiva POV en conducción nocturna comparando lentes estándar vs Crizal Multicapa y filtros amarillos.',
                     en: 'Module 2: First-person POV night driving experience comparing standard vs Crizal Multicoat and yellow filters.'
                 }
+            },
+            {
+                src: './index_styles/assets/imgs/projects/transitions-simulator-preview.png',
+                caption: {
+                    es: 'Módulo 3: Probador facial 3D interactivo en WebGL y modulación solar de lentes fotosensibles Transitions®.',
+                    en: 'Module 3: Real-time WebGL 3D face try-on and solar photochromic activation with Transitions® lenses.'
+                }
+            },
+            {
+                src: './index_styles/assets/imgs/projects/transitions-simulator-demo.jpg',
+                caption: {
+                    es: 'Módulo 3: Visión en primera persona (POV) con cinemática de cuello fisiológica y atenuación de destellos.',
+                    en: 'Module 3: First-person (POV) gaze kinematics with physiological neck physics and glare reduction.'
+                }
             }
         ],
         specs: [
-            { key: { es: 'Arquitectura de la Suite', en: 'Suite Architecture' }, value: 'Multi-módulo desacoplado en Vanilla JS (Zero Dependencies)' },
-            { key: { es: 'Motor de Renderizado', en: 'Rendering Engine' }, value: 'HTML5 Canvas 2D con aceleración gráfica por hardware' },
-            { key: { es: 'Rendimiento en Vivo', en: 'Live Framerate' }, value: '60 FPS continuos en pantallas táctiles y escritorio' },
-            { key: { es: 'Modelos Físicos', en: 'Physics Engines' }, value: 'Refracción paraxial de Snell + Transmitancia espectral fotónica' },
-            { key: { es: 'Módulos Integrados', en: 'Integrated Modules' }, value: '1. Simulador Visual de Patologías | 2. Simulador de Filtros Ópticos' },
-            { key: { es: 'Compatibilidad Clínica', en: 'Clinical Compatibility' }, value: 'Tablets de mostrador, iPads, Monitores de gabinete' }
+            { key: { es: 'Arquitectura de la Suite', en: 'Suite Architecture' }, value: 'Multi-módulo desacoplado en Vanilla JS, Canvas 2D y Three.js WebGL' },
+            { key: { es: 'Motores de Renderizado', en: 'Rendering Engines' }, value: 'HTML5 Canvas 2D acelerado + Three.js 3D Viewport con materiales PBR' },
+            { key: { es: 'Rendimiento en Vivo', en: 'Live Framerate' }, value: '60 a 120 FPS continuos en pantallas táctiles y escritorio' },
+            { key: { es: 'Modelos Físicos', en: 'Physics Engines' }, value: 'Refracción de Snell, transmitancia espectral, cinética LERP y teorema de Minkwitz' },
+            { key: { es: 'Módulos Integrados', en: 'Integrated Modules' }, value: '1. Patologías (Ocularis) | 2. Filtros (Chromatis) | 3. Fotosensibles (Luminix) | 4. Diseños Focales (WIP)' },
+            { key: { es: 'Compatibilidad Clínica', en: 'Clinical Compatibility' }, value: 'Tablets de mostrador, iPads, Monitores de gabinete y smartphones' }
         ],
         stats: [
-            { label: { es: 'Rendimiento Gráfico', en: 'Rendering Speed' }, value: '60 FPS' },
-            { label: { es: 'Módulos Especializados', en: 'Clinical Modules' }, value: '2 Motores' },
-            { label: { es: 'Dependencias Externas', en: 'Bundle Overhead' }, value: '0 KB (Vanilla)' },
-            { label: { es: 'Tiempo de Carga', en: 'Startup Latency' }, value: '< 400 ms' }
+            { label: { es: 'Rendimiento Gráfico', en: 'Rendering Speed' }, value: '60-120 FPS' },
+            { label: { es: 'Módulos Especializados', en: 'Clinical Modules' }, value: '4 Motores' },
+            { label: { es: 'Líneas Demostradas', en: 'Lens Technologies' }, value: '12+ Tecnologías' },
+            { label: { es: 'Tiempo de Carga', en: 'Startup Latency' }, value: '< 450 ms' }
         ],
-        tags: ['Vanilla JavaScript', 'HTML5 Canvas 2D', 'Snell Ray-Tracing', 'Spectral Filtering', 'Physical Simulation', 'Zero Dependencies', 'Clinical UI/UX'],
+        tags: ['Vanilla JavaScript', 'HTML5 Canvas 2D', 'Three.js', 'WebGL 3D', 'Snell Ray-Tracing', 'Spectral Filtering', 'Photochromic LERP', 'Minkwitz Corridors', 'Clinical UI/UX'],
         overview: {
-            es: 'Visiometric Labs es una suite completa de simulación física y tecnología visual diseñada para transformar la experiencia en la consulta optométrica y oftálmica. Desarrollada uniendo los principios del modelado de sistemas físicos, óptica geométrica y cálculo numérico con interfaces visuales de alto rendimiento, la suite integra dos motores complementarios: el Simulador Visual de Patologías (dedicado al modelado anatómico y defectos refractivos) y el Simulador de Filtros Ópticos (dedicado a la demostración de tratamientos de lentes y protección espectral).',
-            en: 'Visiometric Labs is an end-to-end physics simulation and vision tech suite engineered to redefine clinical ophthalmic consultations. Combining physical systems modeling, geometric optics, and real-time numerical solvers with high-performance web graphics, the suite brings together two complementary engines: the Visual Pathology Simulator (anatomical refraction and dioptric lens modeling) and the Optical Filters Simulator (spectral coatings and light transmission).'
+            es: 'Visiometric Labs es una suite completa de simulación física y tecnología visual diseñada para transformar la experiencia en la consulta optométrica y oftálmica. Desarrollada uniendo los principios del modelado de sistemas físicos, óptica geométrica y cálculo numérico con interfaces visuales de alto rendimiento, la suite integra cuatro motores complementarios: el Simulador Visual de Patologías (dedicado al modelado anatómico y defectos refractivos), el Simulador de Filtros Ópticos (tratamientos y protección espectral), el Simulador de Lentes Fotosensibles Transitions® (probador facial 3D WebGL con extinción de deslumbramiento) y el Simulador de Diseños y Distancias Focales (geometría de monofocales, bifocales y progresivos, actualmente en desarrollo activo).',
+            en: 'Visiometric Labs is an end-to-end physics simulation and vision tech suite engineered to redefine clinical ophthalmic consultations. Combining physical systems modeling, geometric optics, and real-time numerical solvers with high-performance web graphics, the suite brings together four complementary engines: the Visual Pathology Simulator (anatomical refraction and dioptric lens modeling), the Optical Filters Simulator (coatings and spectral transmission), the Transitions® Photochromic Simulator (3D WebGL avatar try-on with solar glare extinction), and the Focal Lengths Simulator (monofocal, bifocal, and progressive corridor geometry, currently in active development).'
         },
         problem: {
             title: {
@@ -110,7 +136,8 @@
             {
                 id: 'refraction-simulator',
                 route: '#/proyecto/visiometric-suite/refraction-simulator',
-                status: 'in-development',
+                status: 'completed',
+                icon: '👁️',
                 title: {
                     es: 'Módulo 1: Simulador Visual de Patologías',
                     en: 'Module 1: Visual Pathology Simulator'
@@ -130,7 +157,8 @@
             {
                 id: 'filters-simulator',
                 route: '#/proyecto/visiometric-suite/filters-simulator',
-                status: 'in-development',
+                status: 'completed',
+                icon: '🔬',
                 title: {
                     es: 'Módulo 2: Simulador de Filtros Ópticos — Recubrimientos & Tratamientos',
                     en: 'Module 2: Optical Filters Simulator — Lens Coatings & Treatments'
@@ -146,6 +174,48 @@
                 tags: ['Spectral Filtering', 'Canvas 2D', 'Anti-Glare Suppression', 'Photochromic LERP', 'Zero Dependencies'],
                 demo: 'https://visiometric-labs.github.io/filters-simulator/',
                 github: 'https://github.com/visiometric-labs/filters-simulator'
+            },
+            {
+                id: 'transitions-simulator',
+                route: '#/proyecto/visiometric-suite/transitions-simulator',
+                status: 'completed',
+                icon: '🕶️',
+                title: {
+                    es: 'Módulo 3: Simulador de Lentes Fotosensibles Transitions® & Probador 3D',
+                    en: 'Module 3: Transitions® Photochromic Lenses Simulator & 3D Virtual Try-On'
+                },
+                shortTitle: {
+                    es: 'Lentes Fotosensibles Transitions®',
+                    en: 'Transitions® Photochromic Lenses'
+                },
+                desc: {
+                    es: 'Plataforma clínica en Three.js con probador facial 3D y visión en primera persona (POV). Modula la cinética de tintado fotocromático según radiación solar y atenúa destellos extremos con cinemática de mirada fisiológica.',
+                    en: 'Clinical Three.js platform featuring a real-time 3D face try-on avatar and first-person POV gaze kinematics. Simulates solar UV photochromic tint kinetics across Signature Gen S, XTRActive, and Style Mirrors lines.'
+                },
+                tags: ['Three.js', 'WebGL 3D', 'Photochromic LERP', 'Virtual Try-On', 'Gaze Biomechanics', 'Vite 6'],
+                demo: 'https://visiometric-labs.github.io/transitions-simulator/',
+                github: 'https://github.com/visiometric-labs/transitions-simulator'
+            },
+            {
+                id: 'focal_lengths-simulator',
+                route: '#/proyecto/visiometric-suite/focal_lengths-simulator',
+                status: 'in-development',
+                icon: '📐',
+                title: {
+                    es: 'Módulo 4: Simulador de Diseños de Lente Oftálmica & Distancias Focales',
+                    en: 'Module 4: Focal Lengths & Ophthalmic Lens Designs Simulator'
+                },
+                shortTitle: {
+                    es: 'Diseños y Distancias Focales',
+                    en: 'Focal Lengths & Lens Designs'
+                },
+                desc: {
+                    es: 'Simulador pedagógico interactivo de campos visuales para lentes Monofocales, Bifocales (Flat-Top con salto de imagen), Progresivos Multifocales (Free-Form digital) y Ocupacionales, demostrando profundidad de foco y aberración marginal lateral.',
+                    en: 'Interactive clinical simulator modeling visual field zones for Single Vision, Bifocals (image jump), Progressive Free-Form lenses, and Occupational designs, demonstrating depth of field and lateral marginal astigmatism.'
+                },
+                tags: ['Optical Ray Physics', 'Minkwitz Corridors', 'Bifocals Image Jump', 'Progressive Free-Form', 'Occupational Optics'],
+                demo: null, // WIP / En desarrollo activo
+                github: 'https://github.com/visiometric-labs/focal_lengths-simulator'
             }
         ],
         codeSnippet: {
@@ -155,36 +225,46 @@
 export class VisiometricSuite {
     constructor() {
         this.modules = {
-            ocularis: { name: 'Ocularis Refraction Engine', ready: true },
-            filters: { name: 'Spectral Filters Engine', ready: true }
+            pathology: { name: 'Ocularis Refraction & Anatomy Engine', ready: true },
+            filters: { name: 'Chromatis Spectral Coatings Engine', ready: true },
+            photochromic3d: { name: 'Luminix Three.js 3D Try-On & Photochromic Engine', ready: true },
+            focalDesigns: { name: 'Focal Lengths & Minkwitz Corridor Solver', ready: false } // WIP
         };
     }
 
     /**
-     * Integrates refractive calculation with spectral coating simulation
-     * to visualize the patient's corrected visual experience.
+     * Integrates dioptric correction, spectral filtering, photochromic UV kinetics,
+     * and progressive corridor geometry into a unified patient consultation experience.
      */
-    simulateIntegratedConsultation(patientData, lensConfig) {
-        const { sphericalError, astigmatismAxis } = patientData;
-        const { diopters, blueCut, antiReflective, photochromic } = lensConfig;
+    simulateIntegratedConsultation(patientPrescription, lensConfig, environment) {
+        const { sphericalError, cylinderAxis, additionPresbyopia } = patientPrescription;
+        const { lensDesign, photochromicFamily, antiReflectiveCoat } = lensConfig;
+        const { ambientLux, uvIndex, gazeDistanceMeters } = environment;
 
-        // Step 1: Compute Snell ray convergence (Ocularis module)
-        const refractiveResult = this.modules.ocularis.computeRayTracing({
-            diopters,
-            retinalDistance: sphericalError < 0 ? 26.5 : 22.0
+        // 1. Refractive ray convergence (Module 1: Ocularis)
+        const refractive = this.modules.pathology.computeSnellRays(sphericalError, cylinderAxis);
+
+        // 2. Spectral transmission & parasitic reflection extinction (Module 2: Chromatis)
+        const spectral = this.modules.filters.evaluateTransmission({
+            blueCut: true,
+            antiReflective: antiReflectiveCoat
         });
 
-        // Step 2: Compute spectral transmission & glare extinction (Filters module)
-        const spectralResult = this.modules.filters.applyFilterPipeline({
-            blueCutActive: blueCut,
-            glareSuppressed: antiReflective,
-            uvLevel: photochromic ? 0.75 : 0.0
+        // 3. Dynamic photochromic tint & 3D avatar illumination (Module 3: Luminix)
+        const photochromic = this.modules.photochromic3d.evaluateKinetics({
+            family: photochromicFamily,
+            uv: uvIndex,
+            tempC: 22.0
         });
+
+        // 4. Progressive corridor & marginal astigmatism (Module 4: Focal Lengths)
+        const focalClarity = this.modules.focalDesigns.evaluatePoint(0, 5, additionPresbyopia, gazeDistanceMeters);
 
         return {
-            focalAccuracy: refractiveResult.inFocus,
-            retinalBlurRadius: refractiveResult.blurCircleRadius,
-            contrastEnhancement: spectralResult.contrastBoost,
+            retinalFocusScore: refractive.inFocus ? 1.0 : refractive.blurRadius,
+            glareExtinctionPercent: spectral.glareSuppressed ? 92 : 15,
+            lensTintOpacity: photochromic.tintOpacity,
+            corridorSharpness: focalClarity.sharpnessFactor,
             framerate: 60
         };
     }
@@ -196,35 +276,35 @@ export class VisiometricSuite {
                 en: 'Suite Modular Architecture & Data Flow'
             },
             description: {
-                es: 'Ecosistema de simulación desacoplado en dos motores físicos independientes con una capa de control unificada.',
-                en: 'Decoupled simulation ecosystem consisting of two independent physics engines bound by a unified UI controller layer.'
+                es: 'Ecosistema de simulación desacoplado en cuatro motores físicos y visuales independientes con una capa de control unificada.',
+                en: 'Decoupled simulation ecosystem consisting of four specialized physics and graphics engines bound by a unified UI controller layer.'
             },
             flow: [
-                { step: '01. Diagnóstico Refractivo', desc: 'Módulo de Patologías Visuales: Selección de patología (miopía/hipermetropía/astigmatismo) y ajuste de potencia diótrica en tiempo real.' },
-                { step: '02. Trazado Paraxial de Rayos', desc: 'Resolución trigonométrica analítica que muestra cómo el haz de luz converge exactamente en el plano retiniano.' },
-                { step: '03. Evaluación de Tratamientos', desc: 'Módulo Filtros: Simulación interactiva de recubrimientos (filtro azul para pantallas, antirreflejo para noche, fotocromático para sol).' },
-                { step: '04. Renderizado Canvas 60 FPS', desc: 'Composición gráfica acelerada por GPU en navegadores móviles y desktop sin instalación de software.' },
+                { step: '01. Diagnóstico Refractivo', desc: 'Módulo 1 (Ocularis): Selección de patología (miopía/hipermetropía/astigmatismo) y ajuste de potencia dióptrica en tiempo real.' },
+                { step: '02. Evaluación de Filtros y Recubrimientos', desc: 'Módulo 2 (Chromatis): Simulación interactiva de tratamientos (filtro azul, antirreflejo multicapa y polarizado).' },
+                { step: '03. Probador 3D & Lentes Fotosensibles', desc: 'Módulo 3 (Luminix): Visualización del avatar 3D en WebGL y modulación solar dinámica con tecnología Transitions®.' },
+                { step: '04. Campos Focales & Diseños de Lente', desc: 'Módulo 4 (Focal Lengths): Comparativa de campos de visión y aberración lateral entre monofocales, bifocales y progresivos (WIP).' },
                 { step: '05. Convicción y Decisión Clínica', desc: 'El paciente experimenta de forma visual e inmediata la diferencia antes/después de sus nuevos lentes.' }
             ],
             keyDecisions: [
                 {
-                    title: 'Arquitectura Web Pura (Vanilla JS) sin Frameworks Pesados',
-                    reason: 'Garantiza inicio instantáneo (< 400 ms) en iPads y tablets de consulta con conectividad variable en consultorios u ópticas.'
+                    title: 'Arquitectura Web Pura (Vanilla JS) y Three.js Desacoplado',
+                    reason: 'Garantiza inicio instantáneo (< 450 ms) y permite cargar los módulos 3D bajo demanda sin sobrecargar tablets de consulta.'
                 },
                 {
-                    title: 'Modularidad Estricta entre Refracción y Recubrimientos',
-                    reason: 'Permite utilizar el Simulador Visual de Patologías de forma autónoma durante el examen médico o activar el Simulador de Filtros durante la asesoría comercial.'
+                    title: 'Modularidad Estricta e Independencia de Motores',
+                    reason: 'Cada simulador puede funcionar como herramienta clínica independiente o integrarse dentro del hub de la Suite.'
                 },
                 {
-                    title: 'Aceleración por Hardware en Canvas 2D',
-                    reason: 'Evita la sobrecarga de shaders WebGL innecesarios, maximizando la autonomía de batería y fluidez en tablets de mostrador.'
+                    title: 'Aceleración por Hardware en Canvas 2D y WebGL',
+                    reason: 'Optimiza el bucle de renderizado para alcanzar 60 a 120 FPS en iPads, tablets táctiles y monitores clínicos.'
                 }
             ]
         },
         challenges: [
             {
-                title: 'Unificación de Dos Paradigmas de Simulación Distintos',
-                challenge: 'El motor de refracción se basa en geometría óptica vectorial (rayos de luz), mientras que el Simulador de Filtros opera sobre composición espacial de imágenes y manipulación de color espectral.',
+                title: 'Unificación de Cuatro Paradigmas de Simulación Distintos',
+                challenge: 'La suite integra trazado de rayos vectorial (Módulo 1), manipulación espectral de color (Módulo 2), avatares PBR 3D (Módulo 3) y cálculo de aberraciones marginales diferenciales (Módulo 4).',
                 solution: 'Diseño de un contrato de interfaz común desacoplado que comparte el bucle de renderizado requestAnimationFrame sin dependencias cruzadas.'
             },
             {
@@ -240,7 +320,11 @@ export class VisiometricSuite {
         subModules: {
             'refraction-simulator': refractionRef,
             'ocularis': refractionRef, // alias for backwards compatibility
-            'filters-simulator': filtersRef
+            'filters-simulator': filtersRef,
+            'transitions-simulator': transitionsRef,
+            'luminix': transitionsRef, // alias
+            'focal_lengths-simulator': focalLengthsRef,
+            'focal-lengths-simulator': focalLengthsRef // alias
         }
     };
 

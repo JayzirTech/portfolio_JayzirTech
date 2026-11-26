@@ -43,6 +43,8 @@ const TRANSLATIONS = {
                 suiteOverview: 'Visión General de la Suite',
                 module1: 'Módulo 1: Simulador Visual de Patologías',
                 module2: 'Módulo 2: Simulador de Filtros Ópticos',
+                module3: 'Módulo 3: Lentes Fotosensibles Transitions®',
+                module4: 'Módulo 4: Diseños y Distancias Focales (WIP)',
                 tocTitle: 'En esta página',
                 secOverview: '01. Visión General & Propósito',
                 secProblem: '02. El Problema & Dolor de Negocio',
@@ -68,9 +70,9 @@ const TRANSLATIONS = {
                 exploreDoc: 'Ver documentación técnica del módulo'
             },
             p1: {
-                category: 'Simulación Física / Óptica Visual',
+                category: 'Simulación Física / Óptica Visual & 3D',
                 title: 'Visiometric Labs — Suite de Simulación Óptica',
-                desc: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física que modela defectos refractivos en tiempo real (Simulador Visual de Patologías) y demuestra el impacto real de los filtros de lentes (Simulador de Filtros Ópticos).'
+                desc: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física y óptica visual que integra 4 motores clínicos: patologías refractivas, filtros y recubrimientos, probador facial 3D de fotosensibles Transitions® y campos de visión según distancias focales (WIP).'
             },
             p2: {
                 category: 'Ingeniería de Datos / Orquestación',
@@ -161,6 +163,8 @@ const TRANSLATIONS = {
                 suiteOverview: 'Suite Overview',
                 module1: 'Module 1: Visual Pathology Simulator',
                 module2: 'Module 2: Optical Filters Simulator',
+                module3: 'Module 3: Transitions® Photochromic Lenses',
+                module4: 'Module 4: Focal Lengths & Lens Designs (WIP)',
                 tocTitle: 'On this page',
                 secOverview: '01. Overview & Purpose',
                 secProblem: '02. Problem & Business Impact',
@@ -186,9 +190,9 @@ const TRANSLATIONS = {
                 exploreDoc: 'View module technical documentation'
             },
             p1: {
-                category: 'Physics Simulation / Visual Optics',
+                category: 'Physics Simulation / Visual Optics & 3D',
                 title: 'Visiometric Labs — Optical Simulation Suite',
-                desc: 'Bridges the communication gap in vision health between specialists and patients: an interactive physics simulation suite modeling refractive errors in real time (Visual Pathology Simulator) and demonstrating the true impact of ophthalmic lens coatings (Optical Filters Simulator).'
+                desc: 'Bridges the vision health communication gap between specialists and patients: an interactive optical simulation suite integrating 4 clinical engines: refractive errors, lens coatings, 3D WebGL Transitions® photochromic try-on, and progressive corridor focal physics (WIP).'
             },
             p2: {
                 category: 'Data Engineering / Orchestration',
@@ -640,10 +644,18 @@ function parseHash(hash) {
         } else if (projectId === 'filters-simulator' || projectId === 'filtros' || projectId === 'filtros-simulator') {
             projectId = 'visiometric-suite';
             subProjectId = 'filters-simulator';
+        } else if (projectId === 'transitions-simulator' || projectId === 'transitions' || projectId === 'luminix') {
+            projectId = 'visiometric-suite';
+            subProjectId = 'transitions-simulator';
+        } else if (projectId === 'focal_lengths-simulator' || projectId === 'focal-lengths-simulator' || projectId === 'focal-lengths' || projectId === 'distancias-focales') {
+            projectId = 'visiometric-suite';
+            subProjectId = 'focal_lengths-simulator';
         }
 
-        if (projectId === 'visiometric-suite' && subProjectId === 'ocularis') {
-            subProjectId = 'refraction-simulator';
+        if (projectId === 'visiometric-suite') {
+            if (subProjectId === 'ocularis') subProjectId = 'refraction-simulator';
+            if (subProjectId === 'luminix' || subProjectId === 'transitions') subProjectId = 'transitions-simulator';
+            if (subProjectId === 'focal-lengths-simulator' || subProjectId === 'focal-lengths' || subProjectId === 'distancias-focales') subProjectId = 'focal_lengths-simulator';
         }
 
         return { view: 'project', projectId, subProjectId, section: null };
@@ -741,27 +753,28 @@ function renderProjectDetail(projectId, subProjectId) {
     let nextNav = null;
 
     if (parentSuite) {
-        const refractionMod = parentSuite.subModules && (parentSuite.subModules['refraction-simulator'] || parentSuite.subModules.ocularis);
-        const filtersMod = parentSuite.subModules && parentSuite.subModules['filters-simulator'];
+        const suiteMods = parentSuite.suiteModules || [];
+        const activeModIdx = suiteMods.findIndex((m) => m.id === activeSubId || (m.id === 'refraction-simulator' && activeSubId === 'ocularis'));
 
-        if (!activeSubId) {
+        if (!activeSubId || activeModIdx === -1) {
             // Suite Overview
             if (projectIndex > 0) {
                 prevNav = { href: `#/proyecto/${projects[projectIndex - 1].id}`, name: projects[projectIndex - 1].title[lang] };
             }
-            if (refractionMod) {
-                nextNav = { href: `#/proyecto/${parentSuite.id}/refraction-simulator`, name: refractionMod.title[lang] };
+            if (suiteMods.length > 0) {
+                nextNav = { href: suiteMods[0].route, name: suiteMods[0].title[lang] };
             }
-        } else if (activeSubId === 'refraction-simulator' || activeSubId === 'ocularis') {
-            prevNav = { href: `#/proyecto/${parentSuite.id}`, name: `${docsDict.suiteOverview || 'Visión General'} (${parentSuite.shortTitle ? parentSuite.shortTitle[lang] : parentSuite.title[lang]})` };
-            if (filtersMod) {
-                nextNav = { href: `#/proyecto/${parentSuite.id}/filters-simulator`, name: filtersMod.title[lang] };
+        } else {
+            // Inside a submodule
+            if (activeModIdx === 0) {
+                prevNav = { href: `#/proyecto/${parentSuite.id}`, name: `${docsDict.suiteOverview || 'Visión General'} (${parentSuite.shortTitle ? parentSuite.shortTitle[lang] : parentSuite.title[lang]})` };
+            } else {
+                prevNav = { href: suiteMods[activeModIdx - 1].route, name: suiteMods[activeModIdx - 1].title[lang] };
             }
-        } else if (activeSubId === 'filters-simulator') {
-            if (refractionMod) {
-                prevNav = { href: `#/proyecto/${parentSuite.id}/refraction-simulator`, name: refractionMod.title[lang] };
-            }
-            if (projectIndex < projects.length - 1) {
+
+            if (activeModIdx < suiteMods.length - 1) {
+                nextNav = { href: suiteMods[activeModIdx + 1].route, name: suiteMods[activeModIdx + 1].title[lang] };
+            } else if (projectIndex < projects.length - 1) {
                 nextNav = { href: `#/proyecto/${projects[projectIndex + 1].id}`, name: projects[projectIndex + 1].title[lang] };
             }
         }
@@ -894,14 +907,12 @@ function renderProjectDetail(projectId, subProjectId) {
                         <span class="tab-icon">⊞</span>
                         <span>${docsDict.suiteOverview || 'Visión General de la Suite'}</span>
                     </a>
-                    <a href="#/proyecto/${parentSuite.id}/refraction-simulator" class="doc-suite-tab ${activeSubId === 'refraction-simulator' || activeSubId === 'ocularis' ? 'active' : ''}">
-                        <span class="tab-icon">👁️</span>
-                        <span>${docsDict.module1 || 'Módulo 1: Simulador Visual de Patologías'}</span>
-                    </a>
-                    <a href="#/proyecto/${parentSuite.id}/filters-simulator" class="doc-suite-tab ${activeSubId === 'filters-simulator' ? 'active' : ''}">
-                        <span class="tab-icon">🔬</span>
-                        <span>${docsDict.module2 || 'Módulo 2: Simulador de Filtros Ópticos'}</span>
-                    </a>
+                    ${(parentSuite.suiteModules || []).map((sm) => `
+                        <a href="${sm.route}" class="doc-suite-tab ${activeSubId === sm.id || (sm.id === 'refraction-simulator' && activeSubId === 'ocularis') ? 'active' : ''}">
+                            <span class="tab-icon">${sm.icon || '🔹'}</span>
+                            <span>${sm.shortTitle ? sm.shortTitle[lang] : sm.title[lang]}</span>
+                        </a>
+                    `).join('')}
                 </nav>
             </div>
             ` : ''}
@@ -1040,6 +1051,10 @@ function renderProjectDetail(projectId, subProjectId) {
                                 <div class="doc-module-card">
                                     <div class="doc-module-card-header">
                                         <span class="doc-module-badge">${mod.shortTitle[lang]}</span>
+                                        <span class="doc-status-badge ${mod.status === 'in-development' ? 'status-wip' : 'status-completed'}">
+                                            <span class="status-dot ${mod.status === 'in-development' ? 'pulse' : ''}" aria-hidden="true"></span>
+                                            <span>${mod.status === 'in-development' ? dict.projects.statusWip : dict.projects.statusCompleted}</span>
+                                        </span>
                                     </div>
                                     <h3 class="doc-module-title">${mod.title[lang]}</h3>
                                     <p class="doc-module-desc">${mod.desc[lang]}</p>

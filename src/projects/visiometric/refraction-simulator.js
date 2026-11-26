@@ -7,8 +7,9 @@
     const refractionModule = {
         id: 'refraction-simulator',
         suiteId: 'visiometric-suite',
-        version: 'v1.2.0-wip',
-        status: 'in-development',
+        version: 'v1.2.0',
+        status: 'completed',
+        icon: '👁️',
         title: {
             es: 'Módulo 1: Simulador Visual de Patologías',
             en: 'Module 1: Visual Pathology Simulator'
@@ -22,8 +23,8 @@
             en: 'Physics Simulation / Geometric Optics'
         },
         badge: {
-            es: 'En Desarrollo / WIP',
-            en: 'In Active Development'
+            es: 'Concluido',
+            en: 'Completed'
         },
         theme: {
             accent: '#2dd4bf',

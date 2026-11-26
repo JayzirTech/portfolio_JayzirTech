@@ -7,8 +7,9 @@
     const filtersSimulatorModule = {
         id: 'filters-simulator',
         suiteId: 'visiometric-suite',
-        version: 'v1.1.0-wip',
-        status: 'in-development',
+        version: 'v1.1.0',
+        status: 'completed',
+        icon: '🔬',
         title: {
             es: 'Módulo 2: Simulador de Filtros Ópticos — Recubrimientos & Tratamientos',
             en: 'Module 2: Optical Filters Simulator — Coatings & Treatments'
@@ -22,8 +23,8 @@
             en: 'Physics Simulation / Visual Optics'
         },
         badge: {
-            es: 'En Desarrollo / WIP',
-            en: 'In Active Development'
+            es: 'Concluido',
+            en: 'Completed'
         },
         theme: {
             accent: '#f59e0b',
