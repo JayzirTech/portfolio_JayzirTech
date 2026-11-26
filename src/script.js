@@ -72,7 +72,7 @@ const TRANSLATIONS = {
             p1: {
                 category: 'Simulación Física / Óptica Visual & 3D',
                 title: 'Visiometric Labs — Suite de Simulación Óptica',
-                desc: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física y óptica visual que integra 4 motores clínicos: patologías refractivas, filtros y recubrimientos, probador facial 3D de fotosensibles Transitions® y campos de visión según distancias focales (WIP).'
+                desc: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente mediante una suite interactiva de simulación física, óptica clínica y gráficos 3D en tiempo real para optimizar la consulta y prescripción oftálmica.'
             },
             p2: {
                 category: 'Ingeniería de Datos / Orquestación',
@@ -192,7 +192,7 @@ const TRANSLATIONS = {
             p1: {
                 category: 'Physics Simulation / Visual Optics & 3D',
                 title: 'Visiometric Labs — Optical Simulation Suite',
-                desc: 'Bridges the vision health communication gap between specialists and patients: an interactive optical simulation suite integrating 4 clinical engines: refractive errors, lens coatings, 3D WebGL Transitions® photochromic try-on, and progressive corridor focal physics (WIP).'
+                desc: 'Bridges the clinical communication gap in vision health between specialists and patients through an interactive physics simulation and real-time 3D optical suite engineered to elevate optometric consultations.'
             },
             p2: {
                 category: 'Data Engineering / Orchestration',

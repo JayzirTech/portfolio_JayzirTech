@@ -54,8 +54,8 @@
             accentBorder: 'rgba(45, 212, 191, 0.3)'
         },
         painSummary: {
-            es: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente: una suite interactiva de simulación física y óptica que integra defectos refractivos (Módulo 1), recubrimientos de lentes (Módulo 2), probador 3D de lentes fotosensibles Transitions® (Módulo 3) y campos visuales según distancias focales (Módulo 4 - WIP).',
-            en: 'Bridges the vision health communication gap between specialists and patients: an interactive simulation suite integrating refractive errors (Module 1), optical coatings (Module 2), a 3D WebGL Transitions® photochromic try-on (Module 3), and progressive corridor depth physics (Module 4 - WIP).'
+            es: 'Resuelve la brecha de comprensión en la salud visual entre el especialista y el paciente mediante una suite interactiva de simulación física, óptica clínica y gráficos 3D en tiempo real para optimizar la consulta y prescripción oftálmica.',
+            en: 'Bridges the clinical communication gap in vision health between specialists and patients through an interactive physics simulation and real-time 3D optical suite engineered to elevate optometric consultations.'
         },
         github: 'https://github.com/visiometric-labs',
         demo: null,
